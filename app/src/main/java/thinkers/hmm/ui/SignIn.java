@@ -1,9 +1,11 @@
-package thinkers.hmm;
+package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import thinkers.hmm.R;
 
 
 public class SignIn extends Activity {
