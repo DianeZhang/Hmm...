@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.UserMain"
+            android:label="@string/title_activity_user_main" >
+        </activity>
+        <activity
+            android:name=".ui.AdminMain"
+            android:label="@string/title_activity_admin_main" >
+        </activity>
     </application>
 
 </manifest>
