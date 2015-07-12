@@ -5,15 +5,26 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import thinkers.hmm.R;
 
 public class CourseReview extends Activity {
 
+    private TextView titleCourseReview;
+    private TextView courseReviews;
+    private RatingBar courseRating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_review);
+
+        titleCourseReview = (TextView) findViewById(R.id.textView);
+        courseReviews = (TextView) findViewById(R.id.textView2);
+        courseRating = (RatingBar) findViewById(R.id.ratingBar);
     }
 
     @Override

@@ -43,23 +43,23 @@
         </activity>
         <activity
             android:name=".ui.AddNewCourse"
-            android:label="@string/title_activity_construct_review" >
+            android:label="@string/title_activity_add_new_course" >
         </activity>
         <activity
             android:name=".ui.ListMyReviews"
-            android:label="@string/title_activity_construct_review" >
+            android:label="@string/title_activity_list_my_reviews" >
         </activity>
         <activity
             android:name=".ui.UserInfo"
-            android:label="@string/title_activity_construct_review" >
+            android:label="@string/title_activity_user_info" >
         </activity>
         <activity
             android:name=".ui.CourseReview"
-            android:label="@string/title_activity_construct_review" >
+            android:label="@string/title_activity_course_review" >
         </activity>
         <activity
             android:name=".ui.FacultyReview"
-            android:label="@string/title_activity_construct_review" >
+            android:label="@string/title_activity_faculty_review" >
         </activity>
         <activity
             android:name=".ui.ListCourses"
@@ -83,7 +83,7 @@
         </activity>
         <activity
             android:name=".ui.ListMyDrafts"
-            android:label="@string/title_activity_list_my_reviews" >
+            android:label="@string/title_activity_list_my_drafts" >
         </activity>
     </application>
 

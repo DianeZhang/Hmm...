@@ -78,6 +78,7 @@ public class ListCourses extends Activity {
         @Override
         public void onClick(View v) {
             Intent addNewCourse = new Intent(ListCourses.this, AddNewCourse.class);
+
             startActivity(addNewCourse); // start the addNewCourse Activity
         }
     };

@@ -66,7 +66,7 @@ public class Login extends Activity {
     private View.OnClickListener loginAction = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Login.this, UserMain.class);
+            Intent intent = new Intent(Login.this, AdminMain.class);
             startActivity(intent);
         }
     };
