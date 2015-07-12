@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">Hmm...</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_activity_list_courses">ListCourses</string>
+    <string name="title_activity_list_course_reviews">ListCourseReviews</string>
+
+    <string name="list_courses_title">List of Courses</string>
+    <string name="list_courses_search">Search courses here...</string>
+
+    <string name="list_course_reviews_title">List Course Reviews</string>
+    <string name="list_course_reviews_prof1">Professor1 ... </string>
+    <string name="list_course_reviews_prof2">Professor2 ... </string>
+    <string name="list_course_reviews_prof3">Professor3 ... </string>
+    <string name="list_course_reviews_prof4">Professor4 ... </string>
+
+    <string name="course_review_title">Course Review</string>
+    <string name="title_activity_list_faculty">ListFaculty</string>
+
+    <string name="hello_world">Hello world!</string>
+
+
 </resources>
