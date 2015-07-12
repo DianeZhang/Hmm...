@@ -24,6 +24,10 @@
             android:name=".ui.AdminMain"
             android:label="@string/title_activity_admin_main" >
         </activity>
+        <activity
+            android:name=".ui.ListCourses"
+            android:label="@string/list_course_label" >
+        </activity>
     </application>
 
 </manifest>
