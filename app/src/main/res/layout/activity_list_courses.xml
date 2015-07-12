@@ -44,5 +44,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:focusable="true"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/small_plus" />
 </RelativeLayout>
