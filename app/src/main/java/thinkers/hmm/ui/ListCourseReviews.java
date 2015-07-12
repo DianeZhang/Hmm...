@@ -71,7 +71,7 @@ public class ListCourseReviews extends Activity {
         @Override
         public void onClick(View v) {
             // create an Intent to launch the ListCourseReviews Activity
-            Intent viewFacultyReview = new Intent(ListCourseReviews.this, ProfessorReview.class);
+            Intent viewFacultyReview = new Intent(ListCourseReviews.this, FacultyReview.class);
 
             startActivity(viewFacultyReview); // start the viewCourseReviews Activity
         } // end method onClick

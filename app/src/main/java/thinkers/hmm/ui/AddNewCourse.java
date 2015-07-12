@@ -1,5 +1,6 @@
 package thinkers.hmm.ui;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,18 +8,18 @@ import android.view.MenuItem;
 
 import thinkers.hmm.R;
 
-public class UserInfoActivity extends ActionBarActivity {
+public class AddNewCourse extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
+        setContentView(R.layout.activity_add_new_course);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_info, menu);
+        getMenuInflater().inflate(R.menu.menu_add_new_course, menu);
         return true;
     }
 

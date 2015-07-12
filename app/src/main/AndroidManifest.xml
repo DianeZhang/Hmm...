@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.AddNewFaculty"
+            android:label="@string/title_activity_add_new_faculty" >
+        </activity>
     </application>
 
 </manifest>

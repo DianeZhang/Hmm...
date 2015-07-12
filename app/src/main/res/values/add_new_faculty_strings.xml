@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_activity_add_new_faculty">AddNewFaculty</string>
+    <string name="add_new_faculty_title">New Faculty</string>
+    <string name="add_new_faculty_submit_button">Submit</string>
+    <string name="add_new_faculty_cancel_button">Cancel</string>
+
+</resources>
