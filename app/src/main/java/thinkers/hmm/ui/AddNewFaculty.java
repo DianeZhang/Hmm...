@@ -63,14 +63,14 @@ public class AddNewFaculty extends Activity {
     private View.OnClickListener submitNewFacultyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent submitNewFaculty = new Intent(AddNewFaculty.this, ListFaculty.class);
+            Intent submitNewFaculty = new Intent(AddNewFaculty.this, ListFaculties.class);
         }
     };
 
     private View.OnClickListener cancelNewFacultyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v){
-            Intent cancelNewFaculty = new Intent(AddNewFaculty.this, ListFaculty.class);
+            Intent cancelNewFaculty = new Intent(AddNewFaculty.this, ListFaculties.class);
         }
     };
 }

@@ -83,7 +83,7 @@
         </activity>
         <activity
             android:name=".ui.ListMyDrafts"
-            android:label="@string/title_activity_list_my_reviews" >
+            android:label="@string/title_activity_list_my_drafts" >
         </activity>
     </application>
 
