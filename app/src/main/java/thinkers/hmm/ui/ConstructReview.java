@@ -56,7 +56,7 @@ public class ConstructReview extends Activity {
     private View.OnClickListener cancelAction = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(ConstructReview.this, ListMyReviews.class);
+            Intent intent = new Intent(ConstructReview.this, ListMyDrafts.class);
             startActivity(intent);
         }
     };
