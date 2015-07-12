@@ -26,7 +26,11 @@
         </activity>
         <activity
             android:name=".ui.ListCourses"
-            android:label="@string/list_course_label" >
+            android:label="@string/list_courses_label" >
+        </activity>
+        <activity
+            android:name=".ui.ListCourseReviews"
+            android:label="@string/list_course_reviews_label" >
         </activity>
     </application>
 
