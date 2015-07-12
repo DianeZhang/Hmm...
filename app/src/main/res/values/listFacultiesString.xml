@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="list_faculties_label">ListFaculties</string>
+    <string name="list_faculties_title">List of Faculties</string>
+    <string name="list_faculties_search">Search professors here... </string>
+</resources>

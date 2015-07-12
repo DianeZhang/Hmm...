@@ -1,17 +1,4 @@
 <resources>
     <string name="app_name">Hmm...</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_user_main">UserMain</string>
-    <string name="UserMain_welcome_msg">Welcome to Hmm...</string>
-    <string name="UserMain_listcourse_label">List All Courses</string>
-    <string name="UserMain_listfaculties_label">List All Faculties</string>
-    <string name="UserMain_viewdrafts_label">View My Drafts</string>
-    <string name="UserMain_myreviews_label">View My Reviews</string>
-    <string name="UserMain_settings_label">My Settings</string>
-    <string name="title_activity_admin_main">AdminMain</string>
-    <string name="AdminMain_listusers_label">List All Users</string>
-    <string name="AdminMain_listfaculties_label">List All Faculties</string>
-    <string name="AdminMain_listcourses_label">List All Courses</string>
 </resources>

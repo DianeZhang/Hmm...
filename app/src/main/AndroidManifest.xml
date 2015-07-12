@@ -32,6 +32,18 @@
             android:name=".ui.ListCourseReviews"
             android:label="@string/list_course_reviews_label" >
         </activity>
+        <activity
+            android:name=".ui.ListFaculties"
+            android:label="@string/title_activity_list_faculties" >
+        </activity>
+        <activity
+            android:name=".ui.ListFacultyReviews"
+            android:label="@string/title_activity_list_faculty_reviews" >
+        </activity>
+        <activity
+            android:name=".ui.ListUsers"
+            android:label="@string/title_activity_list_users" >
+        </activity>
     </application>
 
 </manifest>
