@@ -21,7 +21,19 @@ public class ListUsers extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_users);
-    }
+
+        titleListUsers = (TextView) findViewById(R.id.titleTextView);
+
+        //TODO: search bar refreshes the page
+        searchUserEditText = (EditText) findViewById(R.id.searchUserEditText);
+
+        //Clicking on the button to add new courses
+        addNewUserButton = (ImageButton) findViewById(R.id.addNewUserButton);
+        addNewUserButton.setOnClickListener(addNewUserListener);
+
+        //Clicking on an item goes to ListCourseReviews page
+        listUsersListView = (ListView) findViewById(R.id.listUsersListView);
+        listUsersListView.setOnItemClickListener(viewUserReviewsListener);    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
