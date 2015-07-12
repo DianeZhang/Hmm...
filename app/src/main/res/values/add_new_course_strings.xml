@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_activity_add_new_course">AddNewCourseActivity</string>
+    <string name="add_new_course_title">New Course</string>
+    <string name="add_new_course_submit_button">Submit</string>
+    <string name="add_new_course_cancel_button">Cancel</string>
+
+</resources>
