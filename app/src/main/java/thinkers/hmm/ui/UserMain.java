@@ -33,6 +33,9 @@ public class UserMain extends Activity {
         settingsButton = (Button) findViewById(R.id.settingsButton);
 
         settingsButton.setOnClickListener(settingsListener);
+        courseButton.setOnClickListener(coursesListener);
+        facultiesButton.setOnClickListener(facultiesListener);
+        reviewsButton.setOnClickListener(reviewsListener);
     }
 
     private View.OnClickListener settingsListener = new View.OnClickListener() {
@@ -40,6 +43,30 @@ public class UserMain extends Activity {
         public void onClick(View v) {
             Intent viewSettings = new Intent(UserMain.this, Settings.class);
             startActivity(viewSettings);
+        }
+    };
+
+    private View.OnClickListener coursesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewCourses = new Intent(UserMain.this, ListCourses.class);
+            startActivity(viewCourses);
+        }
+    };
+
+    private View.OnClickListener facultiesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewFaculties = new Intent(UserMain.this, ListFaculty.class);
+            startActivity(viewFaculties);
+        }
+    };
+
+    private View.OnClickListener reviewsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewReviews = new Intent(UserMain.this, ListMyReviews.class);
+            startActivity(viewReviews);
         }
     };
 
