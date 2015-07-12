@@ -54,7 +54,7 @@ public class AdminMain extends Activity {
     private View.OnClickListener facultiesListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent viewFaculties = new Intent(AdminMain.this, ListFaculty.class);
+            Intent viewFaculties = new Intent(AdminMain.this, ListFaculties.class);
             startActivity(viewFaculties);
         }
     };
