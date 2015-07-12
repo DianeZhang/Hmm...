@@ -72,7 +72,7 @@ public class ListFaculties extends Activity {
 
     // event listener that responds to the user touching a course's name
     // in the ListView
-    AdapterView.OnItemClickListener viewFacultyReviewsListener = new AdapterView.OnItemClickListener()
+    private AdapterView.OnItemClickListener viewFacultyReviewsListener = new AdapterView.OnItemClickListener()
     {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)

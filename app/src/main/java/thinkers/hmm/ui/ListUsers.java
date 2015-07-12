@@ -29,11 +29,12 @@ public class ListUsers extends Activity {
 
         //Clicking on the button to add new courses
         addNewUserButton = (ImageButton) findViewById(R.id.addNewUserButton);
-        addNewUserButton.setOnClickListener(addNewUserListener);
+//        addNewUserButton.setOnClickListener(addNewUserListener);
 
         //Clicking on an item goes to ListCourseReviews page
         listUsersListView = (ListView) findViewById(R.id.listUsersListView);
-        listUsersListView.setOnItemClickListener(viewUserReviewsListener);    }
+//        listUsersListView.setOnItemClickListener(viewUserReviewsListener);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
