@@ -30,6 +30,8 @@ public class AdminMain extends Activity {
         usersButton = (Button) findViewById(R.id.usersButton);
         settingsButton = (Button) findViewById(R.id.settingsButton);
 
+        courseButton.setOnClickListener(coursesListener);
+        facultiesButton.setOnClickListener(facultiesListener);
         settingsButton.setOnClickListener(settingsListener);
     }
 
@@ -38,6 +40,22 @@ public class AdminMain extends Activity {
         public void onClick(View v) {
             Intent viewSettings = new Intent(AdminMain.this, Settings.class);
             startActivity(viewSettings);
+        }
+    };
+
+    private View.OnClickListener coursesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewCourses = new Intent(AdminMain.this, ListCourses.class);
+            startActivity(viewCourses);
+        }
+    };
+
+    private View.OnClickListener facultiesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewFaculties = new Intent(AdminMain.this, ListFaculty.class);
+            startActivity(viewFaculties);
         }
     };
 

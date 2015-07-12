@@ -21,9 +21,14 @@
             android:label="@string/title_activity_sign_up" >
         </activity>
         <activity
+            android:name=".ui.AddNewFaculty"
+            android:label="@string/title_activity_add_new_faculty" >
+        </activity>
+        <activity
             android:name=".ui.UserMain"
             android:label="@string/title_activity_user_main" >
         </activity>
+
         <activity
             android:name=".ui.AdminMain"
             android:label="@string/title_activity_admin_main" >
@@ -37,9 +42,34 @@
             android:label="@string/title_activity_construct_review" >
         </activity>
         <activity
-            android:name=".ui.ListMyDraft"
-            android:label="@string/title_activity_list_my_draft" >
+            android:name=".ui.AddNewCourse"
+            android:label="@string/title_activity_construct_review" >
         </activity>
+        <activity
+            android:name=".ui.ListMyReviews"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.UserInfo"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.CourseReview"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.FacultyReview"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.ListCourses"
+            android.label="fillin here" >
+        </activity>
+        <activity
+            android:name=".ui.ListFaculty"
+            android.label="fillin here" >
+        </activity>
+
     </application>
 
 </manifest>
