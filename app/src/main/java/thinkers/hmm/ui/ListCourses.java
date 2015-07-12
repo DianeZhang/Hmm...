@@ -7,10 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import thinkers.hmm.R;
 
@@ -37,6 +41,13 @@ public class ListCourses extends Activity {
         //Clicking on an item goes to ListCourseReviews page
         listCoursesListView = (ListView) findViewById(R.id.listCoursesListView);
         listCoursesListView.setOnItemClickListener(viewCourseReviewsListener);
+
+        ArrayList<String> testList = new ArrayList<String>();
+        testList.add("1");
+        testList.add("2");
+        testList.add("3");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(ListCourses.this, android.R.layout.simple_list_item_1, testList);
+        listCoursesListView.setAdapter(arrayAdapter);
 
     }
 
