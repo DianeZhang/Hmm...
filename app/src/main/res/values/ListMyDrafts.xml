@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="ListMyDrafts_Title">My Drafts</string>
     <string name="title_activity_list_my_reviews">ListMyReview</string>
     <string name="my_review_title">My Review</string>
-
-
 </resources>
