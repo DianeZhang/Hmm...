@@ -5,15 +5,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import thinkers.hmm.R;
 
 public class ListMyReviews extends Activity {
 
+    private TextView titleMyReview;
+    private ListView myReviews;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_my_reviews);
+
+        titleMyReview = (TextView) findViewById(R.id.textView);
+        myReviews = (ListView) findViewById(R.id.listView);
     }
 
     @Override

@@ -2,15 +2,12 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import thinkers.hmm.R;
@@ -18,9 +15,9 @@ import thinkers.hmm.R;
 public class AddNewFaculty extends Activity {
 
     private TextView titleAddFaculties;
-    private EditText newCourseEditText;
-    private Button submitNewCourseButton;
-    private Button cancelNewCourseButton;
+    private EditText newFacultyEditText;
+    private Button submitNewFacultyButton;
+    private Button cancelNewFacultyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +26,15 @@ public class AddNewFaculty extends Activity {
 
         titleAddFaculties = (TextView) findViewById(R.id.textView);
 
-        //TODO: search bar refreshes the page
-        newCourseEditText = (EditText) findViewById(R.id.editText);
+        newFacultyEditText = (EditText) findViewById(R.id.editText);
 
-        //Clicking on the button to add new courses
-        submitNewCourseButton = (Button) findViewById(R.id.button);
-        submitNewCourseButton.setOnClickListener(submitNewCourseListener);
+        //Clicking on the button to add new Facultys
+        submitNewFacultyButton = (Button) findViewById(R.id.button);
+        submitNewFacultyButton.setOnClickListener(submitNewFacultyListener);
 
-        //Clicking on an item goes to ListCourseReviews page
-        cancelNewCourseButton = (Button) findViewById(R.id.button2);
-        cancelNewCourseButton.setOnClickListener(cancelNewCourseListener);
+        //Clicking on an item goes to ListFacultyReviews page
+        cancelNewFacultyButton = (Button) findViewById(R.id.button2);
+        cancelNewFacultyButton.setOnClickListener(cancelNewFacultyListener);
 
     }
 
@@ -64,17 +60,17 @@ public class AddNewFaculty extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private View.OnClickListener submitNewCourseListener = new View.OnClickListener() {
+    private View.OnClickListener submitNewFacultyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent submitNewCourse = new Intent(AddNewFaculty.this, ListFaculty.class);
+            Intent submitNewFaculty = new Intent(AddNewFaculty.this, ListFaculty.class);
         }
     };
 
-    private View.OnClickListener cancelNewCourseListener = new View.OnClickListener() {
+    private View.OnClickListener cancelNewFacultyListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-            Intent cancelNewCourse = new Intent(AddNewFaculty.this, ListFaculty.class);
+        public void onClick(View v){
+            Intent cancelNewFaculty = new Intent(AddNewFaculty.this, ListFaculty.class);
         }
     };
 }

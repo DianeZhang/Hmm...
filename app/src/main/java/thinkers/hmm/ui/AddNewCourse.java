@@ -1,19 +1,40 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import thinkers.hmm.R;
 
 public class AddNewCourse extends Activity {
 
+    private TextView titleAddFaculties;
+    private EditText newCourseEditText;
+    private Button submitNewCourseButton;
+    private Button cancelNewCourseButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_course);
+
+        titleAddFaculties = (TextView) findViewById(R.id.textView);
+
+        newCourseEditText = (EditText) findViewById(R.id.editText);
+
+        //Clicking on the button to add new Courses
+        submitNewCourseButton = (Button) findViewById(R.id.button);
+        submitNewCourseButton.setOnClickListener(submitNewCourseListener);
+
+        //Clicking on an item goes to ListCourseReviews page
+        cancelNewCourseButton = (Button) findViewById(R.id.button2);
+        cancelNewCourseButton.setOnClickListener(cancelNewCourseListener);
     }
 
     @Override
@@ -37,4 +58,18 @@ public class AddNewCourse extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private View.OnClickListener submitNewCourseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent submitNewCourse = new Intent(AddNewCourse.this, ListCourses.class);
+        }
+    };
+
+    private View.OnClickListener cancelNewCourseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent cancelNewCourse = new Intent(AddNewCourse.this, ListCourses.class);
+        }
+    };
 }

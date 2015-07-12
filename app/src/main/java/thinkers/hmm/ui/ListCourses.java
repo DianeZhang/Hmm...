@@ -68,7 +68,7 @@ public class ListCourses extends Activity {
     private View.OnClickListener addNewCourseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            Intent addNewCourse = new Intent(ListCourses.this, AddNewCourse.class);
+            Intent addNewCourse = new Intent(ListCourses.this, AddNewCourse.class);
         }
     };
 
