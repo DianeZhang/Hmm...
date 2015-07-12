@@ -1,12 +1,18 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import thinkers.hmm.R;
 
@@ -22,6 +28,17 @@ public class ListMyReviews extends Activity {
 
         titleMyReview = (TextView) findViewById(R.id.textView);
         myReviews = (ListView) findViewById(R.id.listView);
+        //Get elements
+        myReviews.setOnItemClickListener(viewCourseReviewListener);
+
+        //Test
+        ArrayList<String> test = new ArrayList<String>();
+        test.add("1");
+        test.add("2");
+        test.add("3");
+
+        ArrayAdapter<String> testAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test);
+        myReviews.setAdapter(testAdapter);
     }
 
     @Override
@@ -45,4 +62,15 @@ public class ListMyReviews extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private AdapterView.OnItemClickListener viewCourseReviewListener = new AdapterView.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        {
+            // create an Intent to launch the CourseReview Activity
+            Intent viewCourseReview = new Intent(ListMyReviews.this, CourseReview.class);
+            startActivity(viewCourseReview); // start the viewCourseReview Activity
+        } // end method onItemClick
+    }; // end viewContactListener
 }
