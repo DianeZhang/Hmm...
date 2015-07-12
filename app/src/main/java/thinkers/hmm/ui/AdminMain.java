@@ -1,9 +1,11 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,7 +29,35 @@ public class AdminMain extends Activity {
         facultiesButton = (Button) findViewById(R.id.facultiesButton);
         usersButton = (Button) findViewById(R.id.usersButton);
         settingsButton = (Button) findViewById(R.id.settingsButton);
+
+        courseButton.setOnClickListener(coursesListener);
+        facultiesButton.setOnClickListener(facultiesListener);
+        settingsButton.setOnClickListener(settingsListener);
     }
+
+    private View.OnClickListener settingsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewSettings = new Intent(AdminMain.this, Settings.class);
+            startActivity(viewSettings);
+        }
+    };
+
+    private View.OnClickListener coursesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewCourses = new Intent(AdminMain.this, ListCourses.class);
+            startActivity(viewCourses);
+        }
+    };
+
+    private View.OnClickListener facultiesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewFaculties = new Intent(AdminMain.this, ListFaculty.class);
+            startActivity(viewFaculties);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

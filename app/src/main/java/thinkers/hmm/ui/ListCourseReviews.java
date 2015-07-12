@@ -71,7 +71,6 @@ public class ListCourseReviews extends Activity {
         public void onClick(View v) {
             // create an Intent to launch the ListCourseReviews Activity
             Intent viewFacultyReview = new Intent(ListCourseReviews.this, FacultyReview.class);
-
             startActivity(viewFacultyReview); // start the viewCourseReviews Activity
         } // end method onClick
     }; // end viewContactListener
@@ -85,7 +84,6 @@ public class ListCourseReviews extends Activity {
         {
             // create an Intent to launch the ListCourseReviews Activity
             Intent viewCourseReview = new Intent(ListCourseReviews.this, CourseReview.class);
-
             startActivity(viewCourseReview); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener

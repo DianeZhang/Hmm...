@@ -1,9 +1,11 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,7 +31,44 @@ public class UserMain extends Activity {
         draftsButton = (Button) findViewById(R.id.draftsButton);
         reviewsButton = (Button) findViewById(R.id.reviewsButton);
         settingsButton = (Button) findViewById(R.id.settingsButton);
+
+        settingsButton.setOnClickListener(settingsListener);
+        courseButton.setOnClickListener(coursesListener);
+        facultiesButton.setOnClickListener(facultiesListener);
+        reviewsButton.setOnClickListener(reviewsListener);
     }
+
+    private View.OnClickListener settingsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewSettings = new Intent(UserMain.this, Settings.class);
+            startActivity(viewSettings);
+        }
+    };
+
+    private View.OnClickListener coursesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewCourses = new Intent(UserMain.this, ListCourses.class);
+            startActivity(viewCourses);
+        }
+    };
+
+    private View.OnClickListener facultiesListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewFaculties = new Intent(UserMain.this, ListFaculty.class);
+            startActivity(viewFaculties);
+        }
+    };
+
+    private View.OnClickListener reviewsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewReviews = new Intent(UserMain.this, ListMyReviews.class);
+            startActivity(viewReviews);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

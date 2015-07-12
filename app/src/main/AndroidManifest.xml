@@ -8,8 +8,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.SignIn"
-            android:label="@string/app_name" >
+            android:name=".ui.Login"
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,12 +17,49 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.SignUp"
+            android:label="@string/title_activity_sign_up" >
+        </activity>
+        <activity
+            android:name=".ui.AddNewFaculty"
+            android:label="@string/title_activity_add_new_faculty" >
+        </activity>
+        <activity
             android:name=".ui.UserMain"
             android:label="@string/title_activity_user_main" >
         </activity>
+
         <activity
             android:name=".ui.AdminMain"
             android:label="@string/title_activity_admin_main" >
+        </activity>
+        <activity
+            android:name=".ui.Settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".ui.ConstructReview"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.AddNewCourse"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.ListMyReviews"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.UserInfo"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.CourseReview"
+            android:label="@string/title_activity_construct_review" >
+        </activity>
+        <activity
+            android:name=".ui.FacultyReview"
+            android:label="@string/title_activity_construct_review" >
         </activity>
         <activity
             android:name=".ui.ListCourses"
@@ -34,15 +71,15 @@
         </activity>
         <activity
             android:name=".ui.ListFaculties"
-            android:label="@string/title_activity_list_faculties" >
+            android:label="@string/list_faculties_label" >
         </activity>
         <activity
             android:name=".ui.ListFacultyReviews"
-            android:label="@string/title_activity_list_faculty_reviews" >
+            android:label="@string/list_faculty_reviews_label" >
         </activity>
         <activity
             android:name=".ui.ListUsers"
-            android:label="@string/title_activity_list_users" >
+            android:label="@string/list_users_label" >
         </activity>
     </application>
 

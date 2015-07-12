@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_activity_faculty_review">FacultyReview</string>
+    <string name="detailed_faculty_review_title">Faculty Review</string>
+
+</resources>

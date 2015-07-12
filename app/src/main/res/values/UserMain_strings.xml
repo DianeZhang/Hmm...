@@ -1,0 +1,9 @@
+<resources>
+    <string name="title_activity_user_main">UserMain</string>
+    <string name="UserMain_welcome_msg">Welcome to Hmm...</string>
+    <string name="UserMain_listcourse_label">List All Courses</string>
+    <string name="UserMain_listfaculties_label">List All Faculties</string>
+    <string name="UserMain_viewdrafts_label">View My Drafts</string>
+    <string name="UserMain_myreviews_label">View My Reviews</string>
+    <string name="UserMain_settings_label">My Settings</string>
+</resources>
