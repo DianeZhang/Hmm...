@@ -61,6 +61,14 @@
             android:name=".ui.FacultyReview"
             android:label="@string/title_activity_construct_review" >
         </activity>
+        <activity
+            android:name=".ui.ListCourses"
+            android.label="fillin here" >
+        </activity>
+        <activity
+            android:name=".ui.ListFaculty"
+            android.label="fillin here" >
+        </activity>
 
     </application>
 
