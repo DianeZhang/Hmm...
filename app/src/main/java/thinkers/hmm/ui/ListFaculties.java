@@ -35,7 +35,7 @@ public class ListFaculties extends Activity {
         addNewFacultyButton.setOnClickListener(addNewFacultyListener);
 
         //Clicking on an item goes to ListCourseReviews page
-        listFacultiesListView = (ListView) findViewById(R.id.listCourseReviewsListView);
+        listFacultiesListView = (ListView) findViewById(R.id.listFacultiesListView);
         listFacultiesListView.setOnItemClickListener(viewFacultyReviewsListener);
     }
 

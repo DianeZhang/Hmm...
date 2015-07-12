@@ -1,9 +1,12 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -27,13 +30,9 @@ public class ListUsers extends Activity {
         //TODO: search bar refreshes the page
         searchUserEditText = (EditText) findViewById(R.id.searchUserEditText);
 
-        //Clicking on the button to add new courses
-        addNewUserButton = (ImageButton) findViewById(R.id.addNewUserButton);
-//        addNewUserButton.setOnClickListener(addNewUserListener);
-
         //Clicking on an item goes to ListCourseReviews page
         listUsersListView = (ListView) findViewById(R.id.listUsersListView);
-//        listUsersListView.setOnItemClickListener(viewUserReviewsListener);
+        listUsersListView.setOnItemClickListener(viewUserReviewsListener);
     }
 
     @Override
@@ -57,4 +56,17 @@ public class ListUsers extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // event listener that responds to the user touching a user's name
+    // in the ListView
+    private AdapterView.OnItemClickListener viewUserReviewsListener = new AdapterView.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        {
+            // create an Intent to launch the ListCourseReviews Activity
+            Intent viewFacultyReviews = new Intent(ListUsers.this, UserInfo.class);
+            startActivity(viewFacultyReviews); // start the viewCourseReviews Activity
+        } // end method onItemClick
+    }; // end viewContactListener
 }
