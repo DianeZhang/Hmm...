@@ -14,36 +14,35 @@ import android.widget.TextView;
 
 import thinkers.hmm.R;
 
-public class ListCourses extends Activity {
-    private TextView titleListCourses;
-    private EditText searchCourseEditText;
-    private ImageButton addNewCourseButton;
-    private ListView listCoursesListView;
+public class ListFaculties extends Activity {
+    private TextView titleListFaculties;
+    private EditText searchFaultyEditText;
+    private ImageButton addNewFacultyButton;
+    private ListView listFacultiesListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_courses);
+        setContentView(R.layout.activity_list_faculties);
 
-        titleListCourses = (TextView) findViewById(R.id.titleTextView);
+        titleListFaculties = (TextView) findViewById(R.id.titleTextView);
 
         //TODO: search bar refreshes the page
-        searchCourseEditText = (EditText) findViewById(R.id.searchFacultyEditText);
+        searchFaultyEditText = (EditText) findViewById(R.id.searchFacultyEditText);
 
         //Clicking on the button to add new courses
-        addNewCourseButton = (ImageButton) findViewById(R.id.addNewCourseButton);
-        addNewCourseButton.setOnClickListener(addNewCourseListener);
+        addNewFacultyButton = (ImageButton) findViewById(R.id.addNewFacultyButton);
+        addNewFacultyButton.setOnClickListener(addNewFacultyListener);
 
         //Clicking on an item goes to ListCourseReviews page
-        listCoursesListView = (ListView) findViewById(R.id.listCoursesListView);
-        listCoursesListView.setOnItemClickListener(viewCourseReviewsListener);
-
+        listFacultiesListView = (ListView) findViewById(R.id.listCourseReviewsListView);
+        listFacultiesListView.setOnItemClickListener(viewFacultyReviewsListener);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_list_courses, menu);
+        getMenuInflater().inflate(R.menu.menu_list_faculties, menu);
         return true;
     }
 
@@ -62,25 +61,25 @@ public class ListCourses extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    // event-handling object that responds to addNewCourse's events
-    private View.OnClickListener addNewCourseListener = new View.OnClickListener() {
+    // event-handling object that responds to addNewFaculty's events
+    private View.OnClickListener addNewFacultyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent addNewCourse = new Intent(ListCourses.this, AddNewCourse.class);
-            startActivity(addNewCourse); // start the addNewCourse Activity
+            Intent addNewFaculty = new Intent(ListFaculties.this, AddNewFaculty.class);
+            startActivity(addNewFaculty); // start the addNewFaculty Activity
         }
     };
 
     // event listener that responds to the user touching a course's name
     // in the ListView
-    AdapterView.OnItemClickListener viewCourseReviewsListener = new AdapterView.OnItemClickListener()
+    AdapterView.OnItemClickListener viewFacultyReviewsListener = new AdapterView.OnItemClickListener()
     {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
         {
             // create an Intent to launch the ListCourseReviews Activity
-            Intent viewCourseReviews = new Intent(ListCourses.this, ListCourseReviews.class);
-            startActivity(viewCourseReviews); // start the viewCourseReviews Activity
+            Intent viewFacultyReviews = new Intent(ListFaculties.this, ListFacultyReviews.class);
+            startActivity(viewFacultyReviews); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
 }

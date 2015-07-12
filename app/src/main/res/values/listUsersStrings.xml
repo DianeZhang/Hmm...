@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="list_users_label">ListUsers</string>
+    <string name="list_users_title">List of Users</string>
+    <string name="list_users_search">Search users here... </string>
+</resources>
