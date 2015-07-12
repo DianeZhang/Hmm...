@@ -8,14 +8,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import thinkers.hmm.R;
 
 public class ListCourseReviews extends Activity {
-    private TextView titleListCourses;
+    private TextView titleListCourseReviews;
     private Button professor1Button;
     private Button professor2Button;
     private Button professor3Button;
@@ -28,7 +27,7 @@ public class ListCourseReviews extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_course_reviews);
 
-        titleListCourses = (TextView) findViewById(R.id.titleTextView);
+        titleListCourseReviews = (TextView) findViewById(R.id.titleTextView);
 
         //TODO: find a horizontal list view for professors
         professor1Button = (Button) findViewById(R.id.professor1Button);

@@ -36,6 +36,7 @@ public class UserMain extends Activity {
         courseButton.setOnClickListener(coursesListener);
         facultiesButton.setOnClickListener(facultiesListener);
         reviewsButton.setOnClickListener(reviewsListener);
+        draftsButton.setOnClickListener(draftsListener);
     }
 
     private View.OnClickListener settingsListener = new View.OnClickListener() {
@@ -57,7 +58,7 @@ public class UserMain extends Activity {
     private View.OnClickListener facultiesListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent viewFaculties = new Intent(UserMain.this, ListFaculty.class);
+            Intent viewFaculties = new Intent(UserMain.this, ListFaculties.class);
             startActivity(viewFaculties);
         }
     };
@@ -67,6 +68,14 @@ public class UserMain extends Activity {
         public void onClick(View v) {
             Intent viewReviews = new Intent(UserMain.this, ListMyReviews.class);
             startActivity(viewReviews);
+        }
+    };
+
+    private View.OnClickListener draftsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewDrafts = new Intent(UserMain.this, ListMyDrafts.class);
+            startActivity(viewDrafts);
         }
     };
 
