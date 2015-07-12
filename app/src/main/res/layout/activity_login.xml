@@ -98,5 +98,13 @@
                 android:layout_weight="0.33" />
         </LinearLayout>
 
+        <Button
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Login_AdminLoginButton"
+            android:id="@+id/adminloginButton"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="50dp" />
+
     </LinearLayout>
 </RelativeLayout>

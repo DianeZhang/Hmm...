@@ -15,6 +15,7 @@ public class Login extends Activity {
 
     private Button signUp = null;
     private Button login  = null;
+    private Button adminlogin = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,13 @@ public class Login extends Activity {
         //Get element
         login = (Button) findViewById(R.id.button);
         signUp = (Button) findViewById(R.id.button2);
+        adminlogin = (Button) findViewById(R.id.adminloginButton);
 
 
         //Set up button action listener
         signUp.setOnClickListener(signUpAction);
         login.setOnClickListener(loginAction);
-
+        adminlogin.setOnClickListener(adminloginAction);
     }
 
     @Override
@@ -64,6 +66,14 @@ public class Login extends Activity {
     };
 
     private View.OnClickListener loginAction = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Login.this, UserMain.class);
+            startActivity(intent);
+        }
+    };
+
+    private View.OnClickListener adminloginAction = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(Login.this, AdminMain.class);
