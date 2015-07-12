@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_activity_construct_review">ConstructReview</string>
+    <string name="ConstructReview_Title">Write a new Comment</string>
+    <string name="ConstructReview_TitleString">Title:</string>
+    <string name="ConstructReview_TitleHint">Please write your comment title here</string>
+    <string name="ConstructReview_Review">Content:</string>
+    <string name="ConstructReview_ReviewHint">Please write your review details here</string>
+    <string name="ConstructReview_SubmitButton">Submit</string>
+    <string name="ConstructReview_SaveButton">Save</string>
+    <string name="ConstructReview_CancelButton">Cancel</string>
 </resources>

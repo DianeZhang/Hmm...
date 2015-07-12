@@ -36,6 +36,10 @@
             android:name=".ui.ConstructReview"
             android:label="@string/title_activity_construct_review" >
         </activity>
+        <activity
+            android:name=".ui.ListMyDraft"
+            android:label="@string/title_activity_list_my_draft" >
+        </activity>
     </application>
 
 </manifest>
