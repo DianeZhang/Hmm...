@@ -63,13 +63,28 @@
         </activity>
         <activity
             android:name=".ui.ListCourses"
-            android.label="fillin here" >
+            android:label="@string/list_courses_label" >
         </activity>
         <activity
-            android:name=".ui.ListFaculty"
-            android.label="fillin here" >
+            android:name=".ui.ListCourseReviews"
+            android:label="@string/list_course_reviews_label" >
         </activity>
-
+        <activity
+            android:name=".ui.ListFaculties"
+            android:label="@string/list_faculties_label" >
+        </activity>
+        <activity
+            android:name=".ui.ListFacultyReviews"
+            android:label="@string/list_faculty_reviews_label" >
+        </activity>
+        <activity
+            android:name=".ui.ListUsers"
+            android:label="@string/list_users_label" >
+        </activity>
+        <activity
+            android:name=".ui.ListMyDrafts"
+            android:label="@string/title_activity_list_my_reviews" >
+        </activity>
     </application>
 
 </manifest>

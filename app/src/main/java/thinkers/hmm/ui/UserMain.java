@@ -58,7 +58,7 @@ public class UserMain extends Activity {
     private View.OnClickListener facultiesListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent viewFaculties = new Intent(UserMain.this, ListFaculty.class);
+            Intent viewFaculties = new Intent(UserMain.this, ListFaculties.class);
             startActivity(viewFaculties);
         }
     };

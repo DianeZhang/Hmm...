@@ -4,15 +4,30 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Button;
 import thinkers.hmm.R;
+import android.content.Intent;
 
 public class ConstructReview extends Activity {
+
+    private Button cancelButton = null;
+    private Button submitbutton = null;
+    private Button saveButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_construct_review);
+
+        //Get elements
+        submitbutton = (Button)findViewById(R.id.button5);
+        saveButton = (Button)findViewById(R.id.button6);
+        cancelButton = (Button)findViewById(R.id.button7);
+
+        //Set Button Dispatcher
+        cancelButton.setOnClickListener(cancelAction);
+
     }
 
     @Override
@@ -36,4 +51,13 @@ public class ConstructReview extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /** Button Click Dispatcher */
+    private View.OnClickListener cancelAction = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(ConstructReview.this, ListMyReviews.class);
+            startActivity(intent);
+        }
+    };
 }
