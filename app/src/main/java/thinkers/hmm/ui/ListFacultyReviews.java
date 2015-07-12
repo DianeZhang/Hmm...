@@ -7,9 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import thinkers.hmm.R;
 
@@ -40,7 +43,12 @@ public class ListFacultyReviews extends Activity {
         listFacultyReviewsListView = (ListView) findViewById(R.id.listFacultyReviewsListView);
         listFacultyReviewsListView.setOnItemClickListener(viewFacultyReviewListener);
 
-
+        ArrayList<String> testList = new ArrayList<String>();
+        testList.add("1");
+        testList.add("2");
+        testList.add("3");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(ListFacultyReviews.this, android.R.layout.simple_list_item_1, testList);
+        listFacultyReviewsListView.setAdapter(arrayAdapter);
     }
 
     @Override
