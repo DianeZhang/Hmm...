@@ -72,8 +72,9 @@ public class ListCourseReviews extends Activity {
         public void onClick(View v) {
             // create an Intent to launch the ListCourseReviews Activity
             Intent viewFacultyReview = new Intent(ListCourseReviews.this, FacultyReview.class);
+//            Intent viewFacultyReview = new Intent(ListCourseReviews.this, ProfessorReview.class);
 
-            startActivity(viewFacultyReview); // start the viewCourseReviews Activity
+//            startActivity(viewFacultyReview); // start the viewCourseReviews Activity
         } // end method onClick
     }; // end viewContactListener
 
@@ -85,9 +86,9 @@ public class ListCourseReviews extends Activity {
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
         {
             // create an Intent to launch the ListCourseReviews Activity
-            Intent viewCourseReview = new Intent(ListCourseReviews.this, CourseReview.class);
+//            Intent viewCourseReview = new Intent(ListCourseReviews.this, CourseReview.class);
 
-            startActivity(viewCourseReview); // start the viewCourseReviews Activity
+//            startActivity(viewCourseReview); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
 }

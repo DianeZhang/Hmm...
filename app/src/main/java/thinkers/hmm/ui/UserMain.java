@@ -1,9 +1,11 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,7 +31,17 @@ public class UserMain extends Activity {
         draftsButton = (Button) findViewById(R.id.draftsButton);
         reviewsButton = (Button) findViewById(R.id.reviewsButton);
         settingsButton = (Button) findViewById(R.id.settingsButton);
+
+        settingsButton.setOnClickListener(settingsListener);
     }
+
+    private View.OnClickListener settingsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewSettings = new Intent(UserMain.this, Settings.class);
+            startActivity(viewSettings);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

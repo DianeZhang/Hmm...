@@ -1,25 +1,39 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import thinkers.hmm.R;
 
 
-public class SignIn extends Activity {
+public class SignUp extends Activity {
+
+    private Button submitButton = null;
+    private Button cancelButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sign_up);
+
+        //Get element
+        submitButton = (Button)findViewById(R.id.button3);
+        cancelButton = (Button)findViewById(R.id.button4);
+
+        //Set up Button action listerner
+        cancelButton.setOnClickListener(cancelAction);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sign_in, menu);
+        getMenuInflater().inflate(R.menu.menu_sign_up, menu);
         return true;
     }
 
@@ -37,4 +51,13 @@ public class SignIn extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /** Button Click Dispatcher */
+    private View.OnClickListener cancelAction = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(SignUp.this, Login.class);
+            startActivity(intent);
+        }
+    };
 }

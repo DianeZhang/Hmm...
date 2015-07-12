@@ -1,31 +1,40 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 
 import thinkers.hmm.R;
 
-public class AddNewFaculty extends Activity {
+
+public class Login extends Activity {
+
+    private Button signUp = null;
+    private Button login  = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_faculty);
+        setContentView(R.layout.activity_login);
 
+        //Get element
+        login = (Button) findViewById(R.id.button);
+        signUp = (Button) findViewById(R.id.button2);
+
+
+        //Set up button action listener
+        signUp.setOnClickListener(signUpAction);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_new_faculty, menu);
+        getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
 
@@ -43,4 +52,13 @@ public class AddNewFaculty extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /** Button Click Dispatcher */
+    private View.OnClickListener signUpAction = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Login.this, SignUp.class);
+            startActivity(intent);
+      }
+    };
 }

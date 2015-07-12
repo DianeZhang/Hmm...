@@ -1,0 +1,6 @@
+<resources>
+    <string name="title_activity_admin_main">AdminMain</string>
+    <string name="AdminMain_listusers_label">List All Users</string>
+    <string name="AdminMain_listfaculties_label">List All Faculties</string>
+    <string name="AdminMain_listcourses_label">List All Courses</string>
+</resources>

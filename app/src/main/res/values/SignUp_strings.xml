@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="SignUp_Title">Sign Up</string>
+    <string name="SignUp_Username">Username:</string>
+    <string name="SignUp_UsernameHint">Please enter your username here</string>
+    <string name="SignUp_Password">Password:</string>
+    <string name="SignUp_PasswordHint">Please enter your password here</string>
+    <string name="SignUp_Email">Email</string>
+    <string name="SignUp_EmailHint">example@bob.com</string>
+    <string name="SignUp_Phone">Phone Number:</string>
+    <string name="SignUp_PhoneHint">123456789</string>
+    <string name="SignUp_SubmitButton">Submit</string>
+    <string name="SignUp_CancelButton">Cancel</string>
+</resources>

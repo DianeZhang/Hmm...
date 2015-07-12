@@ -1,0 +1,12 @@
+<resources>
+    <string name="title_activity_settings">Settings</string>
+    <string name="Settings_welcome_msg">User\'s Settings</string>
+    <string name="Settings_username_label">Username:</string>
+    <string name="Settings_username">UserName</string>
+    <string name="Settings_password_label">Password:</string>
+    <string name="Settings_password">password</string>
+    <string name="Settings_email_label">Email:</string>
+    <string name="Settings_email">example@example.com</string>
+    <string name="Settings_save_label">Save</string>
+    <string name="Settings_cancel_label">Cancel</string>
+</resources>

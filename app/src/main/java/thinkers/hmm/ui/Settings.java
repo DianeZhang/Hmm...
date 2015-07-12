@@ -1,50 +1,56 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import thinkers.hmm.R;
 
-public class AdminMain extends Activity {
+public class Settings extends Activity {
 
-    private TextView welcomeText;
-    private Button courseButton;
-    private Button facultiesButton;
-    private Button usersButton;
-    private Button settingsButton;
+    private Button saveButton;
+    private Button cancelButton;
+    private EditText editUserName;
+    private EditText editPassword;
+    private EditText editEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);
+        setContentView(R.layout.activity_settings);
 
-        welcomeText = (TextView) findViewById(R.id.welcomeText);
-        courseButton = (Button) findViewById(R.id.coursesButton);
-        facultiesButton = (Button) findViewById(R.id.facultiesButton);
-        usersButton = (Button) findViewById(R.id.usersButton);
-        settingsButton = (Button) findViewById(R.id.settingsButton);
+        saveButton = (Button) findViewById(R.id.saveButton);
+        cancelButton = (Button) findViewById(R.id.cancelButton);
+        editUserName = (EditText) findViewById(R.id.editUserName);
+        editPassword = (EditText) findViewById(R.id.editPassword);
+        editEmail = (EditText) findViewById(R.id.editEmail);
 
-        settingsButton.setOnClickListener(settingsListener);
+        saveButton.setOnClickListener(saveListener);
+        cancelButton.setOnClickListener(cancelListener);
     }
 
-    private View.OnClickListener settingsListener = new View.OnClickListener() {
+    private View.OnClickListener saveListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent viewSettings = new Intent(AdminMain.this, Settings.class);
-            startActivity(viewSettings);
+            finish();
+        }
+    };
+
+    private View.OnClickListener cancelListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
         }
     };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_admin_main, menu);
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
         return true;
     }
 
