@@ -63,6 +63,7 @@ public class UserInfo extends Activity {
         @Override
         public void onClick(View v){
             Intent seeUserReview = new Intent(UserInfo.this, ListMyReviews.class);
+            startActivity(seeUserReview);
         }
     };
 }

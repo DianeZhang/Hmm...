@@ -63,6 +63,7 @@ public class AddNewCourse extends Activity {
         @Override
         public void onClick(View v) {
             Intent submitNewCourse = new Intent(AddNewCourse.this, ListCourses.class);
+            startActivity(submitNewCourse);
         }
     };
 
@@ -70,6 +71,7 @@ public class AddNewCourse extends Activity {
         @Override
         public void onClick(View v) {
             Intent cancelNewCourse = new Intent(AddNewCourse.this, ListCourses.class);
+            startActivity(cancelNewCourse);
         }
     };
 }

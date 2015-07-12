@@ -64,6 +64,7 @@ public class AddNewFaculty extends Activity {
         @Override
         public void onClick(View v) {
             Intent submitNewFaculty = new Intent(AddNewFaculty.this, ListFaculties.class);
+            startActivity(submitNewFaculty);
         }
     };
 
@@ -71,6 +72,7 @@ public class AddNewFaculty extends Activity {
         @Override
         public void onClick(View v){
             Intent cancelNewFaculty = new Intent(AddNewFaculty.this, ListFaculties.class);
+            startActivity(cancelNewFaculty);
         }
     };
 }
