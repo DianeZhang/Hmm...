@@ -28,6 +28,7 @@ public class Login extends Activity {
 
         //Set up button action listener
         signUp.setOnClickListener(signUpAction);
+        login.setOnClickListener(loginAction);
 
     }
 
@@ -60,5 +61,13 @@ public class Login extends Activity {
             Intent intent = new Intent(Login.this, SignUp.class);
             startActivity(intent);
       }
+    };
+
+    private View.OnClickListener loginAction = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Login.this, UserMain.class);
+            startActivity(intent);
+        }
     };
 }
