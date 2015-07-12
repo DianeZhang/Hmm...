@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="list_courses_label">ListCourses</string>
+    <string name="list_courses_title">List of Courses</string>
+    <string name="list_courses_search">Search courses here... </string>
+</resources>

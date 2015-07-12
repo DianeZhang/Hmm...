@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="list_course_reviews_label">ListCourseReviews</string>
+    <string name="list_course_reviews_title">List of Course Reviews</string>
+    <string name="list_course_reviews_prof1">Professor1 ... </string>
+    <string name="list_course_reviews_prof2">Professor2 ... </string>
+    <string name="list_course_reviews_prof3">Professor3 ... </string>
+    <string name="list_course_reviews_prof4">Professor4 ... </string>
+</resources>
