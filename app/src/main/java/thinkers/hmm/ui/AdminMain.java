@@ -33,6 +33,7 @@ public class AdminMain extends Activity {
         courseButton.setOnClickListener(coursesListener);
         facultiesButton.setOnClickListener(facultiesListener);
         settingsButton.setOnClickListener(settingsListener);
+        usersButton.setOnClickListener(usersListener);
     }
 
     private View.OnClickListener settingsListener = new View.OnClickListener() {
@@ -56,6 +57,14 @@ public class AdminMain extends Activity {
         public void onClick(View v) {
             Intent viewFaculties = new Intent(AdminMain.this, ListFaculties.class);
             startActivity(viewFaculties);
+        }
+    };
+
+    private View.OnClickListener usersListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewUsers = new Intent(AdminMain.this, ListUsers.class);
+            startActivity(viewUsers);
         }
     };
 
