@@ -26,7 +26,7 @@ public class ListUsers extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_users);
+        setContentView(R.layout.ui_list_users);
 
         titleListUsers = (TextView) findViewById(R.id.titleTextView);
 

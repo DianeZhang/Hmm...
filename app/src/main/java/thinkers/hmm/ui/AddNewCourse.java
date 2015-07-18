@@ -22,7 +22,7 @@ public class AddNewCourse extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_course);
+        setContentView(R.layout.ui_add_new_course);
 
         titleAddFaculties = (TextView) findViewById(R.id.textView);
 

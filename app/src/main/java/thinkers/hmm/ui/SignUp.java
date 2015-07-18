@@ -19,7 +19,7 @@ public class SignUp extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.ui_sign_up);
 
         //Get element
         submitButton = (Button)findViewById(R.id.button3);

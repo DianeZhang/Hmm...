@@ -1,11 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -20,7 +18,7 @@ public class CourseReview extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_review);
+        setContentView(R.layout.ui_course_review);
 
         titleCourseReview = (TextView) findViewById(R.id.textView);
         courseReviews = (TextView) findViewById(R.id.textView2);

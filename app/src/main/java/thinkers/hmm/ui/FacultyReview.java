@@ -1,7 +1,6 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +18,7 @@ public class FacultyReview extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faculty_review);
+        setContentView(R.layout.ui_faculty_review);
 
         titleFacultyReview = (TextView) findViewById(R.id.textView);
         facultyReviews = (TextView) findViewById(R.id.textView2);

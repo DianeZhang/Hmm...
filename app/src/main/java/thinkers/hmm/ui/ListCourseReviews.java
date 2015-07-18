@@ -28,7 +28,7 @@ public class ListCourseReviews extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_course_reviews);
+        setContentView(R.layout.ui_list_course_reviews);
 
         titleListCourseReviews = (TextView) findViewById(R.id.titleTextView);
 

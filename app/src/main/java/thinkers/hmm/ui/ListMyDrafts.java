@@ -21,7 +21,7 @@ public class ListMyDrafts extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_my_drafts);
+        setContentView(R.layout.ui_list_my_drafts);
 
         //Get elements
         listView = (ListView)findViewById(R.id.DraftListView);

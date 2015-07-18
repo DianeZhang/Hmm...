@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import thinkers.hmm.R;
 
@@ -27,7 +26,7 @@ public class ListCourses extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_courses);
+        setContentView(R.layout.ui_list_courses);
 
         titleListCourses = (TextView) findViewById(R.id.titleTextView);
 

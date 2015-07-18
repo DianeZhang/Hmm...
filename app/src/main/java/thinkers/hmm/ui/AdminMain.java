@@ -22,7 +22,7 @@ public class AdminMain extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);
+        setContentView(R.layout.ui_admin_main);
 
         welcomeText = (TextView) findViewById(R.id.welcomeText);
         courseButton = (Button) findViewById(R.id.coursesButton);

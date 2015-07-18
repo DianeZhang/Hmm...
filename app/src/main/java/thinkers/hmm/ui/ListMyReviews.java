@@ -2,7 +2,6 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +23,7 @@ public class ListMyReviews extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_my_reviews);
+        setContentView(R.layout.ui_list_my_reviews);
 
         titleMyReview = (TextView) findViewById(R.id.textView);
         myReviews = (ListView) findViewById(R.id.listView);

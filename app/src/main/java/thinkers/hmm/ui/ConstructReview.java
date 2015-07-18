@@ -18,7 +18,7 @@ public class ConstructReview extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_construct_review);
+        setContentView(R.layout.ui_construct_review);
 
         //Get elements
         submitbutton = (Button)findViewById(R.id.button5);
