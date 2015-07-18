@@ -7,6 +7,10 @@ public class FacultyReviewDraft extends ReviewDraft {
 
     private int fid;
 
+    public FacultyReviewDraft() {
+        super();
+    }
+
     public int getFid() {
         return fid;
     }

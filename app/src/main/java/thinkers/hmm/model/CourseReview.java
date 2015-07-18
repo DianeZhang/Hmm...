@@ -7,6 +7,10 @@ public class CourseReview extends Review {
 
     private int cid;
 
+    CourseReview() {
+        super();
+    }
+
     public int getCid() {
         return cid;
     }

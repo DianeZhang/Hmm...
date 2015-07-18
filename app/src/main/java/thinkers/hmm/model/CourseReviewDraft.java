@@ -7,6 +7,9 @@ public class CourseReviewDraft extends ReviewDraft {
 
     private int cid;
 
+    public CourseReviewDraft() {
+        super();
+    }
     public int getCid() {
         return cid;
     }

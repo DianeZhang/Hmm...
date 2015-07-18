@@ -7,6 +7,10 @@ public class FacultyReview extends Review {
 
     private int fid;
 
+    public FacultyReview() {
+        super();
+    }
+
     public int getFid() {
         return fid;
     }

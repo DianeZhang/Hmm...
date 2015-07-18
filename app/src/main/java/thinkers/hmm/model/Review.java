@@ -6,13 +6,18 @@ import java.util.Date;
  * Created by chaoli on 7/18/15.
  */
 public abstract class Review {
-    private int id;
+    private int id = -1;
     private int uid;
     private int like;
     private int dislike;
     private String title;
     private String content;
+    private String location;
     private Date createdtime;
+
+    public Review(int) {
+
+    }
 
     public int getId() {
         return id;
@@ -37,6 +42,8 @@ public abstract class Review {
     public String getContent() {
         return content;
     }
+
+    public String getLocation() { return this.location; }
 
     public Date getCreatedtime() {
         return createdtime;
@@ -65,6 +72,8 @@ public abstract class Review {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public void setLocation(String location) { this.location = location; }
 
     public void setCreatedtime(Date createdtime) {
         this.createdtime = createdtime;
