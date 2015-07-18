@@ -1,5 +1,7 @@
 package thinkers.hmm.model;
 
+import java.util.Date;
+
 /**
  * Created by chaoli on 7/18/15.
  */
@@ -8,6 +10,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private Date lastlogin;
 
     public int getId() {
         return id;
@@ -25,6 +28,10 @@ public class User {
         return password;
     }
 
+    public Date getLastlogin() {
+        return lastlogin;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -39,5 +46,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setLastlogin(Date lastlogin) {
+        this.lastlogin = lastlogin;
     }
 }

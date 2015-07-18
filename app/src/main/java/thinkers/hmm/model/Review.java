@@ -1,5 +1,7 @@
 package thinkers.hmm.model;
 
+import java.util.Date;
+
 /**
  * Created by chaoli on 7/18/15.
  */
@@ -10,7 +12,7 @@ public abstract class Review {
     private int dislike;
     private String title;
     private String content;
-
+    private Date createdtime;
 
     public int getId() {
         return id;
@@ -36,6 +38,10 @@ public abstract class Review {
         return content;
     }
 
+    public Date getCreatedtime() {
+        return createdtime;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -58,5 +64,9 @@ public abstract class Review {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setCreatedtime(Date createdtime) {
+        this.createdtime = createdtime;
     }
 }
