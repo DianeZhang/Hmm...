@@ -7,8 +7,14 @@ public class FacultyReviewDraft extends ReviewDraft {
 
     private int fid;
 
-    public FacultyReviewDraft() {
-        super();
+    public FacultyReviewDraft(int reviewId, int uid, int fid, String title, String content) {
+        super(reviewId, uid, title, content);
+        this.fid = fid;
+    }
+
+    public FacultyReviewDraft(int uid, int fid, String title, String content) {
+        super(uid, title, content);
+        this.fid = fid;
     }
 
     public int getFid() {

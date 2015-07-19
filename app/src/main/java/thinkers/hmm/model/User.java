@@ -12,6 +12,22 @@ public class User {
     private String password;
     private Date lastlogin;
 
+    public User(int id, String username, String email, String password, Date lastlogin) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.lastlogin = lastlogin;
+    }
+
+    public User(String username, String email, String password, Date lastlogin) {
+        this.id = -1;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.lastlogin = lastlogin;
+    }
+
     public int getId() {
         return id;
     }
