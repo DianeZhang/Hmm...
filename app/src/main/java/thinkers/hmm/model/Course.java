@@ -10,6 +10,13 @@ public class Course {
     private String school;
 
 
+    public Course(int id, String name, String code, String school) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.school = school;
+    }
+
     public Course(String name, String code, String school) {
         this.id = -1;
         this.name = name;

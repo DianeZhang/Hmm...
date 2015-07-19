@@ -5,7 +5,12 @@ package thinkers.hmm.model;
  */
 public class CourseReview extends Review {
 
-    private int cid;
+    private int cid = -1;
+
+    CourseReview(int cid) {
+        super(cid);
+        this.cid = cid;
+    }
 
     CourseReview() {
         super();
