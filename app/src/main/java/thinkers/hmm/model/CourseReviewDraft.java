@@ -7,13 +7,14 @@ public class CourseReviewDraft extends ReviewDraft {
 
     private int cid;
 
-    public CourseReviewDraft(int cid) {
-        super();
+    public CourseReviewDraft(int cid, int id, int uid, String title, String content) {
+        super(id, uid, title, content);
         this.cid = cid;
     }
 
-    public CourseReviewDraft() {
-        super();
+    public CourseReviewDraft(int cid, int uid, String title, String content) {
+        super(uid, title, content);
+        this.cid = cid;
     }
 
 
