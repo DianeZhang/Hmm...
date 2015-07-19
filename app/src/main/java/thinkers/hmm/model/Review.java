@@ -15,8 +15,22 @@ public abstract class Review {
     private String location;
     private Date createdtime;
 
-    public Review(int) {
+    public Review(int id, int uid, String title, String content, String location, Date createdtime) {
+        this.id = id;
+        this.uid = uid;
+        this.title = title;
+        this.content = content;
+        this.location = location;
+        this.createdtime = createdtime;
+    }
 
+    public Review(int uid, String title, String content, String location, Date createdtime) {
+        this.id = -1;
+        this.uid = uid;
+        this.title = title;
+        this.content = content;
+        this.location = location;
+        this.createdtime = createdtime;
     }
 
     public int getId() {

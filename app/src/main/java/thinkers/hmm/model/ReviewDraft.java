@@ -9,6 +9,20 @@ public abstract class ReviewDraft {
     private String title;
     private String content;
 
+    public ReviewDraft(int id, int uid, String title, String content) {
+        this.id = id;
+        this.uid = uid;
+        this.title = title;
+        this.content = content;
+    }
+
+    public ReviewDraft(int uid, String title, String content) {
+        this.id = -1;
+        this.uid = uid;
+        this.title = title;
+        this.content = content;
+    }
+
     public int getId() {
         return id;
     }
