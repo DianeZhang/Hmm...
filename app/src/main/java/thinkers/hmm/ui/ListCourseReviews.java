@@ -23,7 +23,7 @@ public class ListCourseReviews extends Activity {
     private Button professor2Button;
     private Button professor3Button;
     private Button professor4Button;
-    private ImageButton addNewReviewButton;
+    private Button addNewReviewButton;
 
     private ListView listCourseReviewsListView;
 
@@ -42,7 +42,7 @@ public class ListCourseReviews extends Activity {
         professor1Button.setOnClickListener(viewFacultyReviewListener);
 
         //Clicking on the button to add new review
-        addNewReviewButton = (ImageButton) findViewById(R.id.addNewReviewButton);
+        addNewReviewButton = (Button) findViewById(R.id.addNewReviewButton);
         addNewReviewButton.setOnClickListener(addNewReviewListener);
 
         //Clicking on an item goes to CourseReview page
@@ -95,7 +95,7 @@ public class ListCourseReviews extends Activity {
     private View.OnClickListener addNewReviewListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent addNewReview = new Intent(ListCourseReviews.this, CourseReview.class);
+            Intent addNewReview = new Intent(ListCourseReviews.this, ConstructReview.class);
 
             startActivity(addNewReview); // start the addNewReview Activity
         }

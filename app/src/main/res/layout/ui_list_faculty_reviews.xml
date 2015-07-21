@@ -15,8 +15,9 @@
         android:layout_alignParentEnd="true"
         android:gravity="center"
         android:singleLine="false"
-        android:textSize="40dp"
-        android:layout_alignParentStart="true" />
+        android:textSize="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -58,15 +59,12 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/course1Button" />
 
-    <ImageButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/list_faculty_reviews_add"
         android:id="@+id/addNewReviewButton"
         android:layout_alignBottom="@+id/titleTextView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:focusable="true"
-        android:src="@drawable/small_plus" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
