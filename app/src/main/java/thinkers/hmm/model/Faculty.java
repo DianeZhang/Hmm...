@@ -8,6 +8,11 @@ public class Faculty {
     private int id;
     private String name;
 
+    public Faculty(int id) {
+        super();
+        this.id = id;
+    }
+
     public Faculty(String name) {
         this.name = name;
     }

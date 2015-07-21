@@ -1,20 +1,28 @@
-package thinkers.hmm.model;
-
-/**
- * Created by chaoli on 7/18/15.
- */
-public class CourseReviewDraft extends ReviewDraft {
-
-    private int cid;
-
-    public CourseReviewDraft() {
-        super();
-    }
-    public int getCid() {
-        return cid;
-    }
-
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
-}
+//package thinkers.hmm.model;
+//
+///**
+// * Created by chaoli on 7/18/15.
+// */
+//public class CourseReviewDraft extends ReviewDraft {
+//
+//    private int cid;
+//
+//    public CourseReviewDraft(int cid, int id, int uid, String title, String content) {
+//        super(id, uid, title, content);
+//        this.cid = cid;
+//    }
+//
+//    public CourseReviewDraft(int cid, int uid, String title, String content) {
+//        super(uid, title, content);
+//        this.cid = cid;
+//    }
+//
+//
+//    public int getCid() {
+//        return cid;
+//    }
+//
+//    public void setCid(int cid) {
+//        this.cid = cid;
+//    }
+//}

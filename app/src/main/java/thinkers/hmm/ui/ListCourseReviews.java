@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class ListCourseReviews extends Activity {
     private Button professor2Button;
     private Button professor3Button;
     private Button professor4Button;
+    private Button addNewReviewButton;
 
     private ListView listCourseReviewsListView;
 
@@ -38,6 +40,10 @@ public class ListCourseReviews extends Activity {
         professor3Button = (Button) findViewById(R.id.professor3Button);
         professor4Button = (Button) findViewById(R.id.professor4Button);
         professor1Button.setOnClickListener(viewFacultyReviewListener);
+
+        //Clicking on the button to add new review
+        addNewReviewButton = (Button) findViewById(R.id.addNewReviewButton);
+        addNewReviewButton.setOnClickListener(addNewReviewListener);
 
         //Clicking on an item goes to CourseReview page
         listCourseReviewsListView = (ListView) findViewById(R.id.listCourseReviewsListView);
@@ -84,6 +90,16 @@ public class ListCourseReviews extends Activity {
             startActivity(viewFacultyReview); // start the viewCourseReviews Activity
         } // end method onClick
     }; // end viewContactListener
+
+    // event-handling object that responds to addNewReview's events
+    private View.OnClickListener addNewReviewListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent addNewReview = new Intent(ListCourseReviews.this, ConstructReview.class);
+
+            startActivity(addNewReview); // start the addNewReview Activity
+        }
+    };
 
     // event listener that responds to the user touching a review's name
     // in the ListView
