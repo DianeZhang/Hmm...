@@ -38,6 +38,15 @@ public class DatabaseConnector extends DatabaseConnectorBase implements  Databas
     @Override
     public void close() {
         try {
+            //Close resultset
+            if(resultSet != null) {
+                resultSet.close();
+            }
+            //Close statement
+            if(preparedStatement != null) {
+                preparedStatement.close();
+            }
+            //Close connection
             if(connection != null) {
                 connection.close();
             }
