@@ -8,7 +8,7 @@ import thinkers.hmm.model.Admin;
  * Created by chaoli on 7/18/15.
  */
 public class AdminUtil extends DatabaseConnector{
-    //TODO
+    //All SQL Statement
     private final String TAG = "AdminUtil";
     private final String selectAdminByIDSQL = "SELECT * FROM ADMINS WHERE ID=?;";
     private final String selectAdminByUsernameSQL = "SELECT * FROM ADMINS WHERE USERNAME=?;";
@@ -20,6 +20,7 @@ public class AdminUtil extends DatabaseConnector{
     private final String deleteAdminByUsernameSQL = "DELETE FROM ADMINS WHERE USERNAME=?;";
     private final String insertAdminSQL = "INSERT INTO ADMINS(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
+
     /**
      * @brief Select Admin by UID
      * @param uid
