@@ -6,7 +6,7 @@ import thinkers.hmm.model.User;
  * Created by chaoli on 7/18/15.
  */
 public class UserUtil {
-
+    //TODO
     public User selectUser(int uid){
 
         return null;
