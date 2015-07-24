@@ -7,7 +7,7 @@ import thinkers.hmm.model.Faculty;
 /**
  * Created by Yao on 7/18/15.
  */
-public class facualtyUtil {
+public class FacultyUtil {
     public boolean insertFaculty(Faculty faculty) {
 
     }
