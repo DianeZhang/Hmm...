@@ -9,12 +9,12 @@ public class CourseReview extends Review {
 
     private int cid = -1;
 
-    CourseReview(int id, int cid, int uid, String title, String content, String location, Date createdtime) {
+    public CourseReview(int id, int cid, int uid, String title, String content, String location, Date createdtime) {
         super(id, uid, title, content, location, createdtime);
         this.cid = cid;
     }
 
-    CourseReview(int cid, int uid, String title, String content, String location, Date createdtime) {
+    public CourseReview(int cid, int uid, String title, String content, String location, Date createdtime) {
         super(uid, title, content, location, createdtime);
         this.cid = cid;
     }
