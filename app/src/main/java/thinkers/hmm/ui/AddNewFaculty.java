@@ -26,7 +26,7 @@ public class AddNewFaculty extends Activity {
 
         titleAddFaculties = (TextView) findViewById(R.id.textView);
 
-        newFacultyEditText = (EditText) findViewById(R.id.editText);
+        newFacultyEditText = (EditText) findViewById(R.id.usernameText);
 
         //Clicking on the button to add new Facultys
         submitNewFacultyButton = (Button) findViewById(R.id.button);

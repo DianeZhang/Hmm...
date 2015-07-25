@@ -43,9 +43,9 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText"
+                    android:id="@+id/usernameText"
                     android:layout_column="1"
-                    android:text="@string/SignUp_UsernameHint" />
+                    android:hint="@string/SignUp_UsernameHint" />
             </TableRow>
 
             <TableRow
@@ -63,9 +63,9 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText2"
+                    android:id="@+id/passwordText"
                     android:layout_column="1"
-                    android:text="@string/SignUp_PasswordHint" />
+                    android:hint="@string/SignUp_PasswordHint" />
             </TableRow>
 
             <TableRow
@@ -84,30 +84,11 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText5"
+                    android:id="@+id/emailText"
                     android:layout_column="1"
-                    android:text="@string/SignUp_EmailHint" />
+                    android:hint="@string/SignUp_EmailHint" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/SignUp_Phone"
-                    android:id="@+id/textView5"
-                    android:layout_column="0"
-                    android:textSize="30dp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText6"
-                    android:layout_column="1"
-                    android:text="@string/SignUp_PhoneHint" />
-            </TableRow>
         </TableLayout>
 
         <LinearLayout
@@ -123,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/SignUp_SubmitButton"
-                android:id="@+id/button3"
+                android:id="@+id/submitButton"
                 android:layout_weight="0.33"
                 android:layout_marginRight="100dp"
                 android:layout_marginLeft="100dp" />
@@ -132,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/SignUp_CancelButton"
-                android:id="@+id/button4"
+                android:id="@+id/cancelButton"
                 android:layout_weight="0.33" />
 
         </LinearLayout>
