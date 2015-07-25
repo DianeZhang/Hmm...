@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +33,12 @@ public class Login extends Activity {
     private Button signUp = null;
     private Button login  = null;
     private Button adminlogin = null;
+
+    // Session Management
+    public static final String USER_INFO = "User_Info";
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +144,13 @@ public class Login extends Activity {
                     Toast.makeText(Login.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // update session
+                sharedpreferences = getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("role", USER);
+                editor.putInt("uid", user.getId());
+                editor.commit();
+                // start main page
                 Intent intent = new Intent(Login.this, UserMain.class);
                 startActivity(intent);
             } else if (option.equals(ADMIN_LOGIN_OPERATION)) {
@@ -148,6 +163,13 @@ public class Login extends Activity {
                     Toast.makeText(Login.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // update session
+                sharedpreferences = getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("role", ADMIN);
+                editor.putInt("uid", user.getId());
+                editor.commit();
+                // start main page
                 Intent intent = new Intent(Login.this, UserMain.class);
                 startActivity(intent);
             }
