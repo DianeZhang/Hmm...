@@ -13,9 +13,9 @@ public abstract class Review {
     private String title;
     private String content;
     private String location;
-    private String createdtime;
+    private Date createdtime;
 
-    public Review(int id, int uid, String title, String content, String location, String createdtime) {
+    public Review(int id, int uid, String title, String content, String location, Date createdtime) {
         this.id = id;
         this.uid = uid;
         this.title = title;
@@ -24,7 +24,7 @@ public abstract class Review {
         this.createdtime = createdtime;
     }
 
-    public Review(int uid, String title, String content, String location, String createdtime) {
+    public Review(int uid, String title, String content, String location, Date createdtime) {
         this.id = -1;
         this.uid = uid;
         this.title = title;
@@ -59,7 +59,7 @@ public abstract class Review {
 
     public String getLocation() { return this.location; }
 
-    public String getCreatedtime() {
+    public Date getCreatedtime() {
         return createdtime;
     }
 
@@ -89,7 +89,7 @@ public abstract class Review {
 
     public void setLocation(String location) { this.location = location; }
 
-    public void setCreatedtime(String createdtime) {
+    public void setCreatedtime(Date createdtime) {
         this.createdtime = createdtime;
     }
 }
