@@ -10,15 +10,15 @@ import thinkers.hmm.model.Admin;
 public class AdminUtil extends DatabaseConnector{
     //All SQL Statement
     private final String TAG = "AdminUtil";
-    private final String selectAdminByIDSQL = "SELECT * FROM ADMINS WHERE ID=?;";
-    private final String selectAdminByUsernameSQL = "SELECT * FROM ADMINS WHERE USERNAME=?;";
-    private final String updateAdminByIDSQL = "UPDATE ADMINS SET USERNAME=?,EMAIL=?," +
+    private final String selectAdminByIDSQL = "SELECT * FROM Admins WHERE ID=?;";
+    private final String selectAdminByUsernameSQL = "SELECT * FROM Admins WHERE username=?;";
+    private final String updateAdminByIDSQL = "UPDATE admins SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE UID=?;";
-    private final String updateAdminByUsernameSQL = "UPDATE ADMINS SET USERNAME=?,EMAIL=?," +
+    private final String updateAdminByUsernameSQL = "UPDATE admins SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE USERNAME=?;";
-    private final String deleteAdminByIDSQL = "DELETE FROM ADMINS WHERE ID=?;";
-    private final String deleteAdminByUsernameSQL = "DELETE FROM ADMINS WHERE USERNAME=?;";
-    private final String insertAdminSQL = "INSERT INTO ADMINS(USERNAME, EMAIL, PASSWORD) VALUES" +
+    private final String deleteAdminByIDSQL = "DELETE FROM admins WHERE ID=?;";
+    private final String deleteAdminByUsernameSQL = "DELETE FROM admins WHERE USERNAME=?;";
+    private final String insertAdminSQL = "INSERT INTO admins(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
 
     /**
@@ -27,6 +27,7 @@ public class AdminUtil extends DatabaseConnector{
      * @return admin object if admin found, null if not found
      */
     public Admin selectAdmin(int uid){
+        Admin admin = null;
         try {
             open();
             //Execute statement
@@ -39,16 +40,13 @@ public class AdminUtil extends DatabaseConnector{
                 String username = resultSet.getString("username");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
-                Admin admin = new Admin(uid, username, email, password);
-                return admin;
-            } else {
-                return null;
+                admin = new Admin(uid, username, email, password);
             }
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
         } finally {
             close();
-            return null;
+            return admin;
         }
     }
 
@@ -58,6 +56,7 @@ public class AdminUtil extends DatabaseConnector{
      * @return admin object if admin found, null if not found
      */
     public Admin selectAdmin(String adminname){
+        Admin admin = null;
         try {
             open();
             //Execute statement
@@ -70,16 +69,14 @@ public class AdminUtil extends DatabaseConnector{
                 int uid = resultSet.getInt("id");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
-                Admin admin = new Admin(uid, adminname, email, password);
-                return admin;
-            } else {
-                return null;
+                admin = new Admin(uid, adminname, email, password);
+
             }
         } catch(SQLException ex) {
-            Log.d(TAG, ex.getClass().getSimpleName());
+            Log.d(TAG, preparedStatement.toString());
         } finally {
             close();
-            return null;
+            return admin;
         }
     }
 

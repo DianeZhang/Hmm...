@@ -19,7 +19,7 @@ public class UserUtil extends DatabaseConnector{
 
     //All SQL Statement
     private final String TAG = "UserUtil";
-    private final String selectUsersByIDSQL = "SELECT * FROM USERS WHERE ID=?;";
+    private final String selectUsersByIDSQL = "SELECT * FROM Users WHERE ID=?;";
     private final String selectUserByUsernameSQL = "SELECT * FROM Users WHERE username=?;";
     private final String updateUserByIDSQL = "UPDATE USERS SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE UID=?;";
