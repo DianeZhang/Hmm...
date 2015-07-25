@@ -50,13 +50,6 @@ public class ListUsers extends Activity {
         String[] params= new String[1];
         params[0] = LIST_OPERATION;
         listHelper.execute(params);
-
-        ArrayList<String> testList = new ArrayList<String>();
-        testList.add("1");
-        testList.add("2");
-        testList.add("3");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(ListUsers.this, android.R.layout.simple_list_item_1, testList);
-        listUsersListView.setAdapter(arrayAdapter);
     }
 
     @Override
@@ -105,7 +98,7 @@ public class ListUsers extends Activity {
             option = (String)params[0];
             if(option.equals(LIST_OPERATION)) {
                 UserUtil userUtil = new UserUtil();
-              //  userList = userUtil.;
+                userList = userUtil.selectUser();
                 userNameList = new ArrayList<String>();
                 for (User user : userList) {
                     userNameList.add(user.getUsername());
@@ -117,8 +110,8 @@ public class ListUsers extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
-          //      ArrayAdapter arrayAdapter = new ArrayAdapter(ListFaculties.this, android.R.layout.simple_list_item_1, facultyNameList);
-               // listFacultiesListView.setAdapter(arrayAdapter);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(ListUsers.this, android.R.layout.simple_list_item_1, userNameList);
+                listUsersListView.setAdapter(arrayAdapter);
             }
             return;
         }

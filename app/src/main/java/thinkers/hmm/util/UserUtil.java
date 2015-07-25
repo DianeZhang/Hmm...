@@ -4,9 +4,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import thinkers.hmm.model.Admin;
+import thinkers.hmm.model.Faculty;
 import thinkers.hmm.model.User;
 
 /**
@@ -29,6 +31,7 @@ public class UserUtil extends DatabaseConnector{
     private final String deleteUserByUsernameSQL = "DELETE FROM Users WHERE USERNAME=?;";
     private final String insertUserSQL = "INSERT INTO Users(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
+    private final String selectAllUsersSQL = "SELECT * FROM Users;";
 
     /**
      * @brief select user by id
@@ -219,6 +222,38 @@ public class UserUtil extends DatabaseConnector{
             close();
         }
         return false;
+    }
+
+    /**
+     * @brief select all user
+     * @return
+     */
+    public ArrayList<User> selectUser(){
+        ArrayList<User> users = new ArrayList<User>();
+        User user = null;
+        try {
+            open();
+            //Execute statement
+            preparedStatement = connection.prepareStatement(selectAllUsersSQL);
+            resultSet = preparedStatement.executeQuery();
+
+            //Check if admin exist
+            while(resultSet.next()) {
+                int uid = resultSet.getInt("id");
+                String email = resultSet.getString("email");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                Date lastLogin = resultSet.getTimestamp("lastlogin");
+                user = new User(uid, username, email, password, lastLogin);
+                users.add(user);
+            }
+        } catch(SQLException ex) {
+            Log.d(TAG, Integer.toString(ex.getErrorCode()));
+            Log.d(TAG, preparedStatement.toString());
+        } finally {
+            close();
+            return users;
+        }
     }
 
 }
