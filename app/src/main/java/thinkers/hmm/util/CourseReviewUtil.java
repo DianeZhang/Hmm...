@@ -18,6 +18,7 @@ public class CourseReviewUtil extends DatabaseConnector{
 
     //SQL Statements
     private final String selectReviewSQL = "SELECT * FROM CourseReviews WHERE cid=?;";
+    private final String selectReviewSQLUID = "SELECT * FROM CourseReviews WHERE uid=?";
     private final String updateReviewSQL = "UPDATE TABLE CourseReviews SET cid=?, uid=?, " +
             "likes=?, dislikes=?, title=?, content=?, location=? WHERE id=?;";
     private final String insertReviewSQL = "INSERT INTO CourseReviews(cid,uid,likes,dislikes,title,content,location) VALUES" +
@@ -61,6 +62,40 @@ public class CourseReviewUtil extends DatabaseConnector{
             while(resultSet.next()) {
                 int id = resultSet.getInt("id");
                 int uid = resultSet.getInt("uid");
+                int likes = resultSet.getInt("likes");
+                int dislikes = resultSet.getInt("dislikes");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                Date created = resultSet.getTimestamp("created");
+                String location = resultSet.getString("location");
+
+                CourseReview review = new CourseReview(id, cid, uid, title, content, location, created);
+                review.setLike(likes);
+                review.setDislike(dislikes);
+                reviewList.add(review);
+            }
+        } catch(SQLException ex) {
+            Log.d(TAG, ex.getClass().getSimpleName());
+        } finally {
+            close();
+        }
+
+        return reviewList;
+    }
+
+    public ArrayList<CourseReview> selectCourseReviewByUserId(int uid) {
+        ArrayList<CourseReview> reviewList = new ArrayList<CourseReview>();
+        try {
+            open();
+            //Execute statement
+            preparedStatement = connection.prepareStatement(selectReviewSQLUID);
+            preparedStatement.setInt(1, uid);
+            resultSet = preparedStatement.executeQuery();
+
+            //Go through all the course reviews
+            while(resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int cid = resultSet.getInt("cid");
                 int likes = resultSet.getInt("likes");
                 int dislikes = resultSet.getInt("dislikes");
                 String title = resultSet.getString("title");
