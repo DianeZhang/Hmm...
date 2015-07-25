@@ -18,6 +18,7 @@ public class FacultyReviewUtil extends DatabaseConnector{
     private final String insertFacultyReviewSQL = "INSERT INTO FacultyReviews (fid, uid, likes, " +
             "dislikes, title, content, location ) VALUES" + "(?,?,?,?,?,?,?);";
     private final String selectFacultyReviewByFacultyIdSQL = "SELECT * FROM FacultyReviews WHERE fid=?;";
+    private final String selectFacultyReviewByUserIdSQL = "SELECT * FROM FacultyReviews WHERE uid=?;";
     private final String updateFacultyReviewByIdSQL = "UPDATE TABLE FacultyReviews SET fid=?, uid=?, " +
             "likes=?, dislikes=?, title=?, content=?, location=? WHERE id=?;";
     private final String deleteFacultyReviewByIdSQL = "DELETE FROM FacultyReviews WHERE Id=?;";
@@ -54,6 +55,34 @@ public class FacultyReviewUtil extends DatabaseConnector{
 
             preparedStatement = connection.prepareStatement(selectFacultyReviewByFacultyIdSQL);
             preparedStatement.setInt(1, fid);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                FacultyReview facultyReview = new FacultyReview(resultSet.getInt("id"),resultSet.getInt("uid"),
+                        resultSet.getInt("fid"),resultSet.getString("title"),resultSet.getString("content"),
+                        resultSet.getString("location"),resultSet.getTimestamp("created"));
+                facultyReviews.add(facultyReview);
+            }
+
+            close();
+            return facultyReviews;
+        } catch(SQLException ex) {
+            Log.d(TAG, ex.getClass().getSimpleName());
+            close();
+            facultyReviews.clear();
+            return facultyReviews;
+        }
+
+    }
+
+    public ArrayList<FacultyReview> selectFacultyReviewByUserId(int uid) {
+        ArrayList<FacultyReview> facultyReviews = new ArrayList<FacultyReview>();
+
+        try {
+            open();
+
+            preparedStatement = connection.prepareStatement(selectFacultyReviewByFacultyIdSQL);
+            preparedStatement.setInt(1, uid);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
