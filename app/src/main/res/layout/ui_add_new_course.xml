@@ -20,7 +20,7 @@
     <EditText
         android:layout_width="480dp"
         android:layout_height="500dp"
-        android:id="@+id/editText"
+        android:id="@+id/usernameText"
         android:text= "entrer here"
         android:textSize="20dp"
         android:layout_below="@+id/textView"
@@ -34,8 +34,8 @@
         android:text="@string/add_new_course_submit_button"
         android:id="@+id/button"
         android:layout_marginStart="75dp"
-        android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_below="@+id/usernameText"
+        android:layout_alignStart="@+id/usernameText" />
 
     <Button
         android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         android:text="@string/add_new_course_cancel_button"
         android:id="@+id/button2"
         android:layout_alignTop="@+id/button"
-        android:layout_alignEnd="@+id/editText"
+        android:layout_alignEnd="@+id/usernameText"
         android:layout_marginEnd="78dp" />
 
 
