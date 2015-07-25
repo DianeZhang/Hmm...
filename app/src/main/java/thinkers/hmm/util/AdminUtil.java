@@ -46,9 +46,9 @@ public class AdminUtil extends DatabaseConnector{
             }
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
-            return null;
         } finally {
             close();
+            return null;
         }
     }
 
@@ -77,9 +77,9 @@ public class AdminUtil extends DatabaseConnector{
             }
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
-            return null;
         } finally {
             close();
+            return null;
         }
     }
 
