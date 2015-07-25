@@ -14,10 +14,10 @@ public class FacultyUtil extends DatabaseConnector{
     //Debug TAG
     private final String TAG = "Faculty util";
     private final String insertFacultySQL = "INSERT INTO Faculties (name) VALUES (?) ;";
-    private final String selectFacultiesSQL = "SELECT (id, name) FROM Faculties WHERE name = ?;";
-    private final String selectFacultySQL = "SELECT (id, name) FROM Faculties WHERE id = ?;";
+    private final String selectFacultiesSQL = "SELECT * FROM Faculties WHERE name = ?;";
+    private final String selectFacultySQL = "SELECT * FROM Faculties WHERE id = ?;";
     private final String deleteFacultyByIdSQL = "DELETE FROM Faculties WHERE id=?;";
-    private final String selectAllFacultiesSQL = "SELECT (id, name) FROM Faculties;";
+    private final String selectAllFacultiesSQL = "SELECT * FROM Faculties;";
 
     public boolean insertFaculty(Faculty faculty) {
         try {

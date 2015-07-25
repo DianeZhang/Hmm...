@@ -13,14 +13,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Admin;
 import thinkers.hmm.model.User;
+import thinkers.hmm.util.AdminUtil;
 import thinkers.hmm.util.UserUtil;
 
 
 public class Login extends Activity {
 
     //Operation String
-    private final String LOGIN_OPERATION = "Login_User";
+    private final String USER_LOGIN_OPERATION = "Login_User";
+    private final String ADMIN_LOGIN_OPERATION = "Login_Admin";
 
     //Widgets
     private EditText usernameText = null;
@@ -83,7 +86,7 @@ public class Login extends Activity {
         public void onClick(View view) {
             LoginHelper loginHelper = new LoginHelper();
             String[] params= new String[2];
-            params[0] = LOGIN_OPERATION;
+            params[0] = USER_LOGIN_OPERATION;
             params[1] = usernameText.getText().toString();
             loginHelper.execute(params);
         }
@@ -92,8 +95,11 @@ public class Login extends Activity {
     private View.OnClickListener adminloginAction = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Login.this, AdminMain.class);
-            startActivity(intent);
+            LoginHelper loginHelper = new LoginHelper();
+            String[] params= new String[2];
+            params[0] = ADMIN_LOGIN_OPERATION;
+            params[1] = usernameText.getText().toString();
+            loginHelper.execute(params);
         }
     };
 
@@ -101,26 +107,43 @@ public class Login extends Activity {
 
         private String option = "";
         private User user = null;
+        private Admin admin = null;
 
         @Override
         protected Void doInBackground(Object... params ) {
             option = (String)params[0];
-            if(option.equals(LOGIN_OPERATION)) {
+            if(option.equals(USER_LOGIN_OPERATION)) {
                 UserUtil userUtil = new UserUtil();
                 String username = (String)params[1];
                 user = userUtil.selectUser(username);
+            } else if (option.equals(ADMIN_LOGIN_OPERATION)) {
+                AdminUtil adminUtil = new AdminUtil();
+                String username = (String)params[1];
+                admin = adminUtil.selectAdmin(username);
             }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void object) {
-            if(option.equals(LOGIN_OPERATION)) {
+            if(option.equals(USER_LOGIN_OPERATION)) {
                 if(user == null) {
                     Toast.makeText(Login.this, "Wrong Username!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(user.getPassword().equals(passwordText.getText().toString())
+                        == false) {
+                    Toast.makeText(Login.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = new Intent(Login.this, UserMain.class);
+                startActivity(intent);
+            } else if (option.equals(ADMIN_LOGIN_OPERATION)) {
+                if(admin == null) {
+                    Toast.makeText(Login.this, "Wrong Username!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(admin.getPassword().equals(passwordText.getText().toString())
                         == false) {
                     Toast.makeText(Login.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
                     return;
