@@ -3,6 +3,7 @@ package thinkers.hmm.util;
 import android.util.Log;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import thinkers.hmm.model.Admin;
 import thinkers.hmm.model.User;
@@ -42,7 +43,7 @@ public class UserUtil extends DatabaseConnector{
                 String username = resultSet.getString("username");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
-                String lastLogin = resultSet.getString("lastlogin");
+                Date lastLogin = resultSet.getTimestamp("lastlogin");
                 User user = new User(uid, username, email, password, lastLogin);
                 return user;
             } else {
@@ -74,7 +75,7 @@ public class UserUtil extends DatabaseConnector{
                 int uid = resultSet.getInt("id");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
-                String lastLogin = resultSet.getString("lastlogin");
+                Date lastLogin = resultSet.getTimestamp("lastlogin");
                 User user = new User(uid, username, email, password, lastLogin);
                 return user;
             } else {
@@ -82,9 +83,9 @@ public class UserUtil extends DatabaseConnector{
             }
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
-            return null;
         } finally {
             close();
+            return null;
         }
     }
 

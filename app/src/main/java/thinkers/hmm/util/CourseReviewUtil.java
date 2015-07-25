@@ -19,7 +19,7 @@ public class CourseReviewUtil extends DatabaseConnector{
     //SQL Statements
     private final String selectReviewSQL = "SELECT * FROM CourseReviews WHERE cid=?;";
     private final String updateReviewSQL = "UPDATE TABLE CourseReviews SET cid=?, uid=?, " +
-            "likes=?, dislikes=?, title=?, content=?, created=?, location=? WHERE id=?;";
+            "likes=?, dislikes=?, title=?, content=?, location=? WHERE id=?;";
     private final String insertReviewSQL = "INSERT INTO CourseReviews(cid,uid,likes,dislikes,title,content,location) VALUES" +
             "(?,?,?,?,?,?,?);";
     private final String deleteReviewSQL = "DELETE FROM CourseReviews WHERE id=?;";
@@ -69,8 +69,9 @@ public class CourseReviewUtil extends DatabaseConnector{
                 String location = resultSet.getString("location");
 
                 CourseReview review = new CourseReview(id, cid, uid, title, content, location, created);
-
-                return admin;
+                review.setLike(likes);
+                review.setDislike(dislikes);
+                reviewList.add(review);
             }
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
@@ -87,11 +88,46 @@ public class CourseReviewUtil extends DatabaseConnector{
     }
     */
 
-    public boolean updateCourseReview(int,CourseReview) {
+    public boolean updateCourseReview(int id, CourseReview review) {
+        try {
+            open();
+            preparedStatement = connection.prepareStatement(updateReviewSQL);
+            preparedStatement.setInt(1, review.getCid());
+            preparedStatement.setInt(2, review.getUid());
+            preparedStatement.setInt(3, review.getLike());
+            preparedStatement.setInt(4, review.getDislike());
+            preparedStatement.setString(5, review.getTitle());
+            preparedStatement.setString(6, review.getContent());
+            preparedStatement.setString(7, review.getLocation());
+            preparedStatement.setInt(8, review.getId());
 
+            // execute the java preparedStatement
+            preparedStatement.executeUpdate();
+            close();
+            return true;
+        } catch(SQLException ex) {
+            Log.d(TAG, ex.getClass().getSimpleName());
+        } finally {
+            close();
+        }
+        return false;
     }
 
-    public boolean deleteCourseReview(int) {
+    public boolean deleteCourseReview(int id) {
+        try {
+            open();
+            preparedStatement = connection.prepareStatement(deleteReviewSQL);
+            preparedStatement.setInt(1, id);
 
+            // execute the java preparedStatement
+            preparedStatement.executeUpdate();
+            close();
+            return true;
+        } catch(SQLException ex) {
+            Log.d(TAG, ex.getClass().getSimpleName());
+        } finally {
+            close();
+        }
+        return false;
     }
 }
