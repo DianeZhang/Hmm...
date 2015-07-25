@@ -170,7 +170,7 @@ public class Login extends Activity {
                 editor.putInt("uid", admin.getId());
                 editor.commit();
                 // start main page
-                Intent intent = new Intent(Login.this, UserMain.class);
+                Intent intent = new Intent(Login.this, AdminMain.class);
                 startActivity(intent);
             }
             return;
