@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,11 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RelativeLayout.LayoutParams;
 
 import java.util.ArrayList;
 
@@ -26,6 +32,9 @@ import thinkers.hmm.model.*;
 public class ListCourses extends Activity {
     //Operation String
     private final String LIST_OPERATION = "List_Courses";
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
 
     private TextView titleListCourses;
     private EditText searchCourseEditText;
@@ -43,8 +52,8 @@ public class ListCourses extends Activity {
         searchCourseEditText = (EditText) findViewById(R.id.searchFacultyEditText);
 
         //Clicking on the button to add new courses
-        addNewCourseButton = (ImageButton) findViewById(R.id.addNewCourseButton);
-        addNewCourseButton.setOnClickListener(addNewCourseListener);
+        //addNewCourseButton = (ImageButton) findViewById(R.id.addNewCourseButton);
+        //addNewCourseButton.setOnClickListener(addNewCourseListener);
 
         //Clicking on an item goes to ListCourseReviews page
         listCoursesListView = (ListView) findViewById(R.id.listCoursesListView);
@@ -55,6 +64,20 @@ public class ListCourses extends Activity {
         params[0] = LIST_OPERATION;
         listHelper.execute(params);
 
+        SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+        String role = sharedpreferences.getString("role", null);
+        Toast.makeText(ListCourses.this, "ROLE: " + role, Toast.LENGTH_SHORT).show();
+
+        if (role.equals(ADMIN)) {
+            Button addCourseButton = new Button(this);
+            addCourseButton.setText("Add Course");
+            RelativeLayout rl = (RelativeLayout)findViewById(R.id.relativeLayout);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            addCourseButton.setOnClickListener(addNewCourseListener);
+            //addCourseButton.setLa
+            rl.addView(addCourseButton, lp);
+        }
     }
 
     @Override
