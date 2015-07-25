@@ -20,9 +20,9 @@ public class DatabaseConnector extends DatabaseConnectorBase implements  Databas
      */
     @Override
     public void open() {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-        StrictMode.setThreadPolicy(policy);
+        //StrictMode.setThreadPolicy(policy);
 
         if (connection == null) {
             //If first time run, create connection first

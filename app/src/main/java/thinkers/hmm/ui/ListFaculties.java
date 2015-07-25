@@ -2,6 +2,7 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +18,13 @@ import java.util.ArrayList;
 
 import thinkers.hmm.R;
 
+import thinkers.hmm.util.*;
+import thinkers.hmm.model.*;
+
 public class ListFaculties extends Activity {
+    //Operation String
+    private final String LIST_OPERATION = "List_Faculties";
+
     private TextView titleListFaculties;
     private EditText searchFaultyEditText;
     private ImageButton addNewFacultyButton;
@@ -41,12 +48,10 @@ public class ListFaculties extends Activity {
         listFacultiesListView = (ListView) findViewById(R.id.listFacultiesListView);
         listFacultiesListView.setOnItemClickListener(viewFacultyReviewsListener);
 
-        ArrayList<String> testList = new ArrayList<String>();
-        testList.add("1");
-        testList.add("2");
-        testList.add("3");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(ListFaculties.this, android.R.layout.simple_list_item_1, testList);
-        listFacultiesListView.setAdapter(arrayAdapter);
+        ListFacultyHelper listHelper = new ListFacultyHelper();
+        String[] params= new String[1];
+        params[0] = LIST_OPERATION;
+        listHelper.execute(params);
     }
 
     @Override
@@ -92,4 +97,34 @@ public class ListFaculties extends Activity {
             startActivity(viewFacultyReviews); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
+
+    private class ListFacultyHelper extends AsyncTask<Object, Void, Void> {
+
+        private String option = "";
+        private ArrayList<Faculty> facultyList;
+        private ArrayList<String> facultyNameList;
+
+        @Override
+        protected Void doInBackground(Object... params ) {
+            option = (String)params[0];
+            if(option.equals(LIST_OPERATION)) {
+                FacultyUtil facultyUtil = new FacultyUtil();
+                facultyList = facultyUtil.getAllFaculties();
+                facultyNameList = new ArrayList<String>();
+                for (Faculty faculty : facultyList) {
+                    facultyNameList.add(faculty.getName());
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void object) {
+            if(option.equals(LIST_OPERATION)) {
+                ArrayAdapter arrayAdapter = new ArrayAdapter(ListFaculties.this, android.R.layout.simple_list_item_1, facultyNameList);
+                listFacultiesListView.setAdapter(arrayAdapter);
+            }
+            return;
+        }
+    }
 }
