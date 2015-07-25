@@ -28,21 +28,16 @@ public class CourseReviewDraftUtil extends DatabaseConnector {
             preparedStatement.setInt(1, draftId);
 
             resultSet = preparedStatement.executeQuery();
-            int id = 0;
-            int cid = 0;
-            int uid = 0;
-            String title = "";
-            String content = "";
 
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                cid = resultSet.getInt("cid");
-                uid = resultSet.getInt("uid");
-                title = resultSet.getString("title");
-                content = resultSet.getString("content");
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int cid = resultSet.getInt("cid");
+                int uid = resultSet.getInt("uid");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+
+                draft = new CourseReviewDraft(cid, id, uid, title, content);
             }
-
-            draft = new CourseReviewDraft(cid, id, uid, title, content);
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
         } finally {
