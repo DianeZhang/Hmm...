@@ -55,6 +55,7 @@ public class CourseReviewDraftUtil extends DatabaseConnector {
             preparedStatement.setInt(2, draft.getUid());
             preparedStatement.setString(3, draft.getTitle());
             preparedStatement.setString(4, draft.getContent());
+            preparedStatement.setInt(5, draftId);
 
             // execute the java preparedStatement
             preparedStatement.executeUpdate();
