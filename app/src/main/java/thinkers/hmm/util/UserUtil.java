@@ -20,14 +20,14 @@ public class UserUtil extends DatabaseConnector{
     //All SQL Statement
     private final String TAG = "UserUtil";
     private final String selectUsersByIDSQL = "SELECT * FROM Users WHERE ID=?;";
-    private final String selectUserByUsernameSQL = "SELECT * FROM Users WHERE username=?;";
-    private final String updateUserByIDSQL = "UPDATE USERS SET USERNAME=?,EMAIL=?," +
+    private final String selectUserByUsernameSQL = "SELECT * FROM Users WHERE USERNAME=?;";
+    private final String updateUserByIDSQL = "UPDATE Users SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE UID=?;";
-    private final String updateUserByUsernameSQL = "UPDATE USERS SET USERNAME=?,EMAIL=?," +
+    private final String updateUserByUsernameSQL = "UPDATE Users SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE USERNAME=?;";
-    private final String deleteUserByIDSQL = "DELETE FROM USERS WHERE ID=?;";
-    private final String deleteUserByUsernameSQL = "DELETE FROM USERS WHERE USERNAME=?;";
-    private final String insertUserSQL = "INSERT INTO USERS(USERNAME, EMAIL, PASSWORD) VALUES" +
+    private final String deleteUserByIDSQL = "DELETE FROM Users WHERE ID=?;";
+    private final String deleteUserByUsernameSQL = "DELETE FROM Users WHERE USERNAME=?;";
+    private final String insertUserSQL = "INSERT INTO Users(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
 
     /**

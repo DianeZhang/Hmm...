@@ -12,13 +12,13 @@ public class AdminUtil extends DatabaseConnector{
     private final String TAG = "AdminUtil";
     private final String selectAdminByIDSQL = "SELECT * FROM Admins WHERE ID=?;";
     private final String selectAdminByUsernameSQL = "SELECT * FROM Admins WHERE username=?;";
-    private final String updateAdminByIDSQL = "UPDATE admins SET USERNAME=?,EMAIL=?," +
+    private final String updateAdminByIDSQL = "UPDATE Admins SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE UID=?;";
-    private final String updateAdminByUsernameSQL = "UPDATE admins SET USERNAME=?,EMAIL=?," +
+    private final String updateAdminByUsernameSQL = "UPDATE Admins SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE USERNAME=?;";
-    private final String deleteAdminByIDSQL = "DELETE FROM admins WHERE ID=?;";
-    private final String deleteAdminByUsernameSQL = "DELETE FROM admins WHERE USERNAME=?;";
-    private final String insertAdminSQL = "INSERT INTO admins(USERNAME, EMAIL, PASSWORD) VALUES" +
+    private final String deleteAdminByIDSQL = "DELETE FROM Admins WHERE ID=?;";
+    private final String deleteAdminByUsernameSQL = "DELETE FROM Admins WHERE USERNAME=?;";
+    private final String insertAdminSQL = "INSERT INTO Admins(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
 
     /**
