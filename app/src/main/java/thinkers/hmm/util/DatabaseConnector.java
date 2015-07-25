@@ -23,11 +23,15 @@ public class DatabaseConnector extends DatabaseConnectorBase implements  Databas
             //If first time run, create connection first
             try {
                 Class.forName(JDBC_DRIVER);
-                connection = DriverManager.getConnection("jdbc:mysql://"+DB_URL, USERNAME, PASSWORD);
+                Log.d(TAG, "try to connect");
+                connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+                Log.d(TAG, "connected");
             } catch (ClassNotFoundException ex) {
-                Log.d(TAG, ex.getClass().getSimpleName());
+                Log.d(TAG, ex.getException().toString());
             } catch (SQLException ex) {
-                Log.d(TAG, ex.getClass().getSimpleName());
+                Log.d(TAG, ex.getNextException().toString());
+            } catch (Exception ex) {
+                Log.d(TAG, ex.getMessage().toString());
             }
         }
     }

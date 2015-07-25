@@ -3,6 +3,7 @@ package thinkers.hmm.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,6 +77,7 @@ public class Login extends Activity {
         @Override
         public void onClick(View view) {
             UserUtil userUtil = new UserUtil();
+            Log.d("login", "login Action start");
             User user = userUtil.selectUser(usernameText.getText().toString());
             if(user == null) {
                 Toast.makeText(Login.this, "Wrong Username!", Toast.LENGTH_SHORT).show();

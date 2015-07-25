@@ -5,16 +5,16 @@ package thinkers.hmm.util;
  */
 public class FacultyReviewDraftUtil {
 
-//    public FacultyReviewDraftUtil selectDraft(int draftId){
-//
-//    }
-//
-//    public boolean updateDraft(int draftId, FacultyReviewDraftUtil facultyReviewDraft){
-//
-//    }
-//
-//    public boolean deleteDraft(int draftId){
-//
-//    }
+    public FacultyReviewDraftUtil selectDraft(int draftId){
+
+    }
+
+    public boolean updateDraft(int draftId, FacultyReviewDraftUtil facultyReviewDraft){
+
+    }
+
+    public boolean deleteDraft(int draftId){
+
+    }
 
 }

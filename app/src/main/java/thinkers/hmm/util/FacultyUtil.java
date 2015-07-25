@@ -8,19 +8,19 @@ import thinkers.hmm.model.Faculty;
  * Created by Yao on 7/18/15.
  */
 public class FacultyUtil {
-//    public boolean insertFaculty(Faculty faculty) {
-//
-//    }
-//
-//    public ArrayList<Faculty> selectFaculty(String name) {
-//
-//    }
-//
-//    public boolean deleteFaculty(int id) {
-//
-//    }
-//
-//    public ArrayList<Faculty> getAllFaculties() {
-//
-//    }
+    public boolean insertFaculty(Faculty faculty) {
+
+    }
+
+    public ArrayList<Faculty> selectFaculty(String name) {
+
+    }
+
+    public boolean deleteFaculty(int id) {
+
+    }
+
+    public ArrayList<Faculty> getAllFaculties() {
+
+    }
 }
