@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,9 +18,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.CourseReview;
+import thinkers.hmm.model.FacultyReview;
 import thinkers.hmm.model.Review;
 import thinkers.hmm.model.User;
 import thinkers.hmm.util.CourseReviewUtil;
+import thinkers.hmm.util.FacultyReviewUtil;
 import thinkers.hmm.util.UserUtil;
 
 public class ListMyReviews extends Activity {
@@ -98,11 +103,19 @@ public class ListMyReviews extends Activity {
         @Override
         protected Void doInBackground(Object... params ) {
             option = (String)params[0];
-            if(option.equals(LIST_MYREVIEW)) {
-                ArrayList<Review> myReview = new ArrayList<Review>();
-                CourseReviewUtil myCourseReviews = new CourseReviewUtil();
-   //             myReview = myCourseReviews.selectCourseReview()
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            int uid = sharedpreferences.getInt("uid",0);
 
+            if(option.equals(LIST_MYREVIEW)) {
+                ArrayList<CourseReview> myCourseReviews = new ArrayList<CourseReview>();
+                CourseReviewUtil myCourseReviewUtil = new CourseReviewUtil();
+                myCourseReviews = myCourseReviewUtil.selectCourseReviewByUserId(uid);
+
+                ArrayList<FacultyReview> myFacultyReviews = new ArrayList<FacultyReview>();
+                FacultyReviewUtil myFacultyReviewUtil = new FacultyReviewUtil();
+                myFacultyReviews = myFacultyReviewUtil.selectFacultyReviewByUserId(uid);
+
+                ArrayList<Review> myReviews = new ArrayList<Review>();
 
             }
             return null;
