@@ -13,19 +13,19 @@ public class CourseUtil {
 
     private final String selectCourseSQL = "SELECT * FROM Courses WHERE id=?;";
 
-//    public boolean insertCourse(Course) {
-//
-//    }
-//
-//    public ArrayList<Course> selectCourse(String) {
-//
-//    }
-//
-//    public boolean deleteCourse(int) {
-//
-//    }
-//
-//    public ArrayList<Course> getAllCourses() {
-//
-//    }
+    public boolean insertCourse(Course) {
+
+    }
+
+    public ArrayList<Course> selectCourse(String) {
+
+    }
+
+    public boolean deleteCourse(int) {
+
+    }
+
+    public ArrayList<Course> getAllCourses() {
+
+    }
 }
