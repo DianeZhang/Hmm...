@@ -78,9 +78,9 @@ public class FacultyUtil extends DatabaseConnector{
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
-                facultyId = resultSet.getInt("id");
-                facultyName = resultSet.getString("name");
-                Faculty faculty = new Faculty(facultyId,facultyName);
+            facultyId = resultSet.getInt("id");
+            facultyName = resultSet.getString("name");
+            Faculty faculty = new Faculty(facultyId, facultyName);
 
 
             close();
