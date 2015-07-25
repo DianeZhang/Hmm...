@@ -1,13 +1,16 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import thinkers.hmm.R;
 
@@ -37,6 +40,11 @@ public class UserMain extends Activity {
         facultiesButton.setOnClickListener(facultiesListener);
         reviewsButton.setOnClickListener(reviewsListener);
         draftsButton.setOnClickListener(draftsListener);
+
+        // test to see what's in shared preference
+        SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+        String role = sharedpreferences.getString("role", null);
+        Toast.makeText(UserMain.this, "ROLE: " + role, Toast.LENGTH_SHORT).show();
     }
 
     private View.OnClickListener settingsListener = new View.OnClickListener() {
