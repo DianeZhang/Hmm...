@@ -33,6 +33,7 @@ public class UserUtil extends DatabaseConnector{
     public User selectUser(int uid){
         try {
             open();
+            Log.d(TAG, "Conn opened");
             //Execute statement
             preparedStatement = connection.prepareStatement(selectUsersByIDSQL);
             preparedStatement.setInt(1, uid);
@@ -44,6 +45,7 @@ public class UserUtil extends DatabaseConnector{
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
                 Date lastLogin = resultSet.getTimestamp("lastlogin");
+                Log.d(TAG, "username:"+username);
                 User user = new User(uid, username, email, password, lastLogin);
                 return user;
             } else {

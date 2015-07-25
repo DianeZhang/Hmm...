@@ -9,7 +9,7 @@ import java.sql.ResultSet;
  */
 public abstract class DatabaseConnectorBase {
     //Database Objects
-    Connection connection;
+    Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
