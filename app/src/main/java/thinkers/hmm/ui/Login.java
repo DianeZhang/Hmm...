@@ -7,12 +7,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.User;
+import thinkers.hmm.util.UserUtil;
 
 
 public class Login extends Activity {
 
+    private EditText usernameText = null;
+    private EditText passwordText = null;
     private Button signUp = null;
     private Button login  = null;
     private Button adminlogin = null;
@@ -26,7 +32,8 @@ public class Login extends Activity {
         login = (Button) findViewById(R.id.button);
         signUp = (Button) findViewById(R.id.button2);
         adminlogin = (Button) findViewById(R.id.adminloginButton);
-
+        usernameText = (EditText) findViewById(R.id.usernameText);
+        passwordText = (EditText) findViewById(R.id.passwordText);
 
         //Set up button action listener
         signUp.setOnClickListener(signUpAction);
@@ -68,6 +75,17 @@ public class Login extends Activity {
     private View.OnClickListener loginAction = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
+            UserUtil userUtil = new UserUtil();
+            User user = userUtil.selectUser(usernameText.getText().toString());
+            if(user == null) {
+                Toast.makeText(Login.this, "Wrong Username!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(user.getPassword().equals(passwordText.getText().toString())
+                == false) {
+                Toast.makeText(Login.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intent = new Intent(Login.this, UserMain.class);
             startActivity(intent);
         }

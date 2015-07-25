@@ -46,7 +46,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText3"
+                    android:id="@+id/usernameText"
                     android:layout_column="1"
                     android:hint="@string/Login_HintUsername" />
                     android:text="@Login_String/
@@ -67,7 +67,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText4"
+                    android:id="@+id/passwordText"
                     android:layout_column="1"
                     android:hint="@string/Login_PasswordHint" />
             </TableRow>
