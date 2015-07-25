@@ -1,5 +1,6 @@
 package thinkers.hmm.util;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.sql.SQLException;
@@ -12,6 +13,10 @@ import thinkers.hmm.model.User;
  * Created by chaoli on 7/18/15.
  */
 public class UserUtil extends DatabaseConnector{
+
+    private String option = "";
+    private User user = null;
+
     //All SQL Statement
     private final String TAG = "UserUtil";
     private final String selectUsersByIDSQL = "SELECT * FROM USERS WHERE ID=?;";
@@ -215,4 +220,5 @@ public class UserUtil extends DatabaseConnector{
         }
         return false;
     }
+
 }

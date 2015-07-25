@@ -2,6 +2,7 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,10 @@ import thinkers.hmm.util.UserUtil;
 
 public class Login extends Activity {
 
+    //Operation String
+    private final String LOGIN_OPERATION = "Login_User";
+
+    //Widgets
     private EditText usernameText = null;
     private EditText passwordText = null;
     private Button signUp = null;
@@ -76,20 +81,11 @@ public class Login extends Activity {
     private View.OnClickListener loginAction = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            UserUtil userUtil = new UserUtil();
-            Log.d("login", "login Action start");
-            User user = userUtil.selectUser(usernameText.getText().toString());
-            if(user == null) {
-                Toast.makeText(Login.this, "Wrong Username!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if(user.getPassword().equals(passwordText.getText().toString())
-                == false) {
-                Toast.makeText(Login.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Intent intent = new Intent(Login.this, UserMain.class);
-            startActivity(intent);
+            LoginHelper loginHelper = new LoginHelper();
+            String[] params= new String[2];
+            params[0] = LOGIN_OPERATION;
+            params[1] = usernameText.getText().toString();
+            loginHelper.execute(params);
         }
     };
 
@@ -100,4 +96,40 @@ public class Login extends Activity {
             startActivity(intent);
         }
     };
+
+    private class LoginHelper extends AsyncTask<Object, Void, Void> {
+
+        private String option = "";
+        private User user = null;
+
+        @Override
+        protected Void doInBackground(Object... params ) {
+            option = (String)params[0];
+            if(option.equals(LOGIN_OPERATION)) {
+                UserUtil userUtil = new UserUtil();
+                String username = (String)params[1];
+                user = userUtil.selectUser(username);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void object) {
+            if(option.equals(LOGIN_OPERATION)) {
+                if(user == null) {
+                    Toast.makeText(Login.this, "Wrong Username!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(user.getPassword().equals(passwordText.getText().toString())
+                        == false) {
+                    Toast.makeText(Login.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = new Intent(Login.this, UserMain.class);
+                startActivity(intent);
+            }
+            return;
+        }
+
+    }
 }
