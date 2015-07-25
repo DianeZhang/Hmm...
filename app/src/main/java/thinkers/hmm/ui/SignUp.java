@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +28,11 @@ public class SignUp extends Activity {
 
     //DEBUG INFO
     private final String TAG = "SignUP";
+
+    // Session Management
+    public static final String USER_INFO = "User_Info";
+    public static final String USER = "user";
+    SharedPreferences sharedpreferences;
 
     //Widgets
     private Button submitButton = null;
@@ -86,21 +93,20 @@ public class SignUp extends Activity {
     private View.OnClickListener submitAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            LoginHelper loginHelper = new LoginHelper();
+            SignUpHelper signUpHelper = new SignUpHelper();
             String[] params= new String[4];
             params[0] = USER_SIGNUP_OPERATION;
             params[1] = usernameText.getText().toString();
             params[2] = passwordText.getText().toString();
             params[3] = emailText.getText().toString();
-            loginHelper.execute(params);
+            signUpHelper.execute(params);
         }
     };
 
-    private class LoginHelper extends AsyncTask<Object, Void, Void> {
+    private class SignUpHelper extends AsyncTask<Object, Void, Void> {
 
         private String option = "";
         private User user = null;
-        private Admin admin = null;
         private boolean signUpSucceed = false;
 
         @Override
@@ -111,7 +117,7 @@ public class SignUp extends Activity {
                 String username = (String)params[1];
                 String password = (String)params[2];
                 String email = (String)params[3];
-                User user = new User(username, email, password, null);
+                user = new User(username, email, password, null);
                 signUpSucceed = userUtil.insertUser(user);
             } else {
                 Log.d(TAG, "Invalid Operation");
@@ -126,6 +132,13 @@ public class SignUp extends Activity {
                     Toast.makeText(SignUp.this, "Failed to sign up", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // update session
+                sharedpreferences = getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString("role", USER);
+                editor.putInt("uid", user.getId());
+                editor.commit();
+                // start main page
                 Intent intent = new Intent(SignUp.this, UserMain.class);
                 startActivity(intent);
             } else {
