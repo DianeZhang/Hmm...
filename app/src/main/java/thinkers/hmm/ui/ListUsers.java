@@ -2,6 +2,7 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,8 +17,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Faculty;
+import thinkers.hmm.model.User;
+import thinkers.hmm.util.FacultyUtil;
+import thinkers.hmm.util.UserUtil;
 
 public class ListUsers extends Activity {
+    //Operation String
+    private final String LIST_OPERATION = "List_Faculties";
+
+    //Widgets
     private TextView titleListUsers;
     private EditText searchUserEditText;
     private ImageButton addNewUserButton;
@@ -37,12 +46,10 @@ public class ListUsers extends Activity {
         listUsersListView = (ListView) findViewById(R.id.listUsersListView);
         listUsersListView.setOnItemClickListener(viewUserReviewsListener);
 
-        ArrayList<String> testList = new ArrayList<String>();
-        testList.add("1");
-        testList.add("2");
-        testList.add("3");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(ListUsers.this, android.R.layout.simple_list_item_1, testList);
-        listUsersListView.setAdapter(arrayAdapter);
+        ListUserHelper listHelper = new ListUserHelper();
+        String[] params= new String[1];
+        params[0] = LIST_OPERATION;
+        listHelper.execute(params);
     }
 
     @Override
@@ -79,4 +86,34 @@ public class ListUsers extends Activity {
             startActivity(viewFacultyReviews); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
+
+    private class ListUserHelper extends AsyncTask<Object, Void, Void> {
+
+        private String option = "";
+        private ArrayList<User> userList;
+        private ArrayList<String> userNameList;
+
+        @Override
+        protected Void doInBackground(Object... params ) {
+            option = (String)params[0];
+            if(option.equals(LIST_OPERATION)) {
+                UserUtil userUtil = new UserUtil();
+                userList = userUtil.selectUser();
+                userNameList = new ArrayList<String>();
+                for (User user : userList) {
+                    userNameList.add(user.getUsername());
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void object) {
+            if(option.equals(LIST_OPERATION)) {
+                ArrayAdapter arrayAdapter = new ArrayAdapter(ListUsers.this, android.R.layout.simple_list_item_1, userNameList);
+                listUsersListView.setAdapter(arrayAdapter);
+            }
+            return;
+        }
+    }
 }
