@@ -167,7 +167,7 @@ public class Login extends Activity {
                 sharedpreferences = getSharedPreferences(USER_INFO, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString("role", ADMIN);
-                editor.putInt("uid", user.getId());
+                editor.putInt("uid", admin.getId());
                 editor.commit();
                 // start main page
                 Intent intent = new Intent(Login.this, UserMain.class);
