@@ -2,6 +2,7 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,10 +13,14 @@ import android.widget.TextView;
 
 import thinkers.hmm.R;
 
-public class AddNewFaculty extends Activity {
+import thinkers.hmm.model.Faculty;
+import thinkers.hmm.util.FacultyUtil;
 
-    private TextView titleAddFaculties;
-    private EditText newFacultyEditText;
+public class AddNewFaculty extends Activity {
+    //Operation String
+    private final String ADD_FACULTY_OPERATION = "Add_Faculty";
+
+    private EditText editName;
     private Button submitNewFacultyButton;
     private Button cancelNewFacultyButton;
 
@@ -24,16 +29,14 @@ public class AddNewFaculty extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_add_new_faculty);
 
-        titleAddFaculties = (TextView) findViewById(R.id.textView);
-
-        newFacultyEditText = (EditText) findViewById(R.id.editText);
+        editName = (EditText) findViewById(R.id.editName);
 
         //Clicking on the button to add new Facultys
-        submitNewFacultyButton = (Button) findViewById(R.id.button);
+        submitNewFacultyButton = (Button) findViewById(R.id.button8);
         submitNewFacultyButton.setOnClickListener(submitNewFacultyListener);
 
         //Clicking on an item goes to ListFacultyReviews page
-        cancelNewFacultyButton = (Button) findViewById(R.id.button2);
+        cancelNewFacultyButton = (Button) findViewById(R.id.button9);
         cancelNewFacultyButton.setOnClickListener(cancelNewFacultyListener);
 
     }
@@ -63,8 +66,10 @@ public class AddNewFaculty extends Activity {
     private View.OnClickListener submitNewFacultyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent submitNewFaculty = new Intent(AddNewFaculty.this, ListFaculties.class);
-            startActivity(submitNewFaculty);
+            AddFacultyHelper addHelper = new AddFacultyHelper();
+            String[] params= new String[1];
+            params[0] = ADD_FACULTY_OPERATION;
+            addHelper.execute(params);
         }
     };
 
@@ -75,4 +80,29 @@ public class AddNewFaculty extends Activity {
             startActivity(cancelNewFaculty);
         }
     };
+
+    private class AddFacultyHelper extends AsyncTask<Object, Void, Void> {
+
+        private String option = "";
+
+        @Override
+        protected Void doInBackground(Object... params ) {
+            option = (String)params[0];
+            if(option.equals(ADD_FACULTY_OPERATION)) {
+                FacultyUtil facultyUtil = new FacultyUtil();
+                Faculty newFaculty = new Faculty(editName.getText().toString());
+                facultyUtil.insertFaculty(newFaculty);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void object) {
+            if(option.equals(ADD_FACULTY_OPERATION)) {
+                Intent submitNewFaculty = new Intent(AddNewFaculty.this, ListFaculties.class);
+                startActivity(submitNewFaculty);
+            }
+            return;
+        }
+    }
 }

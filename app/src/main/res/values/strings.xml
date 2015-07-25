@@ -2,5 +2,13 @@
     <string name="app_name">Hmm...</string>
     <string name="action_settings">Settings</string>
     <string name="Login_AdminLoginButton">Admin Login</string>
+    <string name="AddNewCourse_name_label">Course Name:</string>
+    <string name="AddNewCourse_code_label">Course Code:</string>
+    <string name="AddNewCourse_school_label">School Name:</string>
+    <string name="AddNewCourse_name_hint">Enter course name here</string>
+    <string name="AddNewCourse_code_hint">Enter course code here (eg. 18-641)</string>
+    <string name="AddNewCourse_school_hint">Enter school name here</string>
+    <string name="add_new_faculty_name_label">Faculty Name:</string>
+    <string name="add_new_faculty__name_hint">Enter faculty name here</string>
 </resources>
 

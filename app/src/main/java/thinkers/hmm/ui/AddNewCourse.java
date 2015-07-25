@@ -2,6 +2,7 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,12 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import thinkers.hmm.R;
+import thinkers.hmm.model.Course;
+import thinkers.hmm.util.CourseUtil;
 
 public class AddNewCourse extends Activity {
+    //Operation String
+    private final String ADD_COURSE_OPERATION = "Add_Course";
 
-    private TextView titleAddFaculties;
-    private EditText newCourseEditText;
+    private EditText editName;
+    private EditText editCode;
+    private EditText editSchool;
     private Button submitNewCourseButton;
     private Button cancelNewCourseButton;
 
@@ -24,9 +32,9 @@ public class AddNewCourse extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_add_new_course);
 
-        titleAddFaculties = (TextView) findViewById(R.id.textView);
-
-        newCourseEditText = (EditText) findViewById(R.id.editText);
+        editName = (EditText) findViewById(R.id.editName);
+        editCode = (EditText) findViewById(R.id.editCode);
+        editSchool = (EditText) findViewById(R.id.editSchool);
 
         //Clicking on the button to add new Courses
         submitNewCourseButton = (Button) findViewById(R.id.button);
@@ -62,8 +70,10 @@ public class AddNewCourse extends Activity {
     private View.OnClickListener submitNewCourseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent submitNewCourse = new Intent(AddNewCourse.this, ListCourses.class);
-            startActivity(submitNewCourse);
+            AddCourseHelper addHelper = new AddCourseHelper();
+            String[] params= new String[1];
+            params[0] = ADD_COURSE_OPERATION;
+            addHelper.execute(params);
         }
     };
 
@@ -74,4 +84,30 @@ public class AddNewCourse extends Activity {
             startActivity(cancelNewCourse);
         }
     };
+
+    private class AddCourseHelper extends AsyncTask<Object, Void, Void> {
+
+        private String option = "";
+
+        @Override
+        protected Void doInBackground(Object... params ) {
+            option = (String)params[0];
+            if(option.equals(ADD_COURSE_OPERATION)) {
+                CourseUtil courseUtil = new CourseUtil();
+                Course newCourse = new Course(editName.getText().toString(),
+                        editCode.getText().toString(), editSchool.getText().toString());
+                courseUtil.insertCourse(newCourse);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void object) {
+            if(option.equals(ADD_COURSE_OPERATION)) {
+                Intent submitNewCourse = new Intent(AddNewCourse.this, ListCourses.class);
+                startActivity(submitNewCourse);
+            }
+            return;
+        }
+    }
 }
