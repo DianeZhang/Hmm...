@@ -15,7 +15,7 @@ public class UserUtil extends DatabaseConnector{
     //All SQL Statement
     private final String TAG = "UserUtil";
     private final String selectUsersByIDSQL = "SELECT * FROM USERS WHERE ID=?;";
-    private final String selectUserByUsernameSQL = "SELECT * FROM ADMINS WHERE USERNAME=?;";
+    private final String selectUserByUsernameSQL = "SELECT * FROM Users WHERE username=?;";
     private final String updateUserByIDSQL = "UPDATE USERS SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE UID=?;";
     private final String updateUserByUsernameSQL = "UPDATE USERS SET USERNAME=?,EMAIL=?," +
@@ -65,10 +65,11 @@ public class UserUtil extends DatabaseConnector{
      * @return
      */
     public User selectUser(String username){
+        User user = null;
         try {
             open();
             //Execute statement
-            preparedStatement = connection.prepareStatement(selectUsersByIDSQL);
+            preparedStatement = connection.prepareStatement(selectUserByUsernameSQL);
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
 
@@ -78,16 +79,15 @@ public class UserUtil extends DatabaseConnector{
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
                 Date lastLogin = resultSet.getTimestamp("lastlogin");
-                User user = new User(uid, username, email, password, lastLogin);
-                return user;
-            } else {
-                return null;
+                user = new User(uid, username, email, password, lastLogin);
+                Log.d(TAG, "password:"+user.getPassword());
             }
         } catch(SQLException ex) {
-            Log.d(TAG, ex.getClass().getSimpleName());
+            Log.d(TAG, Integer.toString(ex.getErrorCode()));
+            Log.d(TAG, preparedStatement.toString());
         } finally {
             close();
-            return null;
+            return user;
         }
     }
 

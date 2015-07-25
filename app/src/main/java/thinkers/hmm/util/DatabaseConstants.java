@@ -5,7 +5,7 @@ package thinkers.hmm.util;
  */
 public interface DatabaseConstants {
     String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    String DB_URL = "jdbc:mysql://awb.pc.cs.cmu.edu:3306/weiss";
-    String USERNAME = "weiss";
-    String PASSWORD = "washington";
+    String DB_URL = "jdbc:mysql://162.243.187.39:3306/Hmm";
+    String USERNAME = "root";
+    String PASSWORD = "";
 }
