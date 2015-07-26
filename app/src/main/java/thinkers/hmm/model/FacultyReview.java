@@ -14,6 +14,11 @@ public class FacultyReview extends Review {
         this.fid = fid;
     }
 
+    public FacultyReview(int id, int fid, int likes, int dislikes, int uid, String title, String content, String location, Date createdtime) {
+        super(id, uid, likes, dislikes, title, content, location, createdtime);
+        this.fid = fid;
+    }
+
     public FacultyReview(int uid, int fid, String title, String content, String location, Date createdtime) {
         super(uid, title, content, location, createdtime);
         this.fid = fid;
