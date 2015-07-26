@@ -33,7 +33,11 @@ accounts stored in corresponding tables.
 	a) The contents of the page are dynamically created and populated.
 	As an example, if you log in as a user, you will not see the "Add Course"
 	button in the ListCourses page since that is an administrator feature. 
-5) As requested, we created a diagram showing the relationships among the
+5) We finish Course Revew part
+	a) Course Review list finshed
+	b) Course Revew add finished
+	c) Course Review save as draft finished
+6) As requested, we created a diagram showing the relationships among the
 tables in the MySQL database. 
 	a) Note that the Users table is duplicated in the diagram for aesthetic
 	reasons. The actual database only contains one Users table.
