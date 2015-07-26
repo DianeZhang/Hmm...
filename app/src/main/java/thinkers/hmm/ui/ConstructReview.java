@@ -128,14 +128,22 @@ public class ConstructReview extends Activity {
             params[0] = SUBMIT_OPERATION;
             params[1] = title;
             params[2] = content;
-            params[4] = type;
+            params[3] = type;
             constructReviewHelper.execute(params);
         }
     };
 
     private View.OnClickListener saveAction = new View.OnClickListener() {
         public void onClick(View v) {
+            String title = titleText.getText().toString();
+            String content = contentText.getText().toString();
 
+            String[] params = new String[4];
+            params[0] = SAVE_OPEARTION;
+            params[1] = title;
+            params[2] = content;
+            params[3] = type;
+            constructReviewHelper.execute(params);
         }
     };
 
@@ -205,17 +213,17 @@ public class ConstructReview extends Activity {
         protected void onPostExecute(Void object) {
             if(option.equals(SUBMIT_OPERATION)) {
                 if(result == true) {
-                    Toast.makeText(ConstructReview.this, SUBMIT_SUCCEED_MSG,Toast.LENGTH_SHORT);
+                    Toast.makeText(ConstructReview.this, SUBMIT_SUCCEED_MSG,Toast.LENGTH_SHORT).show();
                     onBackPressed();
                 } else {
-                    Toast.makeText(ConstructReview.this, SUBMIT_FAILED_MSG,Toast.LENGTH_SHORT);
+                    Toast.makeText(ConstructReview.this, SUBMIT_FAILED_MSG,Toast.LENGTH_SHORT).show();
                 }
             } else {
                 if(result == true) {
-                    Toast.makeText(ConstructReview.this, SAVE_SUCCEED_MSG,Toast.LENGTH_SHORT);
+                    Toast.makeText(ConstructReview.this, SAVE_SUCCEED_MSG,Toast.LENGTH_SHORT).show();
                     onBackPressed();
                 } else {
-                    Toast.makeText(ConstructReview.this, SAVE_FAILED_MSG,Toast.LENGTH_SHORT);
+                    Toast.makeText(ConstructReview.this, SAVE_FAILED_MSG,Toast.LENGTH_SHORT).show();
                 }
             }
         }
