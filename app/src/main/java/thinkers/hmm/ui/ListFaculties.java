@@ -30,6 +30,8 @@ public class ListFaculties extends Activity {
     //Operation String
     private final String LIST_OPERATION = "List_Faculties";
 
+    private ImageButton homeButton;
+
     public static final String USER = "user";
     public static final String ADMIN = "admin";
 
@@ -55,6 +57,9 @@ public class ListFaculties extends Activity {
         //Clicking on an item goes to ListCourseReviews page
         listFacultiesListView = (ListView) findViewById(R.id.listFacultiesListView);
         listFacultiesListView.setOnItemClickListener(viewFacultyReviewsListener);
+
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
 
         ListFacultyHelper listHelper = new ListFacultyHelper();
         String[] params= new String[1];
@@ -105,6 +110,22 @@ public class ListFaculties extends Activity {
         public void onClick(View v) {
             Intent addNewFaculty = new Intent(ListFaculties.this, AddNewFaculty.class);
             startActivity(addNewFaculty); // start the addNewFaculty Activity
+        }
+    };
+
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListFaculties.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListFaculties.this, AdminMain.class);
+                startActivity(home);
+            }
         }
     };
 

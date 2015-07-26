@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,10 @@ public class ListMyReviews extends Activity {
     //Widgets
     private TextView titleMyReview;
     private ListView myReviews;
+    private ImageButton homeButton;
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class ListMyReviews extends Activity {
 
         //Get elements
         myReviews.setOnItemClickListener(viewCourseReviewListener);
+
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
 
         //Test
         ArrayList<String> test = new ArrayList<String>();
@@ -94,6 +102,21 @@ public class ListMyReviews extends Activity {
         } // end method onItemClick
     }; // end viewContactListener
 
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListMyReviews.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListMyReviews.this, AdminMain.class);
+                startActivity(home);
+            }
+        }
+    };
 
     private class ListMyReviewHelper extends AsyncTask<Object, Void, Void> {
 

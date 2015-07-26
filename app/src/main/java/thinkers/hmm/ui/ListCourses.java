@@ -42,6 +42,7 @@ public class ListCourses extends Activity {
     private EditText searchCourseEditText;
     private ImageButton addNewCourseButton;
     private ListView listCoursesListView;
+    private ImageButton homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,9 @@ public class ListCourses extends Activity {
         //Clicking on an item goes to ListCourseReviews page
         listCoursesListView = (ListView) findViewById(R.id.listCoursesListView);
         listCoursesListView.setOnItemClickListener(viewCourseReviewsListener);
+
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
 
         ListCourseHelper listHelper = new ListCourseHelper();
         String[] params= new String[1];
@@ -111,6 +115,22 @@ public class ListCourses extends Activity {
             Intent addNewCourse = new Intent(ListCourses.this, AddNewCourse.class);
 
             startActivity(addNewCourse); // start the addNewCourse Activity
+        }
+    };
+
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListCourses.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListCourses.this, AdminMain.class);
+                startActivity(home);
+            }
         }
     };
 

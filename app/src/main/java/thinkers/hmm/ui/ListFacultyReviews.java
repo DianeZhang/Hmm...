@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,10 @@ public class ListFacultyReviews extends Activity {
     private Button course3Button;
     private Button course4Button;
     private Button addNewReviewButton;
+    private ImageButton homeButton;
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
 
     private ListView listFacultyReviewsListView;
 
@@ -48,6 +54,9 @@ public class ListFacultyReviews extends Activity {
         //Clicking on an item goes to Faculty page
         listFacultyReviewsListView = (ListView) findViewById(R.id.listFacultyReviewsListView);
         listFacultyReviewsListView.setOnItemClickListener(viewFacultyReviewListener);
+
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
 
         ArrayList<String> testList = new ArrayList<String>();
         testList.add("1");
@@ -99,6 +108,22 @@ public class ListFacultyReviews extends Activity {
             Intent addNewReview = new Intent(ListFacultyReviews.this, ConstructReview.class);
 
             startActivity(addNewReview); // start the addNewReview Activity
+        }
+    };
+
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListFacultyReviews.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListFacultyReviews.this, AdminMain.class);
+                startActivity(home);
+            }
         }
     };
 
