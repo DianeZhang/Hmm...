@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,13 @@ public class ListMyReviews extends Activity {
     private ListView myCourseReviewsListView;
     private ListView myFacultyReviewsListView;
 
+    private ListView myReviews;
+    private ImageButton homeButton;
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +66,11 @@ public class ListMyReviews extends Activity {
         //Get elements
         myCourseReviewsListView.setOnItemClickListener(viewCourseReviewListener);
         myFacultyReviewsListView.setOnItemClickListener(viewFacultyReviewListener);
+
+
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
+
 
 
     }
@@ -98,6 +111,7 @@ public class ListMyReviews extends Activity {
         } // end method onItemClick
     }; // end viewContactListener
 
+
     private AdapterView.OnItemClickListener viewFacultyReviewListener = new AdapterView.OnItemClickListener()
     {
         @Override
@@ -111,6 +125,23 @@ public class ListMyReviews extends Activity {
             startActivity(viewFacultyReview); // start the viewCourseReview Activity
         } // end method onItemClick
     }; // end viewContactListener
+
+
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListMyReviews.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListMyReviews.this, AdminMain.class);
+                startActivity(home);
+            }
+        }
+    };
 
 
     private class ListMyReviewHelper extends AsyncTask<Object, Void, Void> {
