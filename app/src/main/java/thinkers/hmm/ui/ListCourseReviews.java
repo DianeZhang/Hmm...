@@ -107,7 +107,8 @@ public class ListCourseReviews extends Activity {
         @Override
         public void onClick(View v) {
             Intent addNewReview = new Intent(ListCourseReviews.this, ConstructReview.class);
-
+            addNewReview.putExtra("type", "course");
+            addNewReview.putExtra("id", courseID);
             startActivity(addNewReview); // start the addNewReview Activity
         }
     };
@@ -123,11 +124,11 @@ public class ListCourseReviews extends Activity {
             CourseReview review = (CourseReview) parent.getAdapter().getItem(position);
             Toast.makeText(ListCourseReviews.this, "Review ID:" + review.getId(), Toast.LENGTH_SHORT).show();
 
-//            // Put in extras
-//            Intent viewCourseReview = new Intent(ListCourseReviews.this, CourseReview.class);
-//            viewCourseReview.putExtra("rid", review.getId());
-//            // Start activity
-//            startActivity(viewCourseReview); // start the viewCourseReviews Activity
+            // Put in extras
+            Intent viewCourseReview = new Intent(ListCourseReviews.this, CourseReview.class);
+            viewCourseReview.putExtra("rid", review.getId());
+            // Start activity
+            startActivity(viewCourseReview); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
 
