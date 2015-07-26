@@ -30,6 +30,10 @@ public class ConstructReview extends Activity {
     private final String SAVE_OPEARTION = "save";
     private final String COURSE_TYPE = "course";
     private final String FACULTY_TYPE = "faculty";
+    private final String SUBMIT_SUCCEED_MSG = "Review Submitted!";
+    private final String SUBMIT_FAILED_MSG = "Failed to Submit!";
+    private final String SAVE_SUCCEED_MSG = "Review Saved!";
+    private final String SAVE_FAILED_MSG = "Falied to Save!";
 
     //Widgets
     private Button cancelButton = null;
@@ -40,7 +44,7 @@ public class ConstructReview extends Activity {
 
     //Review Variables
     private String type = null;
-    private int id = -1;
+    private int rid = -1;
     private int uid = -1;
 
     //Async Helper
@@ -53,7 +57,7 @@ public class ConstructReview extends Activity {
 
         //Get UID
         SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
-        uid = sharedpreferences.getInt("uid", null);
+        uid = sharedpreferences.getInt("uid", -1);
         if(uid == -1) {
             Log.d(TAG, "Invalid UID:" + uid);
             onBackPressed();
@@ -63,17 +67,17 @@ public class ConstructReview extends Activity {
         //Get review type
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
-        id = intent.getIntExtra("id", -1);
-        if(type == null || id == -1) {
-            Log.d(TAG, "Type:" + type + ",id"+id);
+        rid = intent.getIntExtra("rid", -1);
+        if(type == null || rid == -1) {
+            Log.d(TAG, "Type:" + type + ",rid"+rid);
             onBackPressed();
             return;
         }
 
         //Get elements
-        submitbutton = (Button)findViewById(R.id.button5);
-        saveButton = (Button)findViewById(R.id.button6);
-        cancelButton = (Button)findViewById(R.id.button7);
+        submitbutton = (Button)findViewById(R.id.submitButton);
+        saveButton = (Button)findViewById(R.id.saveButton);
+        cancelButton = (Button)findViewById(R.id.cancelButton);
         titleText = (EditText)findViewById(R.id.titleText);
         contentText = (EditText)findViewById(R.id.contentText);
 
@@ -158,7 +162,7 @@ public class ConstructReview extends Activity {
                 if(option.equals(SUBMIT_OPERATION)) {
                     //Construct Course Review
                     CourseReview review = new CourseReview(
-                            id, uid, title,content,"location", null);
+                            rid, uid, title,content,"location", null);
                     //Insert into DB
                     CourseReviewUtil courseReviewUtil =
                             new CourseReviewUtil();
@@ -166,7 +170,7 @@ public class ConstructReview extends Activity {
                 } else {
                     //Construct Course Review Draft
                     CourseReviewDraft review = new CourseReviewDraft(
-                            id, uid, title,content);
+                            rid, uid, title,content);
                     //Insert into DB
                     CourseReviewDraftUtil courseReviewDraftUtil =
                             new CourseReviewDraftUtil();
@@ -178,7 +182,7 @@ public class ConstructReview extends Activity {
                 if(option.equals(SUBMIT_OPERATION)) {
                     //Construct Faculty Review
                     FacultyReview review = new FacultyReview(
-                            uid, id, title, content, "location", null);
+                            uid, rid, title, content, "location", null);
                     //Insert into DB
                     FacultyReviewUtil facultyReviewUtil =
                             new FacultyReviewUtil();
@@ -186,7 +190,7 @@ public class ConstructReview extends Activity {
                 } else {
                     //Construct Faculty Review Draft
                     FacultyReviewDraft facultyReviewDraft = new FacultyReviewDraft(
-                            id, uid, title, content);
+                            rid, uid, title, content);
                     //Insert into DB
                     FacultyReviewDraftUtil facultyReviewDraftUtil =
                             new FacultyReviewDraftUtil();
@@ -201,12 +205,19 @@ public class ConstructReview extends Activity {
         protected void onPostExecute(Void object) {
             if(option.equals(SUBMIT_OPERATION)) {
                 if(result == true) {
-                    Toast.makeText()
+                    Toast.makeText(ConstructReview.this, SUBMIT_SUCCEED_MSG,Toast.LENGTH_SHORT);
+                    onBackPressed();
+                } else {
+                    Toast.makeText(ConstructReview.this, SUBMIT_FAILED_MSG,Toast.LENGTH_SHORT);
                 }
             } else {
-
+                if(result == true) {
+                    Toast.makeText(ConstructReview.this, SAVE_SUCCEED_MSG,Toast.LENGTH_SHORT);
+                    onBackPressed();
+                } else {
+                    Toast.makeText(ConstructReview.this, SAVE_FAILED_MSG,Toast.LENGTH_SHORT);
+                }
             }
-            return;
         }
     }
 }
