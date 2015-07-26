@@ -143,6 +143,7 @@ public class ConstructReview extends Activity {
             params[1] = title;
             params[2] = content;
             params[3] = type;
+            Log.d(TAG,"fafdsasa");
             constructReviewHelper.execute(params);
         }
     };

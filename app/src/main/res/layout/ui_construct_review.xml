@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/contentText"
-                android:text="@string/ConstructReview_ReviewHint"
+                android:hint="@string/ConstructReview_ReviewHint"
                 android:textSize="25dp"
                 android:background="@android:drawable/alert_light_frame" />
         </LinearLayout>
