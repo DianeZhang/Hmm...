@@ -2,19 +2,23 @@ package thinkers.hmm.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
@@ -94,9 +98,11 @@ public class ListCourses extends Activity {
     private AdapterView.OnItemClickListener viewCourseReviewsListener = new AdapterView.OnItemClickListener()
     {
         @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
         {
             // create an Intent to launch the ListCourseReviews Activity
+            Course course = (Course) parent.getAdapter().getItem(position);
+            Toast.makeText(ListCourses.this, "Course ID:" + course.getId(), Toast.LENGTH_SHORT).show();
             Intent viewCourseReviews = new Intent(ListCourses.this, ListCourseReviews.class);
             startActivity(viewCourseReviews); // start the viewCourseReviews Activity
         } // end method onItemClick
@@ -106,7 +112,6 @@ public class ListCourses extends Activity {
 
         private String option = "";
         private ArrayList<Course> courseList;
-        private ArrayList<String> courseTitleList;
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -114,10 +119,6 @@ public class ListCourses extends Activity {
             if(option.equals(LIST_OPERATION)) {
                 CourseUtil courseUtil = new CourseUtil();
                 courseList = courseUtil.getAllCourses();
-                courseTitleList = new ArrayList<String>();
-                for (Course course : courseList) {
-                    courseTitleList.add(course.getName());
-                }
             }
             return null;
         }
@@ -125,10 +126,33 @@ public class ListCourses extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ListCourses.this, android.R.layout.simple_list_item_1, courseTitleList);
-                listCoursesListView.setAdapter(arrayAdapter);
+                CourseAdapter courseAdapter = new CourseAdapter(courseList);
+                listCoursesListView.setAdapter(courseAdapter);
             }
             return;
+        }
+    }
+
+    private class CourseAdapter extends ArrayAdapter<Course> {
+        public CourseAdapter(ArrayList<Course> courses) {
+            super(ListCourses.this, android.R.layout.simple_list_item_1, courses);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // if we weren't given a view, inflate one
+            if (convertView == null) {
+                convertView = ListCourses.this.getLayoutInflater()
+                        .inflate(R.layout.ui_list_item_course, null);
+            }
+
+            // configure the view for this Song
+            final Course course = getItem(position);
+
+            TextView courseTitle = (TextView) convertView.findViewById(R.id.courseTitle);
+            courseTitle.setText(course.getName());
+
+            return convertView;
         }
     }
 }
