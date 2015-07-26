@@ -125,7 +125,7 @@ public class ListCourseReviews extends Activity {
             Toast.makeText(ListCourseReviews.this, "Review ID:" + review.getId(), Toast.LENGTH_SHORT).show();
 
             // Put in extras
-            Intent viewCourseReview = new Intent(ListCourseReviews.this, CourseReview.class);
+            Intent viewCourseReview = new Intent(ListCourseReviews.this, thinkers.hmm.ui.CourseReview.class);
             viewCourseReview.putExtra("rid", review.getId());
             // Start activity
             startActivity(viewCourseReview); // start the viewCourseReviews Activity
