@@ -159,7 +159,7 @@ public class ListCourseReviews extends Activity {
 
     private class CourseReviewAdapter extends ArrayAdapter<CourseReview> {
         public CourseReviewAdapter(ArrayList<CourseReview> reviews) {
-            super(ListCourseReviews.this, android.R.layout.simple_list_item_1, reviews);
+            super(ListCourseReviews.this, R.layout.ui_list_item_review, reviews);
         }
 
         @Override
@@ -167,16 +167,23 @@ public class ListCourseReviews extends Activity {
             // if we weren't given a view, inflate one
             if (convertView == null) {
                 convertView = ListCourseReviews.this.getLayoutInflater()
-                        .inflate(android.R.layout.simple_list_item_1, null);
+                        .inflate(R.layout.ui_list_item_review, null);
             }
 
             // configure the view for this Song
             final CourseReview review = getItem(position);
 
-            TextView courseTitle = (TextView) convertView.findViewById(android.R.id.text1);
+            TextView courseTitle = (TextView) convertView.findViewById(R.id.reviewTitle);
             courseTitle.setText(review.getTitle());
+
+            Button likeButton = (Button) convertView.findViewById(R.id.likeButton);
+            likeButton.setText(Integer.toString(review.getLike()));
+
+            Button dislikeButton = (Button) convertView.findViewById(R.id.dislikeButton);
+            dislikeButton.setText(Integer.toString(review.getDislike()));
 
             return convertView;
         }
+
     }
 }
