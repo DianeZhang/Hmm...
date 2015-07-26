@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ import thinkers.hmm.util.UserUtil;
 public class ListUsers extends Activity {
     //Operation String
     private final String LIST_OPERATION = "List_Faculties";
+    public static final String USER_ID = "user_id";
 
     //Widgets
     private TextView titleListUsers;
@@ -45,6 +48,7 @@ public class ListUsers extends Activity {
         //Clicking on an item goes to ListCourseReviews page
         listUsersListView = (ListView) findViewById(R.id.listUsersListView);
         listUsersListView.setOnItemClickListener(viewUserReviewsListener);
+
 
         ListUserHelper listHelper = new ListUserHelper();
         String[] params= new String[1];
@@ -81,9 +85,12 @@ public class ListUsers extends Activity {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
         {
+            User user = (User) arg0.getAdapter().getItem(arg2);
+            Log.d("OnItemClick",user.getUsername());
             // create an Intent to launch the ListCourseReviews Activity
-            Intent viewFacultyReviews = new Intent(ListUsers.this, UserInfo.class);
-            startActivity(viewFacultyReviews); // start the viewCourseReviews Activity
+            Intent viewUserInfo = new Intent(ListUsers.this, UserInfo.class);
+            viewUserInfo.putExtra(USER_ID, user.getId());
+            startActivity(viewUserInfo); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
 
@@ -91,7 +98,6 @@ public class ListUsers extends Activity {
 
         private String option = "";
         private ArrayList<User> userList;
-        private ArrayList<String> userNameList;
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -99,10 +105,6 @@ public class ListUsers extends Activity {
             if(option.equals(LIST_OPERATION)) {
                 UserUtil userUtil = new UserUtil();
                 userList = userUtil.selectUser();
-                userNameList = new ArrayList<String>();
-                for (User user : userList) {
-                    userNameList.add(user.getUsername());
-                }
             }
             return null;
         }
@@ -110,10 +112,33 @@ public class ListUsers extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ListUsers.this, android.R.layout.simple_list_item_1, userNameList);
-                listUsersListView.setAdapter(arrayAdapter);
+                UserAdapter userAdapter = new UserAdapter(userList);
+                listUsersListView.setAdapter(userAdapter);
             }
             return;
+        }
+    }
+
+    private class UserAdapter extends ArrayAdapter<User> {
+        public UserAdapter(ArrayList<User> users) {
+            super(ListUsers.this, android.R.layout.simple_list_item_1, users);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // if we weren't given a view, inflate one
+            if (convertView == null) {
+                convertView = ListUsers.this.getLayoutInflater()
+                        .inflate(android.R.layout.simple_list_item_1, null);
+            }
+
+            // configure the view for this Song
+            final User user = getItem(position);
+
+            TextView userName = (TextView) convertView.findViewById(android.R.id.text1);
+            userName.setText(user.getUsername());
+
+            return convertView;
         }
     }
 }
