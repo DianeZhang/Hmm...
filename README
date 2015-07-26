@@ -1,0 +1,52 @@
+**********
+Authors:
+**********
+Yao Zhou, Dan Zhang, Chao Li, Li Gu
+
+**********
+Date:
+**********
+July 25th, 2015
+
+*********************
+Progress Updates:
+*********************
+1) We implemented all of the database operations in the util package.
+	a) Not all tables require all CRUD operations. Some records are not
+	updatable. 
+	b) Some util classes have overridden methods that select rows from
+	the database through different coulmns. 
+	c) Every *Util class extends DatabaseConnector, which in turns extends the 
+	abstract class DatabaseConnectorBase. It is responsible for opening
+	and closing the connection. It also implements the DatabaseConstants 
+	interface.
+	d) All of the util methods are tested and working as expected.
+2) We set up a server with MySQL running.
+	a) We created a database and all the tables in our Database Schema.
+	b) We populated the tables with some dummy data. 
+3) We can now remotely connect to our database and populate our pages using
+the contents in the database. 
+	a) All of the pages now have real data (well...real fake data) from the
+	actual database in our server.
+4) We are able to login through the login page as admins or users through
+accounts stored in corresponding tables.
+	a) The contents of the page are dynamically created and populated.
+	As an example, if you log in as a user, you will not see the "Add Course"
+	button in the ListCourses page since that is an administrator feature. 
+5) As requested, we created a diagram showing the relationships among the
+tables in the MySQL database. 
+	a) Note that the Users table is duplicated in the diagram for aesthetic
+	reasons. The actual database only contains one Users table.
+
+*******************
+Setup:
+*******************
+1) The project files are self-contained and no additional setup is necessary
+once the project is imported into Android Studio.
+2) The project should be emulated using a Nexus 7 (1200x1920) tablet.
+3) To login as a user, one can use the following credentials:
+	username: yao
+	password: user
+4) To login as an admin, one can use the following credentials:
+	username: yao
+	password: admin
