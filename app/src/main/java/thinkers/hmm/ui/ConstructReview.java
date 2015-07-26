@@ -44,7 +44,7 @@ public class ConstructReview extends Activity {
 
     //Review Variables
     private String type = null;
-    private int rid = -1;
+    private int id = -1;
     private int uid = -1;
 
     //Async Helper
@@ -67,9 +67,9 @@ public class ConstructReview extends Activity {
         //Get review type
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
-        rid = intent.getIntExtra("rid", -1);
-        if(type == null || rid == -1) {
-            Log.d(TAG, "Type:" + type + ",rid"+rid);
+        id = intent.getIntExtra("id", -1);
+        if(type == null || id == -1) {
+            Log.d(TAG, "Type:" + type + ",id"+id);
             onBackPressed();
             return;
         }
@@ -162,7 +162,7 @@ public class ConstructReview extends Activity {
                 if(option.equals(SUBMIT_OPERATION)) {
                     //Construct Course Review
                     CourseReview review = new CourseReview(
-                            rid, uid, title,content,"location", null);
+                            id, uid, title,content,"location", null);
                     //Insert into DB
                     CourseReviewUtil courseReviewUtil =
                             new CourseReviewUtil();
@@ -170,7 +170,7 @@ public class ConstructReview extends Activity {
                 } else {
                     //Construct Course Review Draft
                     CourseReviewDraft review = new CourseReviewDraft(
-                            rid, uid, title,content);
+                            id, uid, title,content);
                     //Insert into DB
                     CourseReviewDraftUtil courseReviewDraftUtil =
                             new CourseReviewDraftUtil();
@@ -182,7 +182,7 @@ public class ConstructReview extends Activity {
                 if(option.equals(SUBMIT_OPERATION)) {
                     //Construct Faculty Review
                     FacultyReview review = new FacultyReview(
-                            uid, rid, title, content, "location", null);
+                            uid, id, title, content, "location", null);
                     //Insert into DB
                     FacultyReviewUtil facultyReviewUtil =
                             new FacultyReviewUtil();
@@ -190,7 +190,7 @@ public class ConstructReview extends Activity {
                 } else {
                     //Construct Faculty Review Draft
                     FacultyReviewDraft facultyReviewDraft = new FacultyReviewDraft(
-                            rid, uid, title, content);
+                            id, uid, title, content);
                     //Insert into DB
                     FacultyReviewDraftUtil facultyReviewDraftUtil =
                             new FacultyReviewDraftUtil();
