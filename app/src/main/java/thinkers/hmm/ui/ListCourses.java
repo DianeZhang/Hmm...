@@ -141,11 +141,15 @@ public class ListCourses extends Activity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
         {
-            // create an Intent to launch the ListCourseReviews Activity
+            // Get selected course from adapter
             Course course = (Course) parent.getAdapter().getItem(position);
-            Toast.makeText(ListCourses.this, "Course ID:" + course.getId(), Toast.LENGTH_SHORT).show();
-//            Intent viewCourseReviews = new Intent(ListCourses.this, ListCourseReviews.class);
-//            startActivity(viewCourseReviews); // start the viewCourseReviews Activity
+            // Toast.makeText(ListCourses.this, "Course ID:" + course.getId(), Toast.LENGTH_SHORT).show();
+
+            // Put in extras
+            Intent viewCourseReviews = new Intent(ListCourses.this, ListCourseReviews.class);
+            viewCourseReviews.putExtra("cid", course.getId());
+            // Start activity
+            startActivity(viewCourseReviews); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
 
