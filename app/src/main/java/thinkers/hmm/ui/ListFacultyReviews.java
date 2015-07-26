@@ -12,12 +12,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
 
 public class ListFacultyReviews extends Activity {
+
+    private int facultyID;
+
     private TextView titleListFacultyReviews;
     private Button course1Button;
     private Button course2Button;
@@ -31,6 +35,10 @@ public class ListFacultyReviews extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_list_faculty_reviews);
+
+        // Get facultyID from bundle
+        facultyID =  getIntent().getExtras().getInt("fid");
+        Toast.makeText(ListFacultyReviews.this, "faculty ID:" + facultyID, Toast.LENGTH_SHORT).show();
 
         titleListFacultyReviews = (TextView) findViewById(R.id.titleTextView);
 
@@ -97,7 +105,8 @@ public class ListFacultyReviews extends Activity {
         @Override
         public void onClick(View v) {
             Intent addNewReview = new Intent(ListFacultyReviews.this, ConstructReview.class);
-
+            addNewReview.putExtra("type", "faculty");
+            addNewReview.putExtra("id", facultyID);
             startActivity(addNewReview); // start the addNewReview Activity
         }
     };

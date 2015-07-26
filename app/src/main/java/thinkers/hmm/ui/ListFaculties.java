@@ -113,10 +113,16 @@ public class ListFaculties extends Activity {
     private AdapterView.OnItemClickListener viewFacultyReviewsListener = new AdapterView.OnItemClickListener()
     {
         @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
         {
-            // create an Intent to launch the ListCourseReviews Activity
+            // Get selected course from adapter
+            Faculty faculty = (Faculty) parent.getAdapter().getItem(position);
+            // Toast.makeText(ListCourses.this, "Course ID:" + course.getId(), Toast.LENGTH_SHORT).show();
+
+            // Put in extras
             Intent viewFacultyReviews = new Intent(ListFaculties.this, ListFacultyReviews.class);
+            viewFacultyReviews.putExtra("fid", faculty.getId());
+            // Start activity
             startActivity(viewFacultyReviews); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
