@@ -61,6 +61,8 @@ public class FacultyReviewUtil extends DatabaseConnector{
                 FacultyReview facultyReview = new FacultyReview(resultSet.getInt("id"),resultSet.getInt("uid"),
                         resultSet.getInt("fid"),resultSet.getString("title"),resultSet.getString("content"),
                         resultSet.getString("location"),resultSet.getTimestamp("created"));
+                facultyReview.setLike(resultSet.getInt("likes"));
+                facultyReview.setDislike(resultSet.getInt("dislikes"));
                 facultyReviews.add(facultyReview);
             }
 
@@ -89,6 +91,8 @@ public class FacultyReviewUtil extends DatabaseConnector{
                 FacultyReview facultyReview = new FacultyReview(resultSet.getInt("id"),resultSet.getInt("uid"),
                         resultSet.getInt("fid"),resultSet.getString("title"),resultSet.getString("content"),
                         resultSet.getString("location"),resultSet.getTimestamp("created"));
+                facultyReview.setLike(resultSet.getInt("likes"));
+                facultyReview.setDislike(resultSet.getInt("dislikes"));
                 facultyReviews.add(facultyReview);
             }
 

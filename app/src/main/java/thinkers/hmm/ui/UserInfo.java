@@ -13,6 +13,7 @@ import thinkers.hmm.R;
 
 public class UserInfo extends Activity {
 
+    private int userId;
     private TextView titleUserInfo;
     private TextView username;
     private TextView userEmail;
@@ -23,6 +24,9 @@ public class UserInfo extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_user_info);
+
+        Bundle extras = getIntent().getExtras();
+        userId = extras.getInt(ListUsers.USER_ID);
 
         titleUserInfo = (TextView) findViewById(R.id.textView);
         username = (TextView) findViewById(R.id.textView2);

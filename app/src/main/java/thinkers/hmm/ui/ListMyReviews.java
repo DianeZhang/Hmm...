@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +21,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Course;
 import thinkers.hmm.model.CourseReview;
+import thinkers.hmm.model.Faculty;
 import thinkers.hmm.model.FacultyReview;
 import thinkers.hmm.model.Review;
 import thinkers.hmm.model.User;
@@ -30,10 +35,19 @@ public class ListMyReviews extends Activity {
 
     //Operation String
     private final String LIST_MYREVIEW = "List_MyReviews";
+    private final String REVIEW_ID = "review_id";
 
     //Widgets
     private TextView titleMyReview;
+    private ListView myCourseReviewsListView;
+    private ListView myFacultyReviewsListView;
+
     private ListView myReviews;
+    private ImageButton homeButton;
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +55,8 @@ public class ListMyReviews extends Activity {
         setContentView(R.layout.ui_list_my_reviews);
 
         titleMyReview = (TextView) findViewById(R.id.textView);
-        myReviews = (ListView) findViewById(R.id.listView);
+        myCourseReviewsListView = (ListView) findViewById(R.id.listView);
+        myFacultyReviewsListView = (ListView) findViewById(R.id.listView2);
 
         ListMyReviewHelper listMyReviewHelper = new ListMyReviewHelper();
         String[] params= new String[1];
@@ -49,16 +64,15 @@ public class ListMyReviews extends Activity {
         listMyReviewHelper.execute(params);
 
         //Get elements
-        myReviews.setOnItemClickListener(viewCourseReviewListener);
+        myCourseReviewsListView.setOnItemClickListener(viewCourseReviewListener);
+        myFacultyReviewsListView.setOnItemClickListener(viewFacultyReviewListener);
 
-        //Test
-        ArrayList<String> test = new ArrayList<String>();
-        test.add("1");
-        test.add("2");
-        test.add("3");
 
-        ArrayAdapter<String> testAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test);
-        myReviews.setAdapter(testAdapter);
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
+
+
+
     }
 
     @Override
@@ -88,17 +102,53 @@ public class ListMyReviews extends Activity {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
         {
+            CourseReview courseReview = (CourseReview) arg0.getAdapter().getItem(arg2);
+            Log.d("OnItemClick", Integer.toString(courseReview.getUid()));
             // create an Intent to launch the CourseReview Activity
-            Intent viewCourseReview = new Intent(ListMyReviews.this, CourseReview.class);
+            Intent viewCourseReview = new Intent(ListMyReviews.this, thinkers.hmm.ui.CourseReview.class);
+            viewCourseReview.putExtra(REVIEW_ID, courseReview.getId());
             startActivity(viewCourseReview); // start the viewCourseReview Activity
         } // end method onItemClick
     }; // end viewContactListener
 
 
+    private AdapterView.OnItemClickListener viewFacultyReviewListener = new AdapterView.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        {
+            FacultyReview facultyReview = (FacultyReview) arg0.getAdapter().getItem(arg2);
+            Log.d("OnItemClick", Integer.toString(facultyReview.getUid()));
+            // create an Intent to launch the CourseReview Activity
+            Intent viewFacultyReview = new Intent(ListMyReviews.this, thinkers.hmm.ui.FacultyReview.class);
+            viewFacultyReview.putExtra(REVIEW_ID, facultyReview.getId());
+            startActivity(viewFacultyReview); // start the viewCourseReview Activity
+        } // end method onItemClick
+    }; // end viewContactListener
+
+
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListMyReviews.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListMyReviews.this, AdminMain.class);
+                startActivity(home);
+            }
+        }
+    };
+
+
     private class ListMyReviewHelper extends AsyncTask<Object, Void, Void> {
 
         private String option = "";
-        private User user = null;
+        private ArrayList<CourseReview> myCourseReviews;
+        private ArrayList<FacultyReview> myFacultyReviews;
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -107,16 +157,11 @@ public class ListMyReviews extends Activity {
             int uid = sharedpreferences.getInt("uid",0);
 
             if(option.equals(LIST_MYREVIEW)) {
-                ArrayList<CourseReview> myCourseReviews = new ArrayList<CourseReview>();
                 CourseReviewUtil myCourseReviewUtil = new CourseReviewUtil();
                 myCourseReviews = myCourseReviewUtil.selectCourseReviewByUserId(uid);
 
-                ArrayList<FacultyReview> myFacultyReviews = new ArrayList<FacultyReview>();
                 FacultyReviewUtil myFacultyReviewUtil = new FacultyReviewUtil();
                 myFacultyReviews = myFacultyReviewUtil.selectFacultyReviewByUserId(uid);
-
-                ArrayList<Review> myReviews = new ArrayList<Review>();
-
             }
             return null;
         }
@@ -124,20 +169,60 @@ public class ListMyReviews extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_MYREVIEW)) {
-                if(user == null) {
-                    Toast.makeText(ListMyReviews.this, "Wrong Username!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-//                if(user.getPassword().equals(passwordText.getText().toString())
-//                        == false) {
-//                    Toast.makeText(ListMyReviews.this, "Wrong Password!", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-                Intent intent = new Intent(ListMyReviews.this, UserMain.class);
-                startActivity(intent);
+                CourseReviewAdapter courseReviewAdapter = new CourseReviewAdapter(myCourseReviews);
+                myCourseReviewsListView.setAdapter(courseReviewAdapter);
+
+                FacultyReviewAdapter facultyReviewAdapter = new FacultyReviewAdapter(myFacultyReviews);
+                myFacultyReviewsListView.setAdapter(facultyReviewAdapter);
             }
             return;
         }
 
+    }
+
+    private class CourseReviewAdapter extends ArrayAdapter<CourseReview> {
+        public CourseReviewAdapter(ArrayList<CourseReview> courseReviews) {
+            super(ListMyReviews.this, android.R.layout.simple_list_item_1, courseReviews);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // if we weren't given a view, inflate one
+            if (convertView == null) {
+                convertView = ListMyReviews.this.getLayoutInflater()
+                        .inflate(android.R.layout.simple_list_item_1, null);
+            }
+
+            // configure the view for this Song
+            final CourseReview courseReview = getItem(position);
+
+            TextView courseReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
+            courseReviewTitle.setText(courseReview.getTitle());
+
+            return convertView;
+        }
+    }
+
+    private class FacultyReviewAdapter extends ArrayAdapter<FacultyReview> {
+        public FacultyReviewAdapter(ArrayList<FacultyReview> facultyReviews) {
+            super(ListMyReviews.this, android.R.layout.simple_list_item_1, facultyReviews);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // if we weren't given a view, inflate one
+            if (convertView == null) {
+                convertView = ListMyReviews.this.getLayoutInflater()
+                        .inflate(android.R.layout.simple_list_item_1, null);
+            }
+
+            // configure the view for this Song
+            final FacultyReview facultyReview = getItem(position);
+
+            TextView facultyReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
+            facultyReviewTitle.setText(facultyReview.getTitle());
+
+            return convertView;
+        }
     }
 }

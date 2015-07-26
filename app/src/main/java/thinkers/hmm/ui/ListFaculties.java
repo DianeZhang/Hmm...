@@ -30,6 +30,8 @@ public class ListFaculties extends Activity {
     //Operation String
     private final String LIST_OPERATION = "List_Faculties";
 
+    private ImageButton homeButton;
+
     public static final String USER = "user";
     public static final String ADMIN = "admin";
 
@@ -55,6 +57,9 @@ public class ListFaculties extends Activity {
         //Clicking on an item goes to ListCourseReviews page
         listFacultiesListView = (ListView) findViewById(R.id.listFacultiesListView);
         listFacultiesListView.setOnItemClickListener(viewFacultyReviewsListener);
+
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
 
         ListFacultyHelper listHelper = new ListFacultyHelper();
         String[] params= new String[1];
@@ -108,15 +113,37 @@ public class ListFaculties extends Activity {
         }
     };
 
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListFaculties.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListFaculties.this, AdminMain.class);
+                startActivity(home);
+            }
+        }
+    };
+
     // event listener that responds to the user touching a course's name
     // in the ListView
     private AdapterView.OnItemClickListener viewFacultyReviewsListener = new AdapterView.OnItemClickListener()
     {
         @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
         {
-            // create an Intent to launch the ListCourseReviews Activity
+            // Get selected course from adapter
+            Faculty faculty = (Faculty) parent.getAdapter().getItem(position);
+            // Toast.makeText(ListCourses.this, "Course ID:" + course.getId(), Toast.LENGTH_SHORT).show();
+
+            // Put in extras
             Intent viewFacultyReviews = new Intent(ListFaculties.this, ListFacultyReviews.class);
+            viewFacultyReviews.putExtra("fid", faculty.getId());
+            // Start activity
             startActivity(viewFacultyReviews); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener

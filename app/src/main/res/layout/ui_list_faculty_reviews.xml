@@ -67,4 +67,12 @@
         android:layout_alignBottom="@+id/titleTextView"
         android:layout_alignParentStart="true" />
 
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/homeButton"
+        android:background="@drawable/homegray"
+        android:layout_above="@+id/course4Button"
+        android:layout_alignEnd="@+id/titleTextView" />
+
 </RelativeLayout>

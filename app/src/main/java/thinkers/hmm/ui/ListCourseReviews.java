@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +35,10 @@ public class ListCourseReviews extends Activity {
     private Button professor3Button;
     private Button professor4Button;
     private Button addNewReviewButton;
+    private ImageButton homeButton;
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
 
     private ListView listCourseReviewsListView;
 
@@ -60,6 +67,10 @@ public class ListCourseReviews extends Activity {
         //Clicking on an item goes to CourseReview page
         listCourseReviewsListView = (ListView) findViewById(R.id.listCourseReviewsListView);
         listCourseReviewsListView.setOnItemClickListener(viewCourseReviewListener);
+
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
+
 
         //Populate list
         ListCourseReviewHelper listHelper = new ListCourseReviewHelper();
@@ -102,7 +113,22 @@ public class ListCourseReviews extends Activity {
         } // end method onClick
     }; // end viewContactListener
 
-    // event-handling object that responds to addNewReview's events
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListCourseReviews.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListCourseReviews.this, AdminMain.class);
+                startActivity(home);
+            }
+        }
+    };
+
     private View.OnClickListener addNewReviewListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
