@@ -87,6 +87,11 @@ public class ListMyReviews extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_logout) {
+            Intent intent = new Intent(ListMyReviews.this, Login.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

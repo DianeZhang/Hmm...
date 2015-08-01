@@ -116,6 +116,7 @@ public class Login extends Activity {
         private String option = "";
         private User user = null;
         private Admin admin = null;
+        private String newRecordsCount = "";
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -124,6 +125,8 @@ public class Login extends Activity {
                 UserUtil userUtil = new UserUtil();
                 String username = (String)params[1];
                 user = userUtil.selectUser(username);
+                newRecordsCount = userUtil.getNewReviewsCount(user.getId());
+
             } else if (option.equals(ADMIN_LOGIN_OPERATION)) {
                 AdminUtil adminUtil = new AdminUtil();
                 String username = (String)params[1];
@@ -152,6 +155,8 @@ public class Login extends Activity {
                 editor.commit();
                 // start main page
                 Intent intent = new Intent(Login.this, UserMain.class);
+                intent.putExtra("NewCourseReviews", Integer.parseInt(newRecordsCount.split("\t")[0]));
+                intent.putExtra("NewFacultyReviews", Integer.parseInt(newRecordsCount.split("\t")[1]));
                 startActivity(intent);
             } else if (option.equals(ADMIN_LOGIN_OPERATION)) {
                 if(admin == null) {
