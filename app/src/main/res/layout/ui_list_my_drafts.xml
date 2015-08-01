@@ -24,9 +24,15 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/DraftListView"
+            android:id="@+id/DraftListViewCourse"
             android:layout_gravity="center_horizontal"
             android:background="@android:drawable/alert_light_frame" />
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/DraftListViewFaculty"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:drawable/alert_light_frame" />
     </LinearLayout>
 </RelativeLayout>

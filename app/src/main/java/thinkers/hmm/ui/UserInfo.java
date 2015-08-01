@@ -35,8 +35,8 @@ public class UserInfo extends Activity {
 
 
         //Clicking on the button to see user's reviews
-        seeUserReviewsButton = (Button) findViewById(R.id.button);
-        seeUserReviewsButton.setOnClickListener(seeUserReviewListener);
+//        seeUserReviewsButton = (Button) findViewById(R.id.button);
+//        seeUserReviewsButton.setOnClickListener(seeUserReviewListener);
     }
 
     @Override
@@ -66,11 +66,11 @@ public class UserInfo extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private View.OnClickListener seeUserReviewListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v){
-            Intent seeUserReview = new Intent(UserInfo.this, ListMyReviews.class);
-            startActivity(seeUserReview);
-        }
-    };
+//    private View.OnClickListener seeUserReviewListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v){
+//            Intent seeUserReview = new Intent(UserInfo.this, ListMyReviews.class);
+//            startActivity(seeUserReview);
+//        }
+//    };
 }

@@ -3,6 +3,7 @@ package thinkers.hmm.util;
 import android.util.Log;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import thinkers.hmm.model.CourseReviewDraft;
 import thinkers.hmm.model.Faculty;
@@ -17,6 +18,7 @@ public class FacultyReviewDraftUtil extends DatabaseConnector {
 
     //SQL Statements
     private final String selectDraftSQL = "SELECT * FROM FacultyReviewDrafts WHERE id=?;";
+    private final String selectDraftByUidSQL = "SELECT * FROM FacultyReviewDrafts WHERE uid=?;";
     private final String updateDraftSQL = "UPDATE TABLE FacultyReviewDrafts SET fid=?, uid=?, " +
             "title=?, content=? WHERE id=?;";
     private final String insertDraftSQL = "INSERT INTO FacultyReviewDrafts(fid,uid,title,content) VALUES" +
@@ -48,6 +50,34 @@ public class FacultyReviewDraftUtil extends DatabaseConnector {
         }
 
         return draft;
+    }
+
+    public ArrayList<FacultyReviewDraft> selectDraftByUid(int uid){
+        ArrayList<FacultyReviewDraft> facultyReviewDrafts = new ArrayList<FacultyReviewDraft>();
+        FacultyReviewDraft draft = null;
+        try {
+            open();
+            preparedStatement = connection.prepareStatement(selectDraftSQL);
+            preparedStatement.setInt(1, uid);
+
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int fid = resultSet.getInt("fid");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+
+                draft = new FacultyReviewDraft(id, uid, fid, title, content);
+                facultyReviewDrafts.add(draft);
+            }
+        } catch(SQLException ex) {
+            Log.d(TAG, ex.getClass().getSimpleName());
+        } finally {
+            close();
+        }
+
+        return facultyReviewDrafts;
     }
 
     public boolean updateDraft(int draftId, FacultyReviewDraft draft){
