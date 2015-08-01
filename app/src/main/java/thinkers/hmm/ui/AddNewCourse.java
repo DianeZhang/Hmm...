@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,11 @@ public class AddNewCourse extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.action_logout) {
+            Intent intent = new Intent(AddNewCourse.this, Login.class);
+            startActivity(intent);
             return true;
         }
 

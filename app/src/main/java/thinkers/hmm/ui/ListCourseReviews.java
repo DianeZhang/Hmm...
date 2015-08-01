@@ -97,6 +97,11 @@ public class ListCourseReviews extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_logout) {
+            Intent intent = new Intent(ListCourseReviews.this, Login.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

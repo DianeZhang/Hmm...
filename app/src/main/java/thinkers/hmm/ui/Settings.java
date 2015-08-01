@@ -1,6 +1,7 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,6 +64,11 @@ public class Settings extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.action_logout) {
+            Intent intent = new Intent(Settings.this, Login.class);
+            startActivity(intent);
             return true;
         }
 
