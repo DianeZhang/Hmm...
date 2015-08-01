@@ -9,12 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import thinkers.hmm.R;
-import thinkers.hmm.model.Course;
-import thinkers.hmm.util.CourseReviewUtil;
-import thinkers.hmm.util.CourseUtil;
 
 public class CourseReview extends Activity {
     private thinkers.hmm.model.CourseReview courseReview;
@@ -37,10 +32,10 @@ public class CourseReview extends Activity {
         courseReview = (thinkers.hmm.model.CourseReview) getIntent().getBundleExtra("ReviewBundle").getSerializable("Review");
         Toast.makeText(CourseReview.this, "Review ID:" + courseReview.getId(), Toast.LENGTH_SHORT).show();
 
-        titleCourseReview = (TextView) findViewById(R.id.titleCourseReview);
+        titleCourseReview = (TextView) findViewById(R.id.titleFacultyReview);
         titleCourseReview.setText(courseReview.getTitle());
 
-        courseReviewContent = (TextView) findViewById(R.id.courseReviewContent);
+        courseReviewContent = (TextView) findViewById(R.id.facultyReviewContent);
         courseReviewContent.setText(courseReview.getContent());
 
     }
