@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,10 +23,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Course;
 import thinkers.hmm.model.Faculty;
 import thinkers.hmm.model.FacultyReview;
 import thinkers.hmm.util.CourseFacultyRelationshipUtil;
+import thinkers.hmm.util.CourseUtil;
 import thinkers.hmm.util.FacultyReviewUtil;
+import thinkers.hmm.util.FacultyUtil;
 
 public class ListFacultyReviews extends Activity {
 
@@ -174,22 +178,22 @@ public class ListFacultyReviews extends Activity {
 
         private String option = "";
         private ArrayList<FacultyReview> facultyReviewList = null;
-        private ArrayList<Faculty> faculties = new ArrayList<>();
+        private ArrayList<Course> courses = new ArrayList<>();
 
         @Override
         protected Void doInBackground(Object... params ) {
             option = (String)params[0];
             if(option.equals(LIST_FACULTY_REVIEWS)) {
                 FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
-                facultyReviewList = facultyReviewUtil.selectFacultyReviewsByFacultyId(facultyID);
+                facultyReviewList = facultyReviewUtil.selectFacultyReview(facultyID);
             } else if (option.equals(LIST_COURSES)) {
-                CourseFacultyRelationshipUtil facultyFacultyRelationshipUtil = new CourseFacultyRelationshipUtil();
-                ArrayList<Integer> facultyIDs = facultyFacultyRelationshipUtil.selectFaculties(facultyID);
+                CourseFacultyRelationshipUtil courseFacultyRelationshipUtil = new CourseFacultyRelationshipUtil();
+                ArrayList<Integer> courseIDs = courseFacultyRelationshipUtil.selectCourses(facultyID);
 
-                FacultyUtil facultyUtil = new FacultyUtil();
-                for (int fid: facultyIDs) {
-                    Faculty faculty = facultyUtil.selectFaculty(fid);
-                    faculties.add(faculty);
+                CourseUtil courseUtil = new CourseUtil();
+                for (int cid : courseIDs) {
+                    Course course = courseUtil.selectCourse(cid);
+                    courses.add(course);
                 }
             }
             return null;
@@ -197,26 +201,26 @@ public class ListFacultyReviews extends Activity {
 
         @Override
         protected void onPostExecute(Void object) {
-            if(option.equals(LIST_COURSE_REVIEWS)) {
+            if(option.equals(LIST_FACULTY_REVIEWS)) {
                 FacultyReviewAdapter facultyReviewAdapter = new FacultyReviewAdapter(facultyReviewList);
                 listFacultyReviewsListView.setAdapter(facultyReviewAdapter);
-            } else if (option.equals(LIST_FACULTIES)) {
-                LinearLayout rl = (LinearLayout) findViewById(R.id.professorsLayout);
+            } else if (option.equals(LIST_COURSES)) {
+                LinearLayout rl = (LinearLayout) findViewById(R.id.classesLayout);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         220, LinearLayout.LayoutParams.WRAP_CONTENT);
-                for (Faculty faculty: faculties) {
-                    Button facultyButton = new Button(ListFacultyReviews.this);
-                    facultyButton.setText(faculty.getName());
-                    final Faculty f = faculty;
-                    facultyButton.setOnClickListener(new View.OnClickListener() {
+                for (Course course : courses) {
+                    Button courseButton = new Button(ListFacultyReviews.this);
+                    courseButton.setText(course.getName());
+                    final Course c = course;
+                    courseButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent listFacultyReviews = new Intent(getApplication(), ListFacultyReviews.class);
-                            listFacultyReviews.putExtra("fid", f.getId());
-                            startActivity(listFacultyReviews);
+                            Intent listCourseReviews = new Intent(getApplication(), ListCourseReviews.class);
+                            listCourseReviews.putExtra("cid", c.getId());
+                            startActivity(listCourseReviews);
                         }
                     });
-                    rl.addView(facultyButton, lp);
+                    rl.addView(courseButton, lp);
                 }
             }
             return;
