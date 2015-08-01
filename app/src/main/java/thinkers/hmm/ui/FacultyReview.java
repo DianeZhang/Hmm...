@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import thinkers.hmm.R;
@@ -23,12 +22,9 @@ public class FacultyReview extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_faculty_review);
 
-        titleFacultyReview = (TextView) findViewById(R.id.textView);
-        facultyReviews = (TextView) findViewById(R.id.textView2);
-
         likeButton = (Button) findViewById(R.id.likeButton);
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
-        
+
         titleFacultyReview = (TextView) findViewById(R.id.titleCourseReview);
         facultyReviews = (TextView) findViewById(R.id.courseReviewContent);
     }
