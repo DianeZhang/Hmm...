@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/SignUp_Title"
-            android:id="@+id/titleCourseReview"
+            android:id="@+id/reviewTitle"
             android:textSize="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/SignUp_Username"
-                    android:id="@+id/courseReviewContent"
+                    android:id="@+id/reviewContent"
                     android:layout_column="0"
                     android:textSize="30dp" />
 
