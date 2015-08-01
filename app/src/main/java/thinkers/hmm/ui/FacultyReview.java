@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -14,16 +15,23 @@ public class FacultyReview extends Activity {
 
     private TextView titleFacultyReview;
     private TextView facultyReviews;
-    private RatingBar facultyRating;
+    private Button likeButton;
+    private Button dislikeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_faculty_review);
 
-        titleFacultyReview = (TextView) findViewById(R.id.textView);
-        facultyReviews = (TextView) findViewById(R.id.textView2);
-        facultyRating = (RatingBar) findViewById(R.id.ratingBar);
+        titleFacultyReview = (TextView) findViewById(R.id.reviewTitle);
+        facultyReviews = (TextView) findViewById(R.id.reviewContent);
+
+
+        likeButton = (Button) findViewById(R.id.likeButton);
+        dislikeButton = (Button) findViewById(R.id.dislikeButton);
+        
+        titleFacultyReview = (TextView) findViewById(R.id.titleCourseReview);
+        facultyReviews = (TextView) findViewById(R.id.courseReviewContent);
     }
 
     @Override

@@ -32,7 +32,7 @@ import thinkers.hmm.model.*;
 
 
 public class ListCourses extends Activity {
-    //Operation String
+    //Operation Strings
     private final String LIST_OPERATION = "List_Courses";
 
     public static final String USER = "user";
@@ -40,6 +40,7 @@ public class ListCourses extends Activity {
 
     private TextView titleListCourses;
     private EditText searchCourseEditText;
+    private Button searchCourseButton;
     private ImageButton addNewCourseButton;
     private ListView listCoursesListView;
     private ImageButton homeButton;
@@ -53,6 +54,8 @@ public class ListCourses extends Activity {
 
         //TODO: search bar refreshes the page
         searchCourseEditText = (EditText) findViewById(R.id.searchFacultyEditText);
+        searchCourseButton = (Button) findViewById(R.id.searchCourseButton);
+        searchCourseButton.setOnClickListener(searchCourseListener);
 
         //Clicking on the button to add new courses
         //addNewCourseButton = (ImageButton) findViewById(R.id.addNewCourseButton);
@@ -70,9 +73,9 @@ public class ListCourses extends Activity {
         params[0] = LIST_OPERATION;
         listHelper.execute(params);
 
+        //Show add new course button to admins
         SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
         String role = sharedpreferences.getString("role", null);
-        Toast.makeText(ListCourses.this, "ROLE: " + role, Toast.LENGTH_SHORT).show();
 
         if (role.equals(ADMIN)) {
             Button addCourseButton = new Button(this);
@@ -123,6 +126,16 @@ public class ListCourses extends Activity {
         }
     };
 
+    // event-handling object that responds to searchCourse events
+    private View.OnClickListener searchCourseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent searchCourse = new Intent(ListCourses.this, ListCourses.class);
+            //TODO: Refresh the page to search for course
+            startActivity(searchCourse); // start the addNewCourse Activity
+        }
+    };
+
     private View.OnClickListener homeListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -139,8 +152,6 @@ public class ListCourses extends Activity {
         }
     };
 
-    // event listener that responds to the user touching a course's name
-    // in the ListView
     private AdapterView.OnItemClickListener viewCourseReviewsListener = new AdapterView.OnItemClickListener()
     {
         @Override

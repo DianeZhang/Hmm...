@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,15 +27,15 @@ public class UserInfo extends Activity {
         Bundle extras = getIntent().getExtras();
         userId = extras.getInt(ListUsers.USER_ID);
 
-        titleUserInfo = (TextView) findViewById(R.id.textView);
-        username = (TextView) findViewById(R.id.textView2);
+        titleUserInfo = (TextView) findViewById(R.id.reviewTitle);
+        username = (TextView) findViewById(R.id.reviewContent);
         titleUserInfo = (TextView) findViewById(R.id.textView3);
         titleUserInfo = (TextView) findViewById(R.id.textView4);
 
 
         //Clicking on the button to see user's reviews
-        seeUserReviewsButton = (Button) findViewById(R.id.button);
-        seeUserReviewsButton.setOnClickListener(seeUserReviewListener);
+//        seeUserReviewsButton = (Button) findViewById(R.id.button);
+//        seeUserReviewsButton.setOnClickListener(seeUserReviewListener);
     }
 
     @Override
@@ -66,11 +65,11 @@ public class UserInfo extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private View.OnClickListener seeUserReviewListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v){
-            Intent seeUserReview = new Intent(UserInfo.this, ListMyReviews.class);
-            startActivity(seeUserReview);
-        }
-    };
+//    private View.OnClickListener seeUserReviewListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v){
+//            Intent seeUserReview = new Intent(UserInfo.this, ListMyReviews.class);
+//            startActivity(seeUserReview);
+//        }
+//    };
 }

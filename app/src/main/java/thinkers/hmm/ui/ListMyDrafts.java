@@ -1,9 +1,12 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,12 +23,15 @@ import thinkers.hmm.model.*;
 import thinkers.hmm.model.FacultyReview;
 import thinkers.hmm.util.CourseReviewDraftUtil;
 import thinkers.hmm.util.CourseUtil;
+import thinkers.hmm.util.FacultyReviewDraftUtil;
 
 public class ListMyDrafts extends Activity {
 
     //Operation String
     private final String LIST_MYDRAFT = "List_MyDrafts";
-    private final String Draft_ID = "review_id";
+    private final String Draft_CONTENT = "draft_content";
+    private final String COURSE_TYPE = "course";
+    private final String FACULTY_TYPE = "faculty";
 
     //Widgets
     private ListView myCourseReviewDraftListView;
@@ -37,17 +43,19 @@ public class ListMyDrafts extends Activity {
         setContentView(R.layout.ui_list_my_drafts);
 
         //Get elements
-        myCourseReviewDraftListView = (ListView)findViewById(R.id.DraftListView);
-        myCourseReviewDraftListView.setOnItemClickListener(selectMyCourseReviewDraft);
+        myCourseReviewDraftListView = (ListView)findViewById(R.id.DraftListViewCourse);
+        myFacultyReviewDraftListView = (ListView)findViewById(R.id.DraftListViewFaculty);
 
-        //Test
-        ArrayList<String> test = new ArrayList<String>();
-        test.add("1");
-        test.add("2");
-        test.add("3");
+        ListDraftHelper listMyDraftHelper = new ListDraftHelper();
+        String[] params= new String[1];
+        params[0] = LIST_MYDRAFT;
+        listMyDraftHelper.execute(params);
 
-        ArrayAdapter<String> testAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, test);
-     //   listView.setAdapter(testAdapter);
+        myCourseReviewDraftListView.setOnItemClickListener(viewCourseReviewDraftListener);
+        myFacultyReviewDraftListView.setOnItemClickListener(viewFacultyReviewDraftListener);
+
+
+
     }
 
     @Override
@@ -77,26 +85,59 @@ public class ListMyDrafts extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    /** Item Select Action */
-    private AdapterView.OnItemClickListener selectMyCourseReviewDraft = new AdapterView.OnItemClickListener(){
+    private AdapterView.OnItemClickListener viewCourseReviewDraftListener = new AdapterView.OnItemClickListener()
+    {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
-            Intent intent = new Intent(ListMyDrafts.this, ConstructReview.class);
-            startActivity(intent);
-        }
-    };
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        {
+            thinkers.hmm.model.CourseReviewDraft courseReviewDraft = (thinkers.hmm.model.CourseReviewDraft) arg0.getAdapter().getItem(arg2);
+            Log.d("OnItemClick", Integer.toString(courseReviewDraft.getId()));
+            // create an Intent to launch the CourseReview Activity
+            Intent viewCourseReviewDraft = new Intent(ListMyDrafts.this, thinkers.hmm.ui.ConstructReview.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Draft_CONTENT, courseReviewDraft);
+            bundle.putString("type", COURSE_TYPE);
+            viewCourseReviewDraft.putExtras(bundle);
+            startActivity(viewCourseReviewDraft); // start the ConstructReview Activity
+        } // end method onItemClick
+    }; // end viewListener
+
+
+    private AdapterView.OnItemClickListener viewFacultyReviewDraftListener = new AdapterView.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+        {
+            FacultyReviewDraft facultyReviewDraft = (FacultyReviewDraft) arg0.getAdapter().getItem(arg2);
+            Log.d("OnItemClick", Integer.toString(facultyReviewDraft.getId()));
+            // create an Intent to launch the CourseReview Activity
+            Intent viewFacultyReviewDraft= new Intent(ListMyDrafts.this, thinkers.hmm.ui.ConstructReview.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Draft_CONTENT, facultyReviewDraft);
+            bundle.putSerializable("type", FACULTY_TYPE);
+            viewFacultyReviewDraft.putExtras(bundle);
+            startActivity(viewFacultyReviewDraft); // start the ConstructReview Activity
+        } // end method onItemClick
+    }; // end viewListener
 
     private class ListDraftHelper extends AsyncTask<Object, Void, Void> {
 
         private String option = "";
-        private ArrayList<Course> courseReviewDraftList;
+        private ArrayList<CourseReviewDraft> courseReviewDraftList;
+        private ArrayList<FacultyReviewDraft> facultyReviewDraftList;
 
         @Override
         protected Void doInBackground(Object... params ) {
             option = (String)params[0];
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            int uid = sharedpreferences.getInt("uid",0);
+
             if(option.equals(LIST_MYDRAFT)) {
                 CourseReviewDraftUtil courseReviewDraftUtil = new CourseReviewDraftUtil();
-            //    courseReviewDraftList = courseReviewDraftUtil.;
+                courseReviewDraftList = courseReviewDraftUtil.selectDraftByUid(uid);
+
+                FacultyReviewDraftUtil facultyReviewDraftUtil = new FacultyReviewDraftUtil();
+                facultyReviewDraftList = facultyReviewDraftUtil.selectDraftByUid(uid);
             }
             return null;
         }
@@ -104,8 +145,11 @@ public class ListMyDrafts extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_MYDRAFT)) {
-       //         CourseReviewDraftAdapter courseReviewDraftAdapter = new CourseReviewDraftAdapter(courseList);
-       //         myCourseReviewDraftListView.setAdapter(courseReviewDraftAdapter);
+                CourseReviewDraftAdapter courseReviewDraftAdapter = new CourseReviewDraftAdapter(courseReviewDraftList);
+                myCourseReviewDraftListView.setAdapter(courseReviewDraftAdapter);
+
+                FacultyReviewDraftAdapter facultyReviewDraftAdapter = new FacultyReviewDraftAdapter(facultyReviewDraftList);
+                myFacultyReviewDraftListView.setAdapter(facultyReviewDraftAdapter);
             }
             return;
         }
@@ -124,7 +168,7 @@ public class ListMyDrafts extends Activity {
                         .inflate(android.R.layout.simple_list_item_1, null);
             }
 
-            // configure the view for this Song
+            // configure the view for this draft
             final thinkers.hmm.model.CourseReviewDraft courseReviewDraft = getItem(position);
 
             TextView courseReviewDraftTitle = (TextView) convertView.findViewById(android.R.id.text1);
@@ -134,9 +178,9 @@ public class ListMyDrafts extends Activity {
         }
     }
 
-    private class FacultyReviewDraftAdapter extends ArrayAdapter<thinkers.hmm.model.FacultyReview> {
-        public FacultyReviewDraftAdapter(ArrayList<thinkers.hmm.model.FacultyReview> facultyReviews) {
-            super(ListMyDrafts.this, android.R.layout.simple_list_item_1, facultyReviews);
+    private class FacultyReviewDraftAdapter extends ArrayAdapter<thinkers.hmm.model.FacultyReviewDraft> {
+        public FacultyReviewDraftAdapter(ArrayList<thinkers.hmm.model.FacultyReviewDraft> facultyReviewsDrafts) {
+            super(ListMyDrafts.this, android.R.layout.simple_list_item_1, facultyReviewsDrafts);
         }
 
         @Override
@@ -147,11 +191,11 @@ public class ListMyDrafts extends Activity {
                         .inflate(android.R.layout.simple_list_item_1, null);
             }
 
-            // configure the view for this Song
-            final FacultyReview facultyReview = getItem(position);
+            // configure the view for this draft
+            final FacultyReviewDraft facultyReviewDraft = getItem(position);
 
             TextView facultyReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
-            facultyReviewTitle.setText(facultyReview.getTitle());
+            facultyReviewTitle.setText(facultyReviewDraft.getTitle());
 
             return convertView;
         }

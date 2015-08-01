@@ -1,11 +1,9 @@
 package thinkers.hmm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by chaoli on 7/18/15.
- */
-public abstract class Review {
+public abstract class Review implements Serializable {
     private int id = -1;
     private int uid;
     private int like;

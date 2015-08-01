@@ -1,9 +1,11 @@
 package thinkers.hmm.model;
 
+import java.io.Serializable;
+
 /**
  * Created by chaoli on 7/18/15.
  */
-public abstract class ReviewDraft {
+public abstract class ReviewDraft implements Serializable {
     private int id;
     private int uid;
     private String title;

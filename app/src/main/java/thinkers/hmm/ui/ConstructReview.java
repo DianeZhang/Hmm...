@@ -13,6 +13,7 @@ import android.widget.Button;
 import thinkers.hmm.R;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import thinkers.hmm.model.*;
@@ -28,6 +29,7 @@ public class ConstructReview extends Activity {
     private final String TAG = "ConstrcutRevew";
     private final String SUBMIT_OPERATION = "submit";
     private final String SAVE_OPEARTION = "save";
+    private final String Draft_CONTENT = "draft_content";
     private final String COURSE_TYPE = "course";
     private final String FACULTY_TYPE = "faculty";
     private final String SUBMIT_SUCCEED_MSG = "Review Submitted!";
@@ -46,6 +48,8 @@ public class ConstructReview extends Activity {
     private String type = null;
     private int id = -1;
     private int uid = -1;
+    private FacultyReviewDraft facultyReviewDraft = null;
+    private CourseReviewDraft courseReviewDraft =null;
 
     //Async Helper
     ConstructReviewHelper constructReviewHelper = new ConstructReviewHelper();
@@ -64,22 +68,45 @@ public class ConstructReview extends Activity {
             return;
         }
 
-        //Get review type
-        Intent intent = getIntent();
-        type = intent.getStringExtra("type");
-        id = intent.getIntExtra("id", -1);
-        if(type == null || id == -1) {
-            Log.d(TAG, "Type:" + type + ",id"+id);
-            onBackPressed();
-            return;
-        }
-
         //Get elements
         submitbutton = (Button)findViewById(R.id.submitButton);
         saveButton = (Button)findViewById(R.id.saveButton);
         cancelButton = (Button)findViewById(R.id.cancelButton);
         titleText = (EditText)findViewById(R.id.titleText);
         contentText = (EditText)findViewById(R.id.contentText);
+
+        //Get review type
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        type = bundle.getString("type");
+        id = bundle.getInt("id", -1);
+        if (id == -1){
+            if (type == null) {
+                Log.d(TAG, "Type:" + type + ",id" + id);
+                onBackPressed();
+                return;
+            }
+            Log.d(TAG, "Type:" + type + ",id" + id);
+            if(type.equals( COURSE_TYPE)) {
+                courseReviewDraft = (CourseReviewDraft) bundle.getSerializable(Draft_CONTENT);
+                id = courseReviewDraft.getCid();
+                Log.d(TAG, "Type:" + type + ",id" + id);
+                titleText.setHint("");
+                contentText.setText(courseReviewDraft.getContent(), TextView.BufferType.EDITABLE);
+            }else if(type.equals(FACULTY_TYPE)){
+                facultyReviewDraft = (FacultyReviewDraft) bundle.getSerializable(Draft_CONTENT);
+                id = facultyReviewDraft.getFid();
+                Log.d(TAG, "Type:" + type + ",id" + id);
+                titleText.setText(facultyReviewDraft.getTitle(), TextView.BufferType.EDITABLE);
+                contentText.setText(facultyReviewDraft.getContent(),TextView.BufferType.EDITABLE);
+            }
+        }else {
+            if (type == null) {
+                Log.d(TAG, "Type:" + type + ",id" + id);
+                onBackPressed();
+                return;
+            }
+        }
 
         //Set Button Dispatcher
         cancelButton.setOnClickListener(cancelAction);
