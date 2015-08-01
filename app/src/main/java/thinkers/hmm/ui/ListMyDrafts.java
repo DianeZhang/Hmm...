@@ -96,8 +96,8 @@ public class ListMyDrafts extends Activity {
             Intent viewCourseReviewDraft = new Intent(ListMyDrafts.this, thinkers.hmm.ui.ConstructReview.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(Draft_CONTENT, courseReviewDraft);
+            bundle.putString("type", COURSE_TYPE);
             viewCourseReviewDraft.putExtras(bundle);
-            viewCourseReviewDraft.putExtra("type", COURSE_TYPE);
             startActivity(viewCourseReviewDraft); // start the ConstructReview Activity
         } // end method onItemClick
     }; // end viewListener
@@ -114,8 +114,8 @@ public class ListMyDrafts extends Activity {
             Intent viewFacultyReviewDraft= new Intent(ListMyDrafts.this, thinkers.hmm.ui.ConstructReview.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(Draft_CONTENT, facultyReviewDraft);
+            bundle.putSerializable("type", FACULTY_TYPE);
             viewFacultyReviewDraft.putExtras(bundle);
-            viewFacultyReviewDraft.putExtra("type", FACULTY_TYPE);
             startActivity(viewFacultyReviewDraft); // start the ConstructReview Activity
         } // end method onItemClick
     }; // end viewListener
