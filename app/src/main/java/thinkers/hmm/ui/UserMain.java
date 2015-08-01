@@ -1,10 +1,15 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +20,8 @@ import android.widget.Toast;
 import thinkers.hmm.R;
 
 public class UserMain extends Activity {
+
+    private final String TAG = "UserMain";
 
     private TextView welcomeText;
     private Button courseButton;
@@ -41,10 +48,14 @@ public class UserMain extends Activity {
         reviewsButton.setOnClickListener(reviewsListener);
         draftsButton.setOnClickListener(draftsListener);
 
-        // test to see what's in shared preference
+        // get role
         SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
         String role = sharedpreferences.getString("role", null);
-        Toast.makeText(UserMain.this, "ROLE: " + role, Toast.LENGTH_SHORT).show();
+
+        if(savedInstanceState == null) {
+            //Send notification
+            notification();
+        }
     }
 
     private View.OnClickListener settingsListener = new View.OnClickListener() {
@@ -66,8 +77,9 @@ public class UserMain extends Activity {
     private View.OnClickListener facultiesListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent viewFaculties = new Intent(UserMain.this, ListFaculties.class);
-            startActivity(viewFaculties);
+            notification();
+//            Intent viewFaculties = new Intent(UserMain.this, ListFaculties.class);
+//            startActivity(viewFaculties);
         }
     };
 
@@ -105,7 +117,41 @@ public class UserMain extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_logout) {
+            Intent intent = new Intent(UserMain.this, Login.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void notification() {
+        // Get notification data
+        Intent notifyIntent = getIntent();
+        int newCourseReviews = notifyIntent.getIntExtra("NewCourseReviews", 0);
+        int newFacultyReviews = notifyIntent.getIntExtra("NewFacultyReviews", 0);
+
+        // Send notification
+        //Intent notifyIntent = new Intent(); //Create intent for notification
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, notifyIntent,0); //set the intent as pending
+        // Construct Notification
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setTicker(String.format("%d new course reviews, %d new faculty reviews", newCourseReviews,newFacultyReviews))
+                .setContentTitle("New records added since you last login!")
+                .setContentText(String.format("After you last login, there are %d new course reivews and %d faculty review has" +
+                        "been added!", newCourseReviews, newFacultyReviews))
+                .setSmallIcon(R.drawable.small_plus)
+                .setContentIntent(pIntent);
+        notifyIntent.setFlags(Notification.FLAG_ONGOING_EVENT);
+        //Start Notification Manager
+        NotificationManager notiMng = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        //Display Notification
+        notiMng.notify(0, notificationBuilder.build());
+
+
+        //Show Toast message
+        Toast.makeText(UserMain.this,String.format("%d new course reviews, %d new faculty reviews",
+                newCourseReviews,newFacultyReviews),Toast.LENGTH_LONG ).show();
     }
 }
