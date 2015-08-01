@@ -177,40 +177,41 @@ public class ListFacultyReviews extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
-                FacultyReviewAdapter facultyReviewAdapter = new FacultyReviewAdapter(facultyReviewList);
-                listFacultyReviewsListView.setAdapter(facultyReviewAdapter);
+//                FacultyReviewAdapter facultyReviewAdapter = new FacultyReviewAdapter(facultyReviewList);
+//                listFacultyReviewsListView.setAdapter(facultyReviewAdapter);
             }
             return;
         }
     }
 
-    private class FacultyReviewAdapter extends ArrayAdapter<thinkers.hmm.model.CourseReview> {
-        public CourseReviewAdapter(ArrayList<thinkers.hmm.model.CourseReview> reviews) {
-            super(ListCourseReviews.this, R.layout.ui_list_item_review, reviews);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            // if we weren't given a view, inflate one
-            if (convertView == null) {
-                convertView = ListCourseReviews.this.getLayoutInflater()
-                        .inflate(R.layout.ui_list_item_review, null);
-            }
-
-            // configure the view for this Song
-            final thinkers.hmm.model.CourseReview review = getItem(position);
-
-            TextView courseTitle = (TextView) convertView.findViewById(R.id.reviewTitle);
-            courseTitle.setText(review.getTitle());
-
-            Button likeButton = (Button) convertView.findViewById(R.id.likeButton);
-            likeButton.setText(Integer.toString(review.getLike()));
-
-            Button dislikeButton = (Button) convertView.findViewById(R.id.dislikeButton);
-            dislikeButton.setText(Integer.toString(review.getDislike()));
-
-            return convertView;
-        }
-
-    }
+//    private class FacultyReviewAdapter extends ArrayAdapter<thinkers.hmm.model.CourseReview> {
+//        public CourseReviewAdapter(ArrayList<thinkers.hmm.model.CourseReview> reviews) {
+//            super(ListCourseReviews.this, R.layout.ui_list_item_review, reviews);
+//            return;
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            // if we weren't given a view, inflate one
+//            if (convertView == null) {
+//                convertView = ListCourseReviews.this.getLayoutInflater()
+//                        .inflate(R.layout.ui_list_item_review, null);
+//            }
+//
+//            // configure the view for this Song
+//            final thinkers.hmm.model.CourseReview review = getItem(position);
+//
+//            TextView courseTitle = (TextView) convertView.findViewById(R.id.reviewTitle);
+//            courseTitle.setText(review.getTitle());
+//
+//            Button likeButton = (Button) convertView.findViewById(R.id.likeButton);
+//            likeButton.setText(Integer.toString(review.getLike()));
+//
+//            Button dislikeButton = (Button) convertView.findViewById(R.id.dislikeButton);
+//            dislikeButton.setText(Integer.toString(review.getDislike()));
+//
+//            return convertView;
+//        }
+//
+//    }
 }
