@@ -3,6 +3,12 @@ package thinkers.hmm.util;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +38,7 @@ public class UserUtil extends DatabaseConnector{
     private final String insertUserSQL = "INSERT INTO Users(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
     private final String selectAllUsersSQL = "SELECT * FROM Users;";
-
+    private final String webServiceUrl = "";
     /**
      * @brief select user by id
      * @param uid
@@ -254,6 +260,24 @@ public class UserUtil extends DatabaseConnector{
             close();
             return users;
         }
+    }
+
+    /**
+     * @brief Get new reviews count
+     * @return
+     */
+    public String getNewReviewsCount(int uid) {
+        //TODO
+        String result = "";
+        String URL = "";
+        HttpClient httpclient = new DefaultHttpClient();
+        try {
+            HttpResponse response = httpclient.execute(new HttpGet(URL));
+            StatusLine statusLine = response.getStatusLine();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }
