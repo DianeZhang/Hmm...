@@ -13,22 +13,14 @@
         android:text= "@string/my_review_title"
         android:textSize="50dp"
         android:gravity="center"
-<<<<<<< HEAD
-        android:id="@+id/titleFacultyReview"
-=======
-        android:id="@+id/reviewTitle"
->>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
+        android:id="@+id/titleMyReview"
         android:layout_alignParentTop="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-<<<<<<< HEAD
-        android:layout_below="@+id/titleFacultyReview"
-=======
-        android:layout_below="@+id/reviewTitle"
->>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
+        android:layout_below="@+id/titleMyReview"
         android:layout_alignParentStart="true" />
 
 
@@ -46,11 +38,9 @@
         android:id="@+id/homeButton"
         android:background="@drawable/homegray"
         android:layout_alignParentTop="true"
-<<<<<<< HEAD
-        android:layout_alignEnd="@+id/titleFacultyReview" />
-=======
-        android:layout_alignEnd="@+id/reviewTitle" />
->>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
+        android:layout_alignEnd="@+id/titleMyReview" />
+
+
 
 
 

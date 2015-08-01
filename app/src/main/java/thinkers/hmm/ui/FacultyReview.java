@@ -23,7 +23,7 @@ public class FacultyReview extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_faculty_review);
-        
+
         likeButton = (Button) findViewById(R.id.likeButton);
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
 

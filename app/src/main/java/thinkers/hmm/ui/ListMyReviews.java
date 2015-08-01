@@ -48,11 +48,8 @@ public class ListMyReviews extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_list_my_reviews);
 
-<<<<<<< HEAD
-        titleMyReview = (TextView) findViewById(R.id.titleFacultyReview);
-=======
-        titleMyReview = (TextView) findViewById(R.id.reviewTitle);
->>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
+        titleMyReview = (TextView) findViewById(R.id.titleMyReview);
+
         myCourseReviewsListView = (ListView) findViewById(R.id.listView);
         myFacultyReviewsListView = (ListView) findViewById(R.id.listView2);
 
