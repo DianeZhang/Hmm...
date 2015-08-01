@@ -28,8 +28,8 @@ public class UserInfo extends Activity {
         Bundle extras = getIntent().getExtras();
         userId = extras.getInt(ListUsers.USER_ID);
 
-        titleUserInfo = (TextView) findViewById(R.id.textView);
-        username = (TextView) findViewById(R.id.textView2);
+        titleUserInfo = (TextView) findViewById(R.id.titleCourseReview);
+        username = (TextView) findViewById(R.id.courseReviewContent);
         titleUserInfo = (TextView) findViewById(R.id.textView3);
         titleUserInfo = (TextView) findViewById(R.id.textView4);
 

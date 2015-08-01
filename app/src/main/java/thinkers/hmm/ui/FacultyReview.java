@@ -20,8 +20,8 @@ public class FacultyReview extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_faculty_review);
 
-        titleFacultyReview = (TextView) findViewById(R.id.textView);
-        facultyReviews = (TextView) findViewById(R.id.textView2);
+        titleFacultyReview = (TextView) findViewById(R.id.titleCourseReview);
+        facultyReviews = (TextView) findViewById(R.id.courseReviewContent);
         facultyRating = (RatingBar) findViewById(R.id.ratingBar);
     }
 
