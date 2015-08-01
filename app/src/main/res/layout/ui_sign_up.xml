@@ -17,7 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/SignUp_Title"
+<<<<<<< HEAD
             android:id="@+id/titleFacultyReview"
+=======
+            android:id="@+id/reviewTitle"
+>>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
             android:textSize="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
@@ -36,7 +40,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/SignUp_Username"
+<<<<<<< HEAD
                     android:id="@+id/facultyReviewContent"
+=======
+                    android:id="@+id/reviewContent"
+>>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
                     android:layout_column="0"
                     android:textSize="30dp" />
 

@@ -32,7 +32,7 @@ import thinkers.hmm.model.*;
 
 
 public class ListCourses extends Activity {
-    //Operation String
+    //Operation Strings
     private final String LIST_OPERATION = "List_Courses";
 
     public static final String USER = "user";

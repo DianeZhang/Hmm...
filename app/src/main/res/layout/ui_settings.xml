@@ -31,7 +31,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Settings_username_label"
+<<<<<<< HEAD
                 android:id="@+id/facultyReviewContent"
+=======
+                android:id="@+id/reviewContent"
+>>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
                 android:layout_column="0"
                 android:textSize="42sp"
                 android:textColor="#ff000000"

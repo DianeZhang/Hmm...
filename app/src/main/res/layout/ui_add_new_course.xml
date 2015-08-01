@@ -18,7 +18,11 @@
             android:text= "@string/add_new_course_title"
             android:textSize="50dp"
             android:gravity="center"
+<<<<<<< HEAD
             android:id="@+id/titleFacultyReview"
+=======
+            android:id="@+id/reviewTitle"
+>>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
             android:layout_marginTop="9dp"
             android:layout_alignParentTop="true"
             android:textColor="#ff000000" />
@@ -38,7 +42,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/editName"
             android:textSize="24dp"
+<<<<<<< HEAD
             android:layout_below="@+id/titleFacultyReview"
+=======
+            android:layout_below="@+id/reviewTitle"
+>>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:layout_weight="0.01"
@@ -58,7 +66,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/editCode"
             android:textSize="24dp"
+<<<<<<< HEAD
             android:layout_below="@+id/titleFacultyReview"
+=======
+            android:layout_below="@+id/reviewTitle"
+>>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:layout_weight="0.01"
@@ -78,7 +90,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/editSchool"
             android:textSize="24dp"
+<<<<<<< HEAD
             android:layout_below="@+id/titleFacultyReview"
+=======
+            android:layout_below="@+id/reviewTitle"
+>>>>>>> b8fc98ec4153ab9698d927f8d415afede13a4a38
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:layout_weight="0.01"
