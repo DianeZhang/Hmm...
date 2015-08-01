@@ -1,5 +1,7 @@
 package thinkers.hmm.model;
 
+import java.io.Serializable;
+
 /**
  * Created by chaoli on 7/18/15.
  */

@@ -109,7 +109,7 @@ public class ListMyReviews extends Activity {
             viewCourseReview.putExtra(REVIEW_ID, courseReview.getId());
             startActivity(viewCourseReview); // start the viewCourseReview Activity
         } // end method onItemClick
-    }; // end viewContactListener
+    }; // end viewListener
 
 
     private AdapterView.OnItemClickListener viewFacultyReviewListener = new AdapterView.OnItemClickListener()
@@ -124,7 +124,7 @@ public class ListMyReviews extends Activity {
             viewFacultyReview.putExtra(REVIEW_ID, facultyReview.getId());
             startActivity(viewFacultyReview); // start the viewCourseReview Activity
         } // end method onItemClick
-    }; // end viewContactListener
+    }; // end viewListener
 
 
     private View.OnClickListener homeListener = new View.OnClickListener() {
@@ -193,7 +193,7 @@ public class ListMyReviews extends Activity {
                         .inflate(android.R.layout.simple_list_item_1, null);
             }
 
-            // configure the view for this Song
+            // configure the view for this review
             final CourseReview courseReview = getItem(position);
 
             TextView courseReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
@@ -216,7 +216,7 @@ public class ListMyReviews extends Activity {
                         .inflate(android.R.layout.simple_list_item_1, null);
             }
 
-            // configure the view for this Song
+            // configure the view for this review
             final FacultyReview facultyReview = getItem(position);
 
             TextView facultyReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
