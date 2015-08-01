@@ -16,20 +16,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
-import thinkers.hmm.model.Course;
 import thinkers.hmm.model.CourseReview;
-import thinkers.hmm.model.Faculty;
 import thinkers.hmm.model.FacultyReview;
-import thinkers.hmm.model.Review;
-import thinkers.hmm.model.User;
 import thinkers.hmm.util.CourseReviewUtil;
 import thinkers.hmm.util.FacultyReviewUtil;
-import thinkers.hmm.util.UserUtil;
 
 public class ListMyReviews extends Activity {
 
@@ -54,7 +48,7 @@ public class ListMyReviews extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_list_my_reviews);
 
-        titleMyReview = (TextView) findViewById(R.id.textView);
+        titleMyReview = (TextView) findViewById(R.id.titleCourseReview);
         myCourseReviewsListView = (ListView) findViewById(R.id.listView);
         myFacultyReviewsListView = (ListView) findViewById(R.id.listView2);
 
@@ -114,7 +108,7 @@ public class ListMyReviews extends Activity {
             viewCourseReview.putExtra(REVIEW_ID, courseReview.getId());
             startActivity(viewCourseReview); // start the viewCourseReview Activity
         } // end method onItemClick
-    }; // end viewContactListener
+    }; // end viewListener
 
 
     private AdapterView.OnItemClickListener viewFacultyReviewListener = new AdapterView.OnItemClickListener()
@@ -129,7 +123,7 @@ public class ListMyReviews extends Activity {
             viewFacultyReview.putExtra(REVIEW_ID, facultyReview.getId());
             startActivity(viewFacultyReview); // start the viewCourseReview Activity
         } // end method onItemClick
-    }; // end viewContactListener
+    }; // end viewListener
 
 
     private View.OnClickListener homeListener = new View.OnClickListener() {
@@ -163,7 +157,7 @@ public class ListMyReviews extends Activity {
 
             if(option.equals(LIST_MYREVIEW)) {
                 CourseReviewUtil myCourseReviewUtil = new CourseReviewUtil();
-                myCourseReviews = myCourseReviewUtil.selectCourseReviewByUserId(uid);
+                myCourseReviews = myCourseReviewUtil.selectCourseReviewsByUserId(uid);
 
                 FacultyReviewUtil myFacultyReviewUtil = new FacultyReviewUtil();
                 myFacultyReviews = myFacultyReviewUtil.selectFacultyReviewByUserId(uid);
@@ -198,7 +192,7 @@ public class ListMyReviews extends Activity {
                         .inflate(android.R.layout.simple_list_item_1, null);
             }
 
-            // configure the view for this Song
+            // configure the view for this review
             final CourseReview courseReview = getItem(position);
 
             TextView courseReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
@@ -221,7 +215,7 @@ public class ListMyReviews extends Activity {
                         .inflate(android.R.layout.simple_list_item_1, null);
             }
 
-            // configure the view for this Song
+            // configure the view for this review
             final FacultyReview facultyReview = getItem(position);
 
             TextView facultyReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);

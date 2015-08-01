@@ -28,6 +28,9 @@ public class FacultyReview extends Activity {
 
         likeButton = (Button) findViewById(R.id.likeButton);
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
+        
+        titleFacultyReview = (TextView) findViewById(R.id.titleCourseReview);
+        facultyReviews = (TextView) findViewById(R.id.courseReviewContent);
     }
 
     @Override

@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 import thinkers.hmm.model.Faculty;
 
-/**
- * Created by Yao on 7/18/15.
- */
 public class FacultyUtil extends DatabaseConnector{
     //Debug TAG
     private final String TAG = "Faculty util";
@@ -67,10 +64,7 @@ public class FacultyUtil extends DatabaseConnector{
     }
 
     public Faculty selectFaculty(int id) {
-        String facultyName;
-        int facultyId;
-
-
+        Faculty faculty = null;
         try {
             open();
 
@@ -78,17 +72,16 @@ public class FacultyUtil extends DatabaseConnector{
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
-            facultyId = resultSet.getInt("id");
-            facultyName = resultSet.getString("name");
-            Faculty faculty = new Faculty(facultyId, facultyName);
-
-
-            close();
-            return faculty;
+            if (resultSet.next()) {
+                int facultyId = resultSet.getInt("id");
+                String facultyName = resultSet.getString("name");
+                faculty = new Faculty(facultyId, facultyName);
+            }
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
+        } finally {
             close();
-            return null;
+            return faculty;
         }
     }
 

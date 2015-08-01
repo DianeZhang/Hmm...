@@ -74,6 +74,8 @@ public class ConstructReview extends Activity {
             return;
         }
 
+
+
         //Get elements
         submitbutton = (Button)findViewById(R.id.submitButton);
         saveButton = (Button)findViewById(R.id.saveButton);

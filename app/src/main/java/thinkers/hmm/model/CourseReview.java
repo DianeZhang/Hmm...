@@ -14,7 +14,7 @@ public class CourseReview extends Review {
         this.cid = cid;
     }
 
-    public CourseReview(int id, int cid, int likes, int dislikes, int uid, String title, String content, String location, Date createdtime) {
+    public CourseReview(int id, int cid, int uid, int likes, int dislikes, String title, String content, String location, Date createdtime) {
         super(id, uid, likes, dislikes, title, content, location, createdtime);
         this.cid = cid;
     }

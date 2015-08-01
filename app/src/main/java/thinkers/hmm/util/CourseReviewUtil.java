@@ -9,16 +9,14 @@ import java.util.Date;
 
 import thinkers.hmm.model.CourseReview;
 
-/**
- * Created by Yao on 7/18/15.
- */
 public class CourseReviewUtil extends DatabaseConnector{
     //Debug TAG
     private final String TAG = "CourseReviewUtil";
 
     //SQL Statements
-    private final String selectReviewSQL = "SELECT * FROM CourseReviews WHERE cid=?;";
-    private final String selectReviewSQLUID = "SELECT * FROM CourseReviews WHERE uid=?";
+    private final String selectReviewByRID = "SELECT * FROM CourseReviews WHERE id=?;";
+    private final String selectReviewsByCID = "SELECT * FROM CourseReviews WHERE cid=?;";
+    private final String selectReviewsByUID = "SELECT * FROM CourseReviews WHERE uid=?";
     private final String updateReviewSQL = "UPDATE TABLE CourseReviews SET cid=?, uid=?, " +
             "likes=?, dislikes=?, title=?, content=?, location=? WHERE id=?;";
     private final String insertReviewSQL = "INSERT INTO CourseReviews(cid,uid,likes,dislikes,title,content,location) VALUES" +
@@ -49,12 +47,42 @@ public class CourseReviewUtil extends DatabaseConnector{
         return false;
     }
 
-    public ArrayList<CourseReview> selectCourseReview(int cid) {
+    public CourseReview selectCourseReview(int rid) {
+        CourseReview courseReview = null;
+        try {
+            open();
+            //Execute statement
+            preparedStatement = connection.prepareStatement(selectReviewByRID);
+            preparedStatement.setInt(1, rid);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int cid = resultSet.getInt("cid");
+                int uid = resultSet.getInt("uid");
+                int likes = resultSet.getInt("likes");
+                int dislikes = resultSet.getInt("dislikes");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                Date created = resultSet.getTimestamp("created");
+                String location = resultSet.getString("location");
+
+                courseReview = new CourseReview(id, cid, uid, likes, dislikes, title, content, location, created);
+            }
+        } catch(SQLException ex) {
+            Log.d(TAG, ex.getClass().getSimpleName());
+        } finally {
+            close();
+        }
+        return courseReview;
+    }
+
+    public ArrayList<CourseReview> selectCourseReviewsByCourseId(int cid) {
         ArrayList<CourseReview> reviewList = new ArrayList<CourseReview>();
         try {
             open();
             //Execute statement
-            preparedStatement = connection.prepareStatement(selectReviewSQL);
+            preparedStatement = connection.prepareStatement(selectReviewsByCID);
             preparedStatement.setInt(1, cid);
             resultSet = preparedStatement.executeQuery();
 
@@ -83,12 +111,12 @@ public class CourseReviewUtil extends DatabaseConnector{
         return reviewList;
     }
 
-    public ArrayList<CourseReview> selectCourseReviewByUserId(int uid) {
+    public ArrayList<CourseReview> selectCourseReviewsByUserId(int uid) {
         ArrayList<CourseReview> reviewList = new ArrayList<CourseReview>();
         try {
             open();
             //Execute statement
-            preparedStatement = connection.prepareStatement(selectReviewSQLUID);
+            preparedStatement = connection.prepareStatement(selectReviewsByUID);
             preparedStatement.setInt(1, uid);
             resultSet = preparedStatement.executeQuery();
 

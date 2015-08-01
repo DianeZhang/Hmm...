@@ -6,28 +6,43 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Course;
+import thinkers.hmm.util.CourseReviewUtil;
+import thinkers.hmm.util.CourseUtil;
 
 public class CourseReview extends Activity {
+    private thinkers.hmm.model.CourseReview courseReview;
 
     private TextView titleCourseReview;
-    private TextView courseReviews;
     private Button likeButton;
     private Button dislikeButton;
+    private TextView courseReviewContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_course_review);
 
-        titleCourseReview = (TextView) findViewById(R.id.textView);
-        courseReviews = (TextView) findViewById(R.id.textView2);
 
         likeButton = (Button) findViewById(R.id.likeButton);
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
+
+        // Get course review from bundle
+        courseReview = (thinkers.hmm.model.CourseReview) getIntent().getBundleExtra("ReviewBundle").getSerializable("Review");
+        Toast.makeText(CourseReview.this, "Review ID:" + courseReview.getId(), Toast.LENGTH_SHORT).show();
+
+        titleCourseReview = (TextView) findViewById(R.id.titleCourseReview);
+        titleCourseReview.setText(courseReview.getTitle());
+
+        courseReviewContent = (TextView) findViewById(R.id.courseReviewContent);
+        courseReviewContent.setText(courseReview.getContent());
+
     }
 
     @Override
