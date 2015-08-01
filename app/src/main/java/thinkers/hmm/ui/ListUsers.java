@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +36,10 @@ public class ListUsers extends Activity {
     private EditText searchUserEditText;
     private ImageButton addNewUserButton;
     private ListView listUsersListView;
+    private ImageButton homeButton;
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,8 @@ public class ListUsers extends Activity {
         listUsersListView = (ListView) findViewById(R.id.listUsersListView);
         listUsersListView.setOnItemClickListener(viewUserReviewsListener);
 
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
 
         ListUserHelper listHelper = new ListUserHelper();
         String[] params= new String[1];
@@ -77,6 +85,22 @@ public class ListUsers extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListUsers.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListUsers.this, AdminMain.class);
+                startActivity(home);
+            }
+        }
+    };
 
     // event listener that responds to the user touching a user's name
     // in the ListView
