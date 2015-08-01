@@ -166,7 +166,6 @@ public class CourseReviewUtil extends DatabaseConnector{
 
             // execute the java preparedStatement
             preparedStatement.executeUpdate();
-            close();
             return true;
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
