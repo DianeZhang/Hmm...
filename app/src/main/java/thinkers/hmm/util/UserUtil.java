@@ -8,6 +8,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class UserUtil extends DatabaseConnector{
     private final String insertUserSQL = "INSERT INTO Users(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
     private final String selectAllUsersSQL = "SELECT * FROM Users;";
-    private final String webServiceUrl = "";
+    private final String webServiceUrl = "http://162.243.187.39:8080/HmmWeb/LoginNewRecordsCheck?UID=";
     /**
      * @brief select user by id
      * @param uid
@@ -269,11 +270,12 @@ public class UserUtil extends DatabaseConnector{
     public String getNewReviewsCount(int uid) {
         //TODO
         String result = "";
-        String URL = "";
+        String URL = webServiceUrl+uid;
         HttpClient httpclient = new DefaultHttpClient();
         try {
             HttpResponse response = httpclient.execute(new HttpGet(URL));
-            StatusLine statusLine = response.getStatusLine();
+            result = EntityUtils.toString(response.getEntity());
+            result = result.trim();
         }catch(Exception e) {
             e.printStackTrace();
         }
