@@ -7,22 +7,19 @@ import java.util.ArrayList;
 
 import thinkers.hmm.model.User;
 
-/**
- * Created by chaoli on 7/18/15.
- */
 public class CourseFacultyRelationshipUtil extends DatabaseConnector{
 
     //All SQL Statement
     private final String TAG = "CFRelationUtil";
-    private final String selectCoursesByFIDSQL = "SELECT * FROM Course_Faculty_Relationship " +
+    private final String selectCoursesByFIDSQL = "SELECT * FROM CourseFacultyRelationship " +
             "WHERE FID=?;";
-    private final String selectFacultiesByCIDSQL = "SELECT * FROM Course_Faculty_Relationship " +
+    private final String selectFacultiesByCIDSQL = "SELECT * FROM CourseFacultyRelationship " +
             "WHERE CID=?;";
-    private final String deleteByCIDSQL = "DELETE FROM Course_Faculty_Relationship " +
+    private final String deleteByCIDSQL = "DELETE FROM CourseFacultyRelationship " +
             "WHERE CID=?;";
-    private final String deleteByFIDSQL = "DELETE FROM Course_Faculty_Relationship " +
+    private final String deleteByFIDSQL = "DELETE FROM CourseFacultyRelationship " +
             "WHERE FID=?;";
-    private final String insertRelationshipSQL = "INSERT INTO Course_Faculty_Relationship(fid, cid) VALUES" +
+    private final String insertRelationshipSQL = "INSERT INTO CourseFacultyRelationship (fid, cid) VALUES" +
             "(?,?);";
 
     /**

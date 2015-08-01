@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,9 +21,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
+import thinkers.hmm.util.FacultyReviewUtil;
+import thinkers.hmm.model.*;
 
 public class ListFacultyReviews extends Activity {
 
+    private final String LIST_OPERATION = "List_Faculty_Reviews";
     private int facultyID;
 
     private TextView titleListFacultyReviews;
@@ -66,12 +71,11 @@ public class ListFacultyReviews extends Activity {
         homeButton = (ImageButton) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(homeListener);
 
-        ArrayList<String> testList = new ArrayList<String>();
-        testList.add("1");
-        testList.add("2");
-        testList.add("3");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(ListFacultyReviews.this, android.R.layout.simple_list_item_1, testList);
-        listFacultyReviewsListView.setAdapter(arrayAdapter);
+        //Populate list
+        ListFacultyReviewHelper listHelper = new ListFacultyReviewHelper();
+        String[] params= new String[1];
+        params[0] = LIST_OPERATION;
+        listHelper.execute(params);
     }
 
     @Override
@@ -154,4 +158,59 @@ public class ListFacultyReviews extends Activity {
             startActivity(viewFacultyReview); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener
+
+    private class ListFacultyReviewHelper extends AsyncTask<Object, Void, Void> {
+
+        private String option = "";
+        private ArrayList<thinkers.hmm.model.FacultyReview> facultyReviewList;
+
+        @Override
+        protected Void doInBackground(Object... params ) {
+            option = (String)params[0];
+            if(option.equals(LIST_OPERATION)) {
+                FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
+                facultyReviewList = facultyReviewUtil.selectFacultyReview(facultyID);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void object) {
+            if(option.equals(LIST_OPERATION)) {
+                FacultyReviewAdapter facultyReviewAdapter = new FacultyReviewAdapter(facultyReviewList);
+                listFacultyReviewsListView.setAdapter(facultyReviewAdapter);
+            }
+            return;
+        }
+    }
+
+    private class FacultyReviewAdapter extends ArrayAdapter<thinkers.hmm.model.CourseReview> {
+        public CourseReviewAdapter(ArrayList<thinkers.hmm.model.CourseReview> reviews) {
+            super(ListCourseReviews.this, R.layout.ui_list_item_review, reviews);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // if we weren't given a view, inflate one
+            if (convertView == null) {
+                convertView = ListCourseReviews.this.getLayoutInflater()
+                        .inflate(R.layout.ui_list_item_review, null);
+            }
+
+            // configure the view for this Song
+            final thinkers.hmm.model.CourseReview review = getItem(position);
+
+            TextView courseTitle = (TextView) convertView.findViewById(R.id.reviewTitle);
+            courseTitle.setText(review.getTitle());
+
+            Button likeButton = (Button) convertView.findViewById(R.id.likeButton);
+            likeButton.setText(Integer.toString(review.getLike()));
+
+            Button dislikeButton = (Button) convertView.findViewById(R.id.dislikeButton);
+            dislikeButton.setText(Integer.toString(review.getDislike()));
+
+            return convertView;
+        }
+
+    }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,19 +25,18 @@ import java.util.ArrayList;
 
 import thinkers.hmm.R;
 import thinkers.hmm.model.CourseReview;
+import thinkers.hmm.model.Faculty;
+import thinkers.hmm.util.CourseFacultyRelationshipUtil;
 import thinkers.hmm.util.CourseReviewUtil;
+import thinkers.hmm.util.FacultyUtil;
 
 public class ListCourseReviews extends Activity {
     //Operation String
-    private final String LIST_OPERATION = "List_Course_Reviews";
+    private final String LIST_COURSE_REVIEWS = "List_Course_Reviews";
+    private final String LIST_FACULTIES = "List_Faculties";
     private int courseID;
 
     private TextView titleListCourseReviews;
-    private Button professor1Button;
-    private Button professor2Button;
-    private Button professor3Button;
-    private Button professor4Button;
-    private Button addNewReviewButton;
     private ImageButton homeButton;
 
     public static final String USER = "user";
@@ -53,17 +55,6 @@ public class ListCourseReviews extends Activity {
 
         titleListCourseReviews = (TextView) findViewById(R.id.titleTextView);
 
-        //TODO: find a horizontal list view for professors
-        professor1Button = (Button) findViewById(R.id.professor1Button);
-        professor2Button = (Button) findViewById(R.id.professor2Button);
-        professor3Button = (Button) findViewById(R.id.professor3Button);
-        professor4Button = (Button) findViewById(R.id.professor4Button);
-        professor1Button.setOnClickListener(viewFacultyReviewListener);
-
-        //Clicking on the button to add new review
-        addNewReviewButton = (Button) findViewById(R.id.addNewReviewButton);
-        addNewReviewButton.setOnClickListener(addNewReviewListener);
-
         //Clicking on an item goes to CourseReview page
         listCourseReviewsListView = (ListView) findViewById(R.id.listCourseReviewsListView);
         listCourseReviewsListView.setOnItemClickListener(viewCourseReviewListener);
@@ -71,12 +62,31 @@ public class ListCourseReviews extends Activity {
         homeButton = (ImageButton) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(homeListener);
 
+        //Show reviews
+        ListCourseReviewHelper listReviewsHelper = new ListCourseReviewHelper();
+        String[] reviewParams= new String[1];
+        reviewParams[0] = LIST_COURSE_REVIEWS;
+        listReviewsHelper.execute(reviewParams);
 
-        //Populate list
-        ListCourseReviewHelper listHelper = new ListCourseReviewHelper();
-        String[] params= new String[1];
-        params[0] = LIST_OPERATION;
-        listHelper.execute(params);
+        //Show relevant professors
+        ListCourseReviewHelper listFacultiesHelper = new ListCourseReviewHelper();
+        String[] facultyParams= new String[1];
+        facultyParams[0] = LIST_FACULTIES;
+        listFacultiesHelper.execute(facultyParams);
+
+        //Show add new review button to users
+        SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+        String role = sharedpreferences.getString("role", null);
+
+        if (role.equals(USER)) {
+            Button addCourseReviewButton = new Button(ListCourseReviews.this);
+            addCourseReviewButton.setText("New Review");
+            RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            addCourseReviewButton.setOnClickListener(addNewReviewListener);
+            rl.addView(addCourseReviewButton, lp);
+        }
     }
 
     @Override
@@ -106,18 +116,6 @@ public class ListCourseReviews extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    // event listener that responds to the user touching a faculty's name
-    // in the ListView
-    View.OnClickListener viewFacultyReviewListener = new View.OnClickListener()
-    {
-        @Override
-        public void onClick(View v) {
-            // create an Intent to launch the ListCourseReviews Activity
-            Intent viewFacultyReview = new Intent(ListCourseReviews.this, FacultyReview.class);
-            startActivity(viewFacultyReview); // start the viewCourseReviews Activity
-        } // end method onClick
-    }; // end viewContactListener
-
     private View.OnClickListener homeListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -144,6 +142,8 @@ public class ListCourseReviews extends Activity {
         }
     };
 
+
+
     // event listener that responds to the user touching a review's name
     // in the ListView
     AdapterView.OnItemClickListener viewCourseReviewListener = new AdapterView.OnItemClickListener()
@@ -157,7 +157,9 @@ public class ListCourseReviews extends Activity {
 
             // Put in extras
             Intent viewCourseReview = new Intent(ListCourseReviews.this, thinkers.hmm.ui.CourseReview.class);
-            viewCourseReview.putExtra("rid", review.getId());
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("Review", review);
+            viewCourseReview.putExtra("ReviewBundle", bundle);
             // Start activity
             startActivity(viewCourseReview); // start the viewCourseReviews Activity
         } // end method onItemClick
@@ -166,23 +168,51 @@ public class ListCourseReviews extends Activity {
     private class ListCourseReviewHelper extends AsyncTask<Object, Void, Void> {
 
         private String option = "";
-        private ArrayList<CourseReview> courseReviewList;
+        private ArrayList<CourseReview> courseReviewList = null;
+        private ArrayList<Faculty> faculties = new ArrayList<>();
 
         @Override
         protected Void doInBackground(Object... params ) {
             option = (String)params[0];
-            if(option.equals(LIST_OPERATION)) {
+            if(option.equals(LIST_COURSE_REVIEWS)) {
                 CourseReviewUtil courseReviewUtil = new CourseReviewUtil();
-                courseReviewList = courseReviewUtil.selectCourseReview(courseID);
+                courseReviewList = courseReviewUtil.selectCourseReviewsByCourseId(courseID);
+            } else if (option.equals(LIST_FACULTIES)) {
+                CourseFacultyRelationshipUtil courseFacultyRelationshipUtil = new CourseFacultyRelationshipUtil();
+                ArrayList<Integer> facultyIDs = courseFacultyRelationshipUtil.selectFaculties(courseID);
+
+                FacultyUtil facultyUtil = new FacultyUtil();
+                for (int fid: facultyIDs) {
+                    Faculty faculty = facultyUtil.selectFaculty(fid);
+                    faculties.add(faculty);
+                }
             }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void object) {
-            if(option.equals(LIST_OPERATION)) {
+            if(option.equals(LIST_COURSE_REVIEWS)) {
                 CourseReviewAdapter courseReviewAdapter = new CourseReviewAdapter(courseReviewList);
                 listCourseReviewsListView.setAdapter(courseReviewAdapter);
+            } else if (option.equals(LIST_FACULTIES)) {
+                LinearLayout rl = (LinearLayout) findViewById(R.id.professorsLayout);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        220, LinearLayout.LayoutParams.WRAP_CONTENT);
+                for (Faculty faculty: faculties) {
+                    Button facultyButton = new Button(ListCourseReviews.this);
+                    facultyButton.setText(faculty.getName());
+                    final Faculty f = faculty;
+                    facultyButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent listFacultyReviews = new Intent(getApplication(), ListFacultyReviews.class);
+                            listFacultyReviews.putExtra("fid", f.getId());
+                            startActivity(listFacultyReviews);
+                        }
+                    });
+                    rl.addView(facultyButton, lp);
+                }
             }
             return;
         }

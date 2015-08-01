@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Settings_username_label"
-                android:id="@+id/textView2"
+                android:id="@+id/courseReviewContent"
                 android:layout_column="0"
                 android:textSize="42sp"
                 android:textColor="#ff000000"

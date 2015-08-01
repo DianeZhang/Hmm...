@@ -2,5 +2,6 @@
 <resources>
     <string name="list_courses_label">ListCourses</string>
     <string name="list_courses_title">List of Courses</string>
-    <string name="list_courses_search">Search courses here... </string>
+    <string name="list_courses_search_text">Search courses here... </string>
+    <string name="list_courses_search_button">GO!</string>
 </resources>

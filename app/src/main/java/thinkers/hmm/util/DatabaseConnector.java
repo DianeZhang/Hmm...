@@ -8,9 +8,6 @@ import java.io.FileReader;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Created by Yao on 7/18/15.
- */
 public class DatabaseConnector extends DatabaseConnectorBase implements  DatabaseConstants {
     //Debug TAG
     private final String TAG = "Database Message";
@@ -23,21 +20,17 @@ public class DatabaseConnector extends DatabaseConnectorBase implements  Databas
         //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         //StrictMode.setThreadPolicy(policy);
-
-        if (connection == null) {
-            //If first time run, create connection first
-            try {
-                Class.forName(JDBC_DRIVER);
-                Log.d(TAG, "try to connect");
-                connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-                Log.d(TAG, "connected");
-            } catch (ClassNotFoundException ex) {
-                Log.d(TAG, ex.getException().toString());
-            } catch (SQLException ex) {
-                Log.d(TAG, ex.getNextException().toString());
-            } catch (Exception ex) {
-                Log.d(TAG, ex.getMessage().toString());
-            }
+        try {
+            Class.forName(JDBC_DRIVER);
+            Log.d(TAG, "try to connect");
+            connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            Log.d(TAG, "connected");
+        } catch (ClassNotFoundException ex) {
+            Log.d(TAG, ex.getException().toString());
+        } catch (SQLException ex) {
+            Log.d(TAG, ex.getNextException().toString());
+        } catch (Exception ex) {
+            Log.d(TAG, ex.getMessage().toString());
         }
     }
 
