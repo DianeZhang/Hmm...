@@ -34,6 +34,7 @@ import thinkers.hmm.model.*;
 public class ListCourses extends Activity {
     //Operation Strings
     private final String LIST_OPERATION = "List_Courses";
+    private final String SEARCH_OPERATION = "Search_Course";
 
     public static final String USER = "user";
     public static final String ADMIN = "admin";
@@ -53,7 +54,7 @@ public class ListCourses extends Activity {
         titleListCourses = (TextView) findViewById(R.id.titleTextView);
 
         //TODO: search bar refreshes the page
-        searchCourseEditText = (EditText) findViewById(R.id.searchFacultyEditText);
+        searchCourseEditText = (EditText) findViewById(R.id.searchCourseEditText);
         searchCourseButton = (Button) findViewById(R.id.searchCourseButton);
         searchCourseButton.setOnClickListener(searchCourseListener);
 
@@ -130,9 +131,11 @@ public class ListCourses extends Activity {
     private View.OnClickListener searchCourseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent searchCourse = new Intent(ListCourses.this, ListCourses.class);
-            //TODO: Refresh the page to search for course
-            startActivity(searchCourse); // start the addNewCourse Activity
+            ListCourseHelper searchHelper = new ListCourseHelper();
+            String[] params= new String[2];
+            params[0] = SEARCH_OPERATION;
+            params[1] = searchCourseEditText.getText().toString().toLowerCase();
+            searchHelper.execute(params);
         }
     };
 
@@ -172,7 +175,8 @@ public class ListCourses extends Activity {
     private class ListCourseHelper extends AsyncTask<Object, Void, Void> {
 
         private String option = "";
-        private ArrayList<Course> courseList;
+        private ArrayList<Course> courseList = null;
+        private ArrayList<Course> searchList = new ArrayList<>();
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -180,6 +184,16 @@ public class ListCourses extends Activity {
             if(option.equals(LIST_OPERATION)) {
                 CourseUtil courseUtil = new CourseUtil();
                 courseList = courseUtil.getAllCourses();
+            } else if (option.equals(SEARCH_OPERATION)) {
+                String keyword = (String) params[1];
+
+                CourseUtil courseUtil = new CourseUtil();
+                courseList = courseUtil.getAllCourses();
+                for (Course course: courseList) {
+                    if (course.getName().toLowerCase().contains(keyword)) {
+                        searchList.add(course);
+                    }
+                }
             }
             return null;
         }
@@ -188,6 +202,9 @@ public class ListCourses extends Activity {
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
                 CourseAdapter courseAdapter = new CourseAdapter(courseList);
+                listCoursesListView.setAdapter(courseAdapter);
+            } else if (option.equals(SEARCH_OPERATION)) {
+                CourseAdapter courseAdapter = new CourseAdapter(searchList);
                 listCoursesListView.setAdapter(courseAdapter);
             }
             return;
