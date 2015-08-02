@@ -17,7 +17,7 @@ public class CourseReviewUtil extends DatabaseConnector{
     private final String selectReviewByRID = "SELECT * FROM CourseReviews WHERE id=?;";
     private final String selectReviewsByCID = "SELECT * FROM CourseReviews WHERE cid=?;";
     private final String selectReviewsByUID = "SELECT * FROM CourseReviews WHERE uid=?";
-    private final String updateReviewSQL = "UPDATE TABLE CourseReviews SET cid=?, uid=?, " +
+    private final String updateReviewSQL = "UPDATE CourseReviews SET cid=?, uid=?, " +
             "likes=?, dislikes=?, title=?, content=?, location=? WHERE id=?;";
     private final String insertReviewSQL = "INSERT INTO CourseReviews(cid,uid,likes,dislikes,title,content,location) VALUES" +
             "(?,?,?,?,?,?,?);";
@@ -166,7 +166,6 @@ public class CourseReviewUtil extends DatabaseConnector{
 
             // execute the java preparedStatement
             preparedStatement.executeUpdate();
-            close();
             return true;
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());

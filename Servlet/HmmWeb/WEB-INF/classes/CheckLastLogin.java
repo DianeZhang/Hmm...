@@ -1,5 +1,3 @@
-package HmmWeb;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.text.ParseException;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CheckLastLogin
  */
-@WebServlet("/LoginNewRecordsCheck")
 public class CheckLastLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String INVALID_PARAM = "Invalid Parameter!";
