@@ -132,7 +132,10 @@ public class ListUsers extends Activity {
             Log.d("OnItemClick",user.getUsername());
             // create an Intent to launch the ListCourseReviews Activity
             Intent viewUserInfo = new Intent(ListUsers.this, UserInfo.class);
-            viewUserInfo.putExtra(USER_ID, user.getId());
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("User", user);
+            viewUserInfo.putExtra("UserBundle", bundle);
+            //viewUserInfo.putExtra(USER_ID, user.getId());
             startActivity(viewUserInfo); // start the viewCourseReviews Activity
         } // end method onItemClick
     }; // end viewContactListener

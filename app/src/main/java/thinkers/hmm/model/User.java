@@ -1,11 +1,12 @@
 package thinkers.hmm.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by chaoli on 7/18/15.
  */
-public class User {
+public class User implements Serializable {
     private int id;
     private String username;
     private String email;

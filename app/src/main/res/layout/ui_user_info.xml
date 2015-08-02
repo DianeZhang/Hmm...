@@ -14,36 +14,137 @@
         android:gravity="center"
         android:id="@+id/titleUserInfo"
         android:layout_marginTop="9dp"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:textColor="#010101" />
 
-    <TextView
-        android:layout_width="480dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/labelUsername"
-        android:text="Username:"
-        android:textSize="20dp"
-        android:layout_below="@+id/titleUserInfo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
-    <TextView
-        android:layout_width="480dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:text="User email:"
-        android:textSize="20dp"
-        android:layout_below="@+id/labelUsername"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleUserInfo">
 
-    <TextView
-        android:layout_width="480dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:text="User phone:"
-        android:textSize="20dp"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelID"
+                android:text="User ID:"
+                android:textSize="36dp"
+                android:layout_below="@+id/labelEmail"
+                android:layout_centerHorizontal="true"
+                android:textColor="#010101"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userID"
+                android:layout_marginLeft="30dp"
+                android:textSize="36dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelUsername"
+                android:text="Username:"
+                android:textSize="36dp"
+                android:layout_below="@+id/titleUserInfo"
+                android:layout_centerHorizontal="true"
+                android:textColor="#010101"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userName"
+                android:layout_marginLeft="30dp"
+                android:textSize="36dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelEmail"
+                android:text="User email:"
+                android:textSize="36dp"
+                android:layout_below="@+id/labelUsername"
+                android:layout_centerHorizontal="true"
+                android:textColor="#010101"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userEmail"
+                android:layout_marginLeft="30dp"
+                android:textSize="24dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelPass"
+                android:text="User pass:"
+                android:textSize="36dp"
+                android:layout_below="@+id/labelEmail"
+                android:layout_centerHorizontal="true"
+                android:textColor="#010101"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userPass"
+                android:layout_marginLeft="30dp"
+                android:textSize="36dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelLastLogin"
+                android:text="Last login:"
+                android:textSize="36dp"
+                android:layout_below="@+id/labelEmail"
+                android:layout_centerHorizontal="true"
+                android:textColor="#010101"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userLastLogin"
+                android:layout_marginLeft="30dp"
+                android:textSize="24dp" />
+        </TableRow>
+
+    </LinearLayout>
 
     <!--<Button
         android:layout_width="wrap_content"

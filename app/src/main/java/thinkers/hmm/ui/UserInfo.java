@@ -12,12 +12,13 @@ import thinkers.hmm.R;
 
 public class UserInfo extends Activity {
 
-    private int userId;
-    private TextView titleUserInfo;
-    private TextView username;
+    private TextView userID;
+    private TextView userName;
     private TextView userEmail;
-    private TextView userPhone;
-    private Button seeUserReviewsButton;
+    private TextView userPassword;
+    private TextView userLastLogin;
+
+    private thinkers.hmm.model.User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +26,20 @@ public class UserInfo extends Activity {
         setContentView(R.layout.ui_user_info);
 
         Bundle extras = getIntent().getExtras();
-        userId = extras.getInt(ListUsers.USER_ID);
+        userID = (TextView) findViewById(R.id.userID);
 
-        titleUserInfo = (TextView) findViewById(R.id.titleUserInfo);
-        username = (TextView) findViewById(R.id.labelUsername);
+        userName = (TextView) findViewById(R.id.userName);
+        userLastLogin = (TextView) findViewById(R.id.userLastLogin);
+        userEmail = (TextView) findViewById(R.id.userEmail);
+        userPassword = (TextView) findViewById(R.id.userPass);
 
+        user = (thinkers.hmm.model.User) getIntent().getBundleExtra("UserBundle").getSerializable("User");
 
-
-        //Clicking on the button to see user's reviews
-//        seeUserReviewsButton = (Button) findViewById(R.id.button);
-//        seeUserReviewsButton.setOnClickListener(seeUserReviewListener);
+        userName.setText(user.getUsername());
+        userEmail.setText(user.getEmail());
+        userPassword.setText(user.getPassword());
+        userLastLogin.setText(user.getLastlogin().toString());
+        userID.setText(Integer.toString(user.getId()));
     }
 
     @Override
