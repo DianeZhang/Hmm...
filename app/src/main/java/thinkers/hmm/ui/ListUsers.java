@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -30,13 +31,14 @@ public class ListUsers extends Activity {
     //Operation String
     private final String LIST_OPERATION = "List_Faculties";
     public static final String USER_ID = "user_id";
+    private final String SEARCH_OPERATION = "Search_User";
 
     //Widgets
     private TextView titleListUsers;
     private EditText searchUserEditText;
-    private ImageButton addNewUserButton;
     private ListView listUsersListView;
     private ImageButton homeButton;
+    private Button searchUserButton;
 
     public static final String USER = "user";
     public static final String ADMIN = "admin";
@@ -48,8 +50,9 @@ public class ListUsers extends Activity {
 
         titleListUsers = (TextView) findViewById(R.id.titleTextView);
 
-        //TODO: search bar refreshes the page
         searchUserEditText = (EditText) findViewById(R.id.searchUserEditText);
+        searchUserButton = (Button) findViewById(R.id.searchUserButton);
+        searchUserButton.setOnClickListener(searchUserListener);
 
         //Clicking on an item goes to ListCourseReviews page
         listUsersListView = (ListView) findViewById(R.id.listUsersListView);
@@ -107,6 +110,17 @@ public class ListUsers extends Activity {
         }
     };
 
+    private View.OnClickListener searchUserListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ListUserHelper searchHelper = new ListUserHelper();
+            String[] params= new String[2];
+            params[0] = SEARCH_OPERATION;
+            params[1] = searchUserEditText.getText().toString().toLowerCase();
+            searchHelper.execute(params);
+        }
+    };
+
     // event listener that responds to the user touching a user's name
     // in the ListView
     private AdapterView.OnItemClickListener viewUserReviewsListener = new AdapterView.OnItemClickListener()
@@ -127,6 +141,7 @@ public class ListUsers extends Activity {
 
         private String option = "";
         private ArrayList<User> userList;
+        private ArrayList<User> searchList = new ArrayList<>();
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -135,6 +150,17 @@ public class ListUsers extends Activity {
                 UserUtil userUtil = new UserUtil();
                 userList = userUtil.selectUser();
             }
+            else if (option.equals(SEARCH_OPERATION)) {
+                String keyword = (String) params[1];
+
+                UserUtil userUtil = new UserUtil();
+                userList = userUtil.selectUser();
+                for (User user: userList) {
+                    if (user.getUsername().toLowerCase().contains(keyword)) {
+                        searchList.add(user);
+                    }
+                }
+            }
             return null;
         }
 
@@ -142,6 +168,10 @@ public class ListUsers extends Activity {
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
                 UserAdapter userAdapter = new UserAdapter(userList);
+                listUsersListView.setAdapter(userAdapter);
+            }
+            else if (option.equals(SEARCH_OPERATION)) {
+                UserAdapter userAdapter = new UserAdapter(searchList);
                 listUsersListView.setAdapter(userAdapter);
             }
             return;
