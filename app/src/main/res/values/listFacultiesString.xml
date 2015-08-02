@@ -2,5 +2,6 @@
 <resources>
     <string name="list_faculties_label">ListFaculties</string>
     <string name="list_faculties_title">List of Faculties</string>
-    <string name="list_faculties_search">Search professors here... </string>
+    <string name="list_faculties_search_text">Search professors here... </string>
+    <string name="list_faculties_search_button">GO!</string>
 </resources>

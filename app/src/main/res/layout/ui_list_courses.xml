@@ -42,7 +42,6 @@
             android:text="@string/list_courses_search_button"
             android:id="@+id/searchCourseButton" />
 
-
     </LinearLayout>
 
     <ListView

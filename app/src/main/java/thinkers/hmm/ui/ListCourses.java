@@ -53,7 +53,6 @@ public class ListCourses extends Activity {
 
         titleListCourses = (TextView) findViewById(R.id.titleTextView);
 
-        //TODO: search bar refreshes the page
         searchCourseEditText = (EditText) findViewById(R.id.searchCourseEditText);
         searchCourseButton = (Button) findViewById(R.id.searchCourseButton);
         searchCourseButton.setOnClickListener(searchCourseListener);
