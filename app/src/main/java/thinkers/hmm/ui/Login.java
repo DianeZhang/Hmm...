@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import thinkers.hmm.R;
 import thinkers.hmm.model.Admin;
 import thinkers.hmm.model.User;
@@ -125,7 +127,13 @@ public class Login extends Activity {
                 UserUtil userUtil = new UserUtil();
                 String username = (String)params[1];
                 user = userUtil.selectUser(username);
-                newRecordsCount = userUtil.getNewReviewsCount(user.getId());
+                if(user!=null) {
+                    newRecordsCount = userUtil.getNewReviewsCount(user.getId());
+                    Log.d("Old Date", user.getLastlogin().toString());
+                    user.setLastlogin(new Date());
+                    Log.d("New Date", user.getLastlogin().toString());
+                    userUtil.updateUser(user.getId(), user);
+                }
 
             } else if (option.equals(ADMIN_LOGIN_OPERATION)) {
                 AdminUtil adminUtil = new AdminUtil();
