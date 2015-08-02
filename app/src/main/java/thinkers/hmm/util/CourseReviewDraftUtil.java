@@ -17,7 +17,7 @@ public class CourseReviewDraftUtil extends DatabaseConnector {
     //SQL Statements
     private final String selectDraftSQL = "SELECT * FROM CourseReviewDrafts WHERE id=?;";
     private final String selectDraftByUidSQL = "SELECT * FROM CourseReviewDrafts WHERE uid=?;";
-    private final String updateDraftSQL = "UPDATE TABLE CourseReviewDrafts SET cid=?, uid=?, " +
+    private final String updateDraftSQL = "UPDATE CourseReviewDrafts SET cid=?, uid=?, " +
             "title=?, content=? WHERE id=?;";
     private final String insertDraftSQL = "INSERT INTO CourseReviewDrafts(cid,uid,title,content) VALUES" +
             "(?,?,?,?);";
