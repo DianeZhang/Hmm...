@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class ListMyReviews extends Activity {
     private ListView myCourseReviewsListView;
     private ListView myFacultyReviewsListView;
 
-    private ListView myReviews;
+    private TextView numOfReviews;
     private ImageButton homeButton;
 
     public static final String USER = "user";
@@ -49,9 +50,11 @@ public class ListMyReviews extends Activity {
         setContentView(R.layout.ui_list_my_reviews);
 
         titleMyReview = (TextView) findViewById(R.id.titleMyReview);
-
+        numOfReviews = (TextView) findViewById(R.id.numberOfReviews);
         myCourseReviewsListView = (ListView) findViewById(R.id.listView);
+        myCourseReviewsListView.setVisibility(View.INVISIBLE);
         myFacultyReviewsListView = (ListView) findViewById(R.id.listView2);
+        myFacultyReviewsListView.setVisibility(View.INVISIBLE);
 
         ListMyReviewHelper listMyReviewHelper = new ListMyReviewHelper();
         String[] params= new String[1];
@@ -68,6 +71,20 @@ public class ListMyReviews extends Activity {
 
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        myCourseReviewsListView.setVisibility(View.INVISIBLE);
+        myFacultyReviewsListView.setVisibility(View.INVISIBLE);
+
+        //Show reviews
+        ListMyReviewHelper listReviewsHelper = new ListMyReviewHelper();
+        String[] params= new String[1];
+        params[0] = LIST_MYREVIEW;
+        listReviewsHelper.execute(params);
     }
 
     @Override
@@ -106,7 +123,10 @@ public class ListMyReviews extends Activity {
             Log.d("OnItemClick", Integer.toString(courseReview.getUid()));
             // create an Intent to launch the CourseReview Activity
             Intent viewCourseReview = new Intent(ListMyReviews.this, thinkers.hmm.ui.CourseReview.class);
-            viewCourseReview.putExtra(REVIEW_ID, courseReview.getId());
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("Review", courseReview);
+            viewCourseReview.putExtra("ReviewBundle", bundle);
+            //viewCourseReview.putExtra(REVIEW_ID, courseReview.getId());
             startActivity(viewCourseReview); // start the viewCourseReview Activity
         } // end method onItemClick
     }; // end viewListener
@@ -121,7 +141,10 @@ public class ListMyReviews extends Activity {
             Log.d("OnItemClick", Integer.toString(facultyReview.getUid()));
             // create an Intent to launch the CourseReview Activity
             Intent viewFacultyReview = new Intent(ListMyReviews.this, thinkers.hmm.ui.FacultyReview.class);
-            viewFacultyReview.putExtra(REVIEW_ID, facultyReview.getId());
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("Review", facultyReview);
+            viewFacultyReview.putExtra("ReviewBundle", bundle);
+            //viewFacultyReview.putExtra(REVIEW_ID, facultyReview.getId());
             startActivity(viewFacultyReview); // start the viewCourseReview Activity
         } // end method onItemClick
     }; // end viewListener
@@ -169,11 +192,19 @@ public class ListMyReviews extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_MYREVIEW)) {
+                numOfReviews.setText("I have "+String.valueOf(myCourseReviews.size()+myFacultyReviews.size()+" reviews."));
                 CourseReviewAdapter courseReviewAdapter = new CourseReviewAdapter(myCourseReviews);
                 myCourseReviewsListView.setAdapter(courseReviewAdapter);
+                if(!myCourseReviews.isEmpty()){
+                    myCourseReviewsListView.setVisibility(View.VISIBLE);
+                }
+
 
                 FacultyReviewAdapter facultyReviewAdapter = new FacultyReviewAdapter(myFacultyReviews);
                 myFacultyReviewsListView.setAdapter(facultyReviewAdapter);
+                if(!myFacultyReviews.isEmpty()){
+                    myFacultyReviewsListView.setVisibility(View.VISIBLE);
+                }
             }
             return;
         }
@@ -182,7 +213,7 @@ public class ListMyReviews extends Activity {
 
     private class CourseReviewAdapter extends ArrayAdapter<CourseReview> {
         public CourseReviewAdapter(ArrayList<CourseReview> courseReviews) {
-            super(ListMyReviews.this, android.R.layout.simple_list_item_1, courseReviews);
+            super(ListMyReviews.this, R.layout.ui_list_item_review, courseReviews);
         }
 
         @Override
@@ -190,14 +221,20 @@ public class ListMyReviews extends Activity {
             // if we weren't given a view, inflate one
             if (convertView == null) {
                 convertView = ListMyReviews.this.getLayoutInflater()
-                        .inflate(android.R.layout.simple_list_item_1, null);
+                        .inflate(R.layout.ui_list_item_review, null);
             }
 
             // configure the view for this review
             final CourseReview courseReview = getItem(position);
 
-            TextView courseReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
+            TextView courseReviewTitle = (TextView) convertView.findViewById(R.id.reviewTitle);
             courseReviewTitle.setText(courseReview.getTitle());
+
+            Button likeButton = (Button) convertView.findViewById(R.id.likeButton);
+            likeButton.setText(Integer.toString(courseReview.getLike()));
+
+            Button dislikeButton = (Button) convertView.findViewById(R.id.dislikeButton);
+            dislikeButton.setText(Integer.toString(courseReview.getDislike()));
 
             return convertView;
         }
@@ -205,7 +242,7 @@ public class ListMyReviews extends Activity {
 
     private class FacultyReviewAdapter extends ArrayAdapter<FacultyReview> {
         public FacultyReviewAdapter(ArrayList<FacultyReview> facultyReviews) {
-            super(ListMyReviews.this, android.R.layout.simple_list_item_1, facultyReviews);
+            super(ListMyReviews.this, R.layout.ui_list_item_review, facultyReviews);
         }
 
         @Override
@@ -213,14 +250,20 @@ public class ListMyReviews extends Activity {
             // if we weren't given a view, inflate one
             if (convertView == null) {
                 convertView = ListMyReviews.this.getLayoutInflater()
-                        .inflate(android.R.layout.simple_list_item_1, null);
+                        .inflate(R.layout.ui_list_item_review, null);
             }
 
             // configure the view for this review
             final FacultyReview facultyReview = getItem(position);
 
-            TextView facultyReviewTitle = (TextView) convertView.findViewById(android.R.id.text1);
+            TextView facultyReviewTitle = (TextView) convertView.findViewById(R.id.reviewTitle);
             facultyReviewTitle.setText(facultyReview.getTitle());
+
+            Button likeButton = (Button) convertView.findViewById(R.id.likeButton);
+            likeButton.setText(Integer.toString(facultyReview.getLike()));
+
+            Button dislikeButton = (Button) convertView.findViewById(R.id.dislikeButton);
+            dislikeButton.setText(Integer.toString(facultyReview.getDislike()));
 
             return convertView;
         }
