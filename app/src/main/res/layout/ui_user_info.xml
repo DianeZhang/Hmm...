@@ -12,17 +12,17 @@
         android:text= "@string/user_info_title"
         android:textSize="50dp"
         android:gravity="center"
-        android:id="@+id/titleCourseReview"
+        android:id="@+id/titleUserInfo"
         android:layout_marginTop="9dp"
         android:layout_alignParentTop="true" />
 
     <TextView
         android:layout_width="480dp"
         android:layout_height="wrap_content"
-        android:id="@+id/courseReviewContent"
+        android:id="@+id/labelUsername"
         android:text="Username:"
         android:textSize="20dp"
-        android:layout_below="@+id/titleCourseReview"
+        android:layout_below="@+id/titleUserInfo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp" />
     <TextView
@@ -31,9 +31,10 @@
         android:id="@+id/textView3"
         android:text="User email:"
         android:textSize="20dp"
-        android:layout_below="@+id/courseReviewContent"
+        android:layout_below="@+id/labelUsername"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp" />
+
     <TextView
         android:layout_width="480dp"
         android:layout_height="wrap_content"

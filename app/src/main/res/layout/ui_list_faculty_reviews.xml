@@ -19,45 +19,22 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="20dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/list_faculty_reviews_course1"
-        android:id="@+id/course1Button"
-        android:layout_below="@+id/titleTextView"
-        android:layout_alignParentStart="true"
-        android:longClickable="false" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/list_faculty_reviews_course2"
-        android:id="@+id/course2Button"
-        android:layout_alignTop="@+id/course1Button"
-        android:layout_toEndOf="@+id/course1Button" />
+        android:id="@+id/classesLayout"
+        android:layout_below="@+id/titleTextView">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/list_faculty_reviews_course3"
-        android:id="@+id/course3Button"
-        android:layout_alignTop="@+id/course2Button"
-        android:layout_toEndOf="@+id/course2Button" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/list_faculty_reviews_course4"
-        android:id="@+id/course4Button"
-        android:layout_alignTop="@+id/course3Button"
-        android:layout_toEndOf="@+id/course3Button" />
+    </LinearLayout>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listFacultyReviewsListView"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/course1Button" />
+        android:layout_below="@+id/classesLayout" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,7 +49,6 @@
         android:layout_height="60dp"
         android:id="@+id/homeButton"
         android:background="@drawable/homegray"
-        android:layout_above="@+id/course4Button"
         android:layout_alignEnd="@+id/titleTextView" />
 
 </RelativeLayout>

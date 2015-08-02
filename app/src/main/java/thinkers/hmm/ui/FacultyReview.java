@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import thinkers.hmm.R;
 
 public class FacultyReview extends Activity {
+    private thinkers.hmm.model.FacultyReview facultyReview;
 
     private TextView titleFacultyReview;
-    private TextView facultyReviews;
+    private TextView facultyReviewContent;
     private Button likeButton;
     private Button dislikeButton;
 
@@ -23,14 +24,17 @@ public class FacultyReview extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_faculty_review);
 
-        titleFacultyReview = (TextView) findViewById(R.id.textView);
-        facultyReviews = (TextView) findViewById(R.id.textView2);
-
         likeButton = (Button) findViewById(R.id.likeButton);
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
-        
-        titleFacultyReview = (TextView) findViewById(R.id.titleCourseReview);
-        facultyReviews = (TextView) findViewById(R.id.courseReviewContent);
+
+        titleFacultyReview = (TextView) findViewById(R.id.titleFacultyReview);
+        facultyReviewContent = (TextView) findViewById(R.id.facultyReviewContent);
+
+        facultyReview = (thinkers.hmm.model.FacultyReview) getIntent().getBundleExtra("ReviewBundle").getSerializable("Review");
+        Toast.makeText(FacultyReview.this, "Review ID:" + facultyReview.getId(), Toast.LENGTH_SHORT).show();
+
+        titleFacultyReview.setText(facultyReview.getTitle());
+        facultyReviewContent.setText(facultyReview.getContent());
     }
 
     @Override

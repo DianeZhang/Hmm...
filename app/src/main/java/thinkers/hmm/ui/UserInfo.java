@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,10 +27,9 @@ public class UserInfo extends Activity {
         Bundle extras = getIntent().getExtras();
         userId = extras.getInt(ListUsers.USER_ID);
 
-        titleUserInfo = (TextView) findViewById(R.id.titleCourseReview);
-        username = (TextView) findViewById(R.id.courseReviewContent);
-        titleUserInfo = (TextView) findViewById(R.id.textView3);
-        titleUserInfo = (TextView) findViewById(R.id.textView4);
+        titleUserInfo = (TextView) findViewById(R.id.titleUserInfo);
+        username = (TextView) findViewById(R.id.labelUsername);
+
 
 
         //Clicking on the button to see user's reviews
