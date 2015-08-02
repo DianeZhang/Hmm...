@@ -90,6 +90,17 @@ public class ListCourseReviews extends Activity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        //Show reviews
+        ListCourseReviewHelper listReviewsHelper = new ListCourseReviewHelper();
+        String[] reviewParams= new String[1];
+        reviewParams[0] = LIST_COURSE_REVIEWS;
+        listReviewsHelper.execute(reviewParams);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_list_course_reviews, menu);

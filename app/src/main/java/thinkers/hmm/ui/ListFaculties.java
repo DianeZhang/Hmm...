@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -176,10 +177,33 @@ public class ListFaculties extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ListFaculties.this, android.R.layout.simple_list_item_1, facultyNameList);
-                listFacultiesListView.setAdapter(arrayAdapter);
+                FacultyAdapter facultyAdapter = new FacultyAdapter(facultyList);
+                listFacultiesListView.setAdapter(facultyAdapter);
             }
             return;
+        }
+    }
+
+    private class FacultyAdapter extends ArrayAdapter<Faculty> {
+        public FacultyAdapter(ArrayList<Faculty> faculties) {
+            super(ListFaculties.this, android.R.layout.simple_list_item_1, faculties);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // if we weren't given a view, inflate one
+            if (convertView == null) {
+                convertView = ListFaculties.this.getLayoutInflater()
+                        .inflate(android.R.layout.simple_list_item_1, null);
+            }
+
+            // configure the view for this Song
+            final Faculty faculty = getItem(position);
+
+            TextView facultyTitle = (TextView) convertView.findViewById(android.R.id.text1);
+            facultyTitle.setText(faculty.getName());
+
+            return convertView;
         }
     }
 }

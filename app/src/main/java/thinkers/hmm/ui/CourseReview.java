@@ -11,13 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
 import thinkers.hmm.R;
-import thinkers.hmm.model.Course;
 import thinkers.hmm.model.User;
 import thinkers.hmm.util.CourseReviewUtil;
-import thinkers.hmm.util.CourseUtil;
 import thinkers.hmm.util.UserUtil;
 
 public class CourseReview extends Activity {
@@ -141,11 +139,17 @@ public class CourseReview extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(GET_AUTHOR)) {
-                reviewAuthor.setText("BY: " + author.getUsername());
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String text = "BY: " + author.getUsername();
+                text += " @" + format.format(courseReview.getCreatedtime());
+                if (courseReview.getLocation() != null) {
+                    text += " @" + courseReview.getLocation();
+                }
+                reviewAuthor.setText(text);
             } else if (option.equals(LIKE)) {
                 likeButton.setText(String.valueOf(courseReview.getLike()));
             } else if (option.equals(DISLIKE)) {
-                likeButton.setText(String.valueOf(courseReview.getDislike()));
+                dislikeButton.setText(String.valueOf(courseReview.getDislike()));
             }
             return;
         }

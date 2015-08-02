@@ -27,10 +27,9 @@ public class UserInfo extends Activity {
         Bundle extras = getIntent().getExtras();
         userId = extras.getInt(ListUsers.USER_ID);
 
-        titleUserInfo = (TextView) findViewById(R.id.reviewTitle);
-        username = (TextView) findViewById(R.id.reviewContent);
-        titleUserInfo = (TextView) findViewById(R.id.textView3);
-        titleUserInfo = (TextView) findViewById(R.id.textView4);
+        titleUserInfo = (TextView) findViewById(R.id.titleUserInfo);
+        username = (TextView) findViewById(R.id.labelUsername);
+
 
 
         //Clicking on the button to see user's reviews

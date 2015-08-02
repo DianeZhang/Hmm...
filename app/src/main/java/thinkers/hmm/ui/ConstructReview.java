@@ -91,7 +91,7 @@ public class ConstructReview extends Activity {
                 courseReviewDraft = (CourseReviewDraft) bundle.getSerializable(Draft_CONTENT);
                 id = courseReviewDraft.getCid();
                 Log.d(TAG, "Type:" + type + ",id" + id);
-                titleText.setHint("");
+                titleText.setText(courseReviewDraft.getTitle(),TextView.BufferType.EDITABLE);
                 contentText.setText(courseReviewDraft.getContent(), TextView.BufferType.EDITABLE);
             }else if(type.equals(FACULTY_TYPE)){
                 facultyReviewDraft = (FacultyReviewDraft) bundle.getSerializable(Draft_CONTENT);
@@ -161,6 +161,11 @@ public class ConstructReview extends Activity {
             params[1] = title;
             params[2] = content;
             params[3] = type;
+//            if(type.equals(COURSE_TYPE)) {
+//
+//            }else if(type.equals(FACULTY_TYPE)){
+//
+//            }
             constructReviewHelper.execute(params);
         }
     };
@@ -175,7 +180,20 @@ public class ConstructReview extends Activity {
             params[1] = title;
             params[2] = content;
             params[3] = type;
-            Log.d(TAG,"fafdsasa");
+            Log.d(TAG,"ready to save");
+
+//            if(type.equals(COURSE_TYPE)) {
+//                if(courseReviewDraft != null) {
+//                    courseReviewDraft.setTitle(params[1]);
+//                    courseReviewDraft.setContent(params[2]);
+//                    CourseReviewDraftUtil courseReviewDraftUtil = new CourseReviewDraftUtil();
+//                    courseReviewDraftUtil.updateDraft(courseReviewDraft.getId(), courseReviewDraft);
+//                }
+//            }else if(type.equals(FACULTY_TYPE)){
+//                if(facultyReviewDraft != null) {
+//
+//                }
+//            }
             constructReviewHelper.execute(params);
         }
     };
@@ -208,14 +226,25 @@ public class ConstructReview extends Activity {
                     CourseReviewUtil courseReviewUtil =
                             new CourseReviewUtil();
                     result = courseReviewUtil.insertCourseReview(review);
+                    if(courseReviewDraft != null) {
+                        CourseReviewDraftUtil courseReviewDraftUtil = new CourseReviewDraftUtil();
+                        courseReviewDraftUtil.deleteDraft(courseReviewDraft.getId());
+                    }
                 } else {
-                    //Construct Course Review Draft
-                    CourseReviewDraft review = new CourseReviewDraft(
-                            id, uid, title,content);
-                    //Insert into DB
-                    CourseReviewDraftUtil courseReviewDraftUtil =
-                            new CourseReviewDraftUtil();
-                    result = courseReviewDraftUtil.insertCourseReviewDraft(review);
+                    if(courseReviewDraft == null) {
+                        //Construct Course Review Draft
+                        CourseReviewDraft review = new CourseReviewDraft(
+                                id, uid, title, content);
+                        //Insert into DB
+                        CourseReviewDraftUtil courseReviewDraftUtil =
+                                new CourseReviewDraftUtil();
+                        result = courseReviewDraftUtil.insertCourseReviewDraft(review);
+                    }else {
+                        courseReviewDraft.setTitle(title);
+                        courseReviewDraft.setContent(content);
+                        CourseReviewDraftUtil courseReviewDraftUtil = new CourseReviewDraftUtil();
+                        courseReviewDraftUtil.updateDraft(courseReviewDraft.getId(),courseReviewDraft);
+                    }
                 }
 
             } else {
@@ -228,14 +257,25 @@ public class ConstructReview extends Activity {
                     FacultyReviewUtil facultyReviewUtil =
                             new FacultyReviewUtil();
                     result = facultyReviewUtil.insertFacultyReview(review);
+                    if(facultyReviewDraft != null) {
+                        FacultyReviewDraftUtil facultyReviewDraftUtil = new FacultyReviewDraftUtil();
+                        facultyReviewDraftUtil.deleteDraft(facultyReviewDraft.getFid());
+                    }
                 } else {
-                    //Construct Faculty Review Draft
-                    FacultyReviewDraft facultyReviewDraft = new FacultyReviewDraft(
-                            id, uid, title, content);
-                    //Insert into DB
-                    FacultyReviewDraftUtil facultyReviewDraftUtil =
-                            new FacultyReviewDraftUtil();
-                    result = facultyReviewDraftUtil.insertFacultyReviewDraft(facultyReviewDraft);
+                    if(facultyReviewDraft==null) {
+                        //Construct Faculty Review Draft
+                        FacultyReviewDraft facultyReviewDraft = new FacultyReviewDraft(
+                                id, uid, title, content);
+                        //Insert into DB
+                        FacultyReviewDraftUtil facultyReviewDraftUtil =
+                                new FacultyReviewDraftUtil();
+                        result = facultyReviewDraftUtil.insertFacultyReviewDraft(facultyReviewDraft);
+                    }else{
+                        facultyReviewDraft.setTitle(title);
+                        facultyReviewDraft.setContent(content);
+                        FacultyReviewDraftUtil facultyReviewDraftUtil = new FacultyReviewDraftUtil();
+                        facultyReviewDraftUtil.updateDraft(facultyReviewDraft.getFid(), facultyReviewDraft);
+                    }
 
                 }
             }
