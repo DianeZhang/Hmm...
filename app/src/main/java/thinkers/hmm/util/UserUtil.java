@@ -37,12 +37,15 @@ public class UserUtil extends DatabaseConnector{
             "PASSWORD=?, lastlogin=? WHERE ID=?;";
     private final String updateUserByUsernameSQL = "UPDATE Users SET USERNAME=?,EMAIL=?," +
             "PASSWORD=?, lastlogin=? WHERE USERNAME=?;";
+    private final String updateUserSettingSQL = "UPDATE Users SET USERNAME=?,PASSWORD = ?, EMAIL=? " +
+            "WHERE id=?;";
     private final String deleteUserByIDSQL = "DELETE FROM Users WHERE ID=?;";
     private final String deleteUserByUsernameSQL = "DELETE FROM Users WHERE USERNAME=?;";
     private final String insertUserSQL = "INSERT INTO Users(USERNAME, EMAIL, PASSWORD) VALUES" +
             "(?,?,?);";
     private final String selectAllUsersSQL = "SELECT * FROM Users;";
     private final String webServiceUrl = "http://162.243.187.39:8080/HmmWeb/LoginNewRecordsCheck?UID=";
+
     /**
      * @brief select user by id
      * @param uid
@@ -164,6 +167,33 @@ public class UserUtil extends DatabaseConnector{
             close();
         }
         return false;
+    }
+
+    /**
+     * @brief update user settings
+     * @param username
+     * @param password
+     * @param email
+     * @param id
+     * @return
+     */
+    public boolean updateSetting(String username, String password, String email, int id) {
+        try {
+            open();
+            preparedStatement = connection.prepareStatement(updateUserSettingSQL);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, email);
+            preparedStatement.setInt(4, id);
+
+            // execute the java preparedStatement
+            preparedStatement.executeUpdate();
+            close();
+            return true;
+        }catch(Exception e) {
+            Log.d(TAG, e.getMessage());
+            return false;
+        }
     }
 
     /**

@@ -16,6 +16,8 @@ public class AdminUtil extends DatabaseConnector{
             "PASSWORD=? WHERE UID=?;";
     private final String updateAdminByUsernameSQL = "UPDATE Admins SET USERNAME=?,EMAIL=?," +
             "PASSWORD=? WHERE USERNAME=?;";
+    private final String updateAdminSettingSQL = "UPDATE Admins SET USERNAME=?,PASSWORD = ?, EMAIL=? " +
+            "WHERE id=?;";
     private final String deleteAdminByIDSQL = "DELETE FROM Admins WHERE ID=?;";
     private final String deleteAdminByUsernameSQL = "DELETE FROM Admins WHERE USERNAME=?;";
     private final String insertAdminSQL = "INSERT INTO Admins(USERNAME, EMAIL, PASSWORD) VALUES" +
@@ -132,6 +134,33 @@ public class AdminUtil extends DatabaseConnector{
             close();
         }
         return false;
+    }
+
+    /**
+     * @brief update admin settings
+     * @param username
+     * @param password
+     * @param email
+     * @param id
+     * @return
+     */
+    public boolean updateSetting(String username, String password, String email, int id) {
+        try {
+            open();
+            preparedStatement = connection.prepareStatement(updateAdminSettingSQL);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, email);
+            preparedStatement.setInt(4, id);
+
+            // execute the java preparedStatement
+            preparedStatement.executeUpdate();
+            close();
+            return true;
+        }catch(Exception e) {
+            Log.d(TAG, e.getMessage());
+            return false;
+        }
     }
 
     /**

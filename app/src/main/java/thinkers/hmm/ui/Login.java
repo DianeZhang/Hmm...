@@ -165,6 +165,7 @@ public class Login extends Activity {
                 Intent intent = new Intent(Login.this, UserMain.class);
                 intent.putExtra("NewCourseReviews", Integer.parseInt(newRecordsCount.split("\t")[0]));
                 intent.putExtra("NewFacultyReviews", Integer.parseInt(newRecordsCount.split("\t")[1]));
+
                 startActivity(intent);
             } else if (option.equals(ADMIN_LOGIN_OPERATION)) {
                 if(admin == null) {

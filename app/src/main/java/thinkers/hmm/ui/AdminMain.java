@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Admin;
+import thinkers.hmm.model.User;
 
 public class AdminMain extends Activity {
 
@@ -34,6 +36,7 @@ public class AdminMain extends Activity {
         facultiesButton.setOnClickListener(facultiesListener);
         settingsButton.setOnClickListener(settingsListener);
         usersButton.setOnClickListener(usersListener);
+
     }
 
     private View.OnClickListener settingsListener = new View.OnClickListener() {

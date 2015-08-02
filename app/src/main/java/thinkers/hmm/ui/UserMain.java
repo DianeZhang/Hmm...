@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.User;
 
 public class UserMain extends Activity {
 
@@ -56,6 +57,7 @@ public class UserMain extends Activity {
             //Send notification
             notification();
         }
+
     }
 
     private View.OnClickListener settingsListener = new View.OnClickListener() {
