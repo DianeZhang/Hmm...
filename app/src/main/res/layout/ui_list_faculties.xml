@@ -17,23 +17,38 @@
         android:gravity="center"
         android:singleLine="false"
         android:textSize="40dp"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchFacultyEditText"
-        android:layout_below="@+id/titleTextView"
-        android:layout_alignEnd="@+id/titleTextView"
         android:layout_alignParentStart="true"
-        android:password="false"
-        android:hint="@string/list_faculties_search" />
+        android:layout_marginBottom="10dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchFacultyLayout"
+        android:layout_below="@+id/titleTextView">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchFacultyEditText"
+            android:layout_below="@+id/titleTextView"
+            android:layout_alignParentStart="true"
+            android:hint="@string/list_faculties_search_text"
+            android:layout_weight="10" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/list_faculties_search_button"
+            android:id="@+id/searchFacultyButton" />
+
+    </LinearLayout>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listFacultiesListView"
-        android:layout_below="@+id/searchFacultyEditText"
+        android:layout_below="@+id/searchFacultyLayout"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="false"
         android:footerDividersEnabled="true" />

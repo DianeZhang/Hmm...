@@ -30,16 +30,17 @@ import thinkers.hmm.model.*;
 public class ListFaculties extends Activity {
     //Operation String
     private final String LIST_OPERATION = "List_Faculties";
-
-    private ImageButton homeButton;
+    private final String SEARCH_OPERATION = "Search_Faculty";
 
     public static final String USER = "user";
     public static final String ADMIN = "admin";
 
     private TextView titleListFaculties;
-    private EditText searchFaultyEditText;
+    private EditText searchFacultyEditText;
+    private Button searchFacultyButton;
     private ImageButton addNewFacultyButton;
     private ListView listFacultiesListView;
+    private ImageButton homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,9 @@ public class ListFaculties extends Activity {
 
         titleListFaculties = (TextView) findViewById(R.id.titleTextView);
 
-        //TODO: search bar refreshes the page
-        searchFaultyEditText = (EditText) findViewById(R.id.searchFacultyEditText);
+        searchFacultyEditText = (EditText) findViewById(R.id.searchFacultyEditText);
+        searchFacultyButton = (Button) findViewById(R.id.searchFacultyButton);
+        searchFacultyButton.setOnClickListener(searchFacultyListener);
 
         //Clicking on the button to add new courses
         //addNewFacultyButton = (ImageButton) findViewById(R.id.addNewFacultyButton);
@@ -119,6 +121,17 @@ public class ListFaculties extends Activity {
         }
     };
 
+    private View.OnClickListener searchFacultyListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ListFacultyHelper searchHelper = new ListFacultyHelper();
+            String[] params= new String[2];
+            params[0] = SEARCH_OPERATION;
+            params[1] = searchFacultyEditText.getText().toString().toLowerCase();
+            searchHelper.execute(params);
+        }
+    };
+
     private View.OnClickListener homeListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -157,8 +170,8 @@ public class ListFaculties extends Activity {
     private class ListFacultyHelper extends AsyncTask<Object, Void, Void> {
 
         private String option = "";
-        private ArrayList<Faculty> facultyList;
-        private ArrayList<String> facultyNameList;
+        private ArrayList<Faculty> facultyList = null;
+        private ArrayList<Faculty> searchList = new ArrayList<>();
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -166,9 +179,15 @@ public class ListFaculties extends Activity {
             if(option.equals(LIST_OPERATION)) {
                 FacultyUtil facultyUtil = new FacultyUtil();
                 facultyList = facultyUtil.getAllFaculties();
-                facultyNameList = new ArrayList<String>();
-                for (Faculty faculty : facultyList) {
-                    facultyNameList.add(faculty.getName());
+            } else if (option.equals(SEARCH_OPERATION)) {
+                String keyword = (String) params[1];
+
+                FacultyUtil facultyUtil = new FacultyUtil();
+                facultyList = facultyUtil.getAllFaculties();
+                for (Faculty faculty: facultyList) {
+                    if (faculty.getName().toLowerCase().contains(keyword)) {
+                        searchList.add(faculty);
+                    }
                 }
             }
             return null;
@@ -178,6 +197,9 @@ public class ListFaculties extends Activity {
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_OPERATION)) {
                 FacultyAdapter facultyAdapter = new FacultyAdapter(facultyList);
+                listFacultiesListView.setAdapter(facultyAdapter);
+            } else if (option.equals(SEARCH_OPERATION)) {
+                FacultyAdapter facultyAdapter = new FacultyAdapter(searchList);
                 listFacultiesListView.setAdapter(facultyAdapter);
             }
             return;
