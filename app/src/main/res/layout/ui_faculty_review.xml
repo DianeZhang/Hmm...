@@ -12,7 +12,7 @@
         android:text= "@string/detailed_faculty_review_title"
         android:textSize="50dp"
         android:gravity="center"
-        android:id="@+id/reviewTitle"
+        android:id="@+id/titleFacultyReview"
         android:layout_marginTop="9dp"
         android:layout_alignParentTop="true" />
 
@@ -21,16 +21,16 @@
         android:layout_height="500dp"
         android:text= "The review"
         android:textSize="20dp"
-        android:id="@+id/reviewContent"
-        android:layout_below="@+id/reviewTitle"
+        android:id="@+id/facultyReviewContent"
+        android:layout_below="@+id/titleFacultyReview"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp" />
 
     <TableRow
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/courseReviewContent"
-        android:layout_alignEnd="@+id/titleCourseReview">
+        android:layout_below="@+id/facultyReviewContent"
+        android:layout_alignEnd="@+id/titleFacultyReview">
 
         <Button
             android:id="@+id/likeButton"

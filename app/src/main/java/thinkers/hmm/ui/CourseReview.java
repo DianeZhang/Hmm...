@@ -12,13 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 import thinkers.hmm.R;
-import thinkers.hmm.model.Course;
 import thinkers.hmm.model.User;
 import thinkers.hmm.util.CourseReviewUtil;
-import thinkers.hmm.util.CourseUtil;
 import thinkers.hmm.util.UserUtil;
 
 public class CourseReview extends Activity {
