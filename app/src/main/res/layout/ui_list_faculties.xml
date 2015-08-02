@@ -26,8 +26,8 @@
         android:layout_below="@+id/titleTextView"
         android:layout_alignEnd="@+id/titleTextView"
         android:layout_alignParentStart="true"
-        android:text="@string/list_faculties_search"
-        android:password="false" />
+        android:password="false"
+        android:hint="@string/list_faculties_search" />
 
     <ListView
         android:layout_width="wrap_content"

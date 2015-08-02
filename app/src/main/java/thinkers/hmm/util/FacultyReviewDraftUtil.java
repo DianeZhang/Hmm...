@@ -19,7 +19,7 @@ public class FacultyReviewDraftUtil extends DatabaseConnector {
     //SQL Statements
     private final String selectDraftSQL = "SELECT * FROM FacultyReviewDrafts WHERE id=?;";
     private final String selectDraftByUidSQL = "SELECT * FROM FacultyReviewDrafts WHERE uid=?;";
-    private final String updateDraftSQL = "UPDATE TABLE FacultyReviewDrafts SET fid=?, uid=?, " +
+    private final String updateDraftSQL = "UPDATE FacultyReviewDrafts SET fid=?, uid=?, " +
             "title=?, content=? WHERE id=?;";
     private final String insertDraftSQL = "INSERT INTO FacultyReviewDrafts(fid,uid,title,content) VALUES" +
             "(?,?,?,?);";
