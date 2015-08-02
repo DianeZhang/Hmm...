@@ -34,7 +34,7 @@ import thinkers.hmm.util.FacultyUtil;
 public class ListFacultyReviews extends Activity {
 
     private final String LIST_FACULTY_REVIEWS = "List_Faculty_Reviews";
-    private final String LIST_COURSES = "List_Facultys";
+    private final String LIST_COURSES = "List_Courses";
     private int facultyID;
 
     private TextView titleListFacultyReviews;
@@ -97,6 +97,17 @@ public class ListFacultyReviews extends Activity {
             addFacultyReviewButton.setOnClickListener(addNewReviewListener);
             rl.addView(addFacultyReviewButton, lp);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Show reviews
+        ListFacultyReviewHelper listReviewsHelper = new ListFacultyReviewHelper();
+        String[] reviewParams= new String[1];
+        reviewParams[0] = LIST_FACULTY_REVIEWS;
+        listReviewsHelper.execute(reviewParams);
     }
 
     @Override
