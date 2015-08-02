@@ -11,6 +11,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,14 +27,16 @@ public class UserUtil extends DatabaseConnector{
     private String option = "";
     private User user = null;
 
+    //Timestamp format
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     //All SQL Statement
     private final String TAG = "UserUtil";
     private final String selectUsersByIDSQL = "SELECT * FROM Users WHERE ID=?;";
     private final String selectUserByUsernameSQL = "SELECT * FROM Users WHERE USERNAME=?;";
     private final String updateUserByIDSQL = "UPDATE Users SET USERNAME=?,EMAIL=?," +
-            "PASSWORD=? WHERE UID=?;";
+            "PASSWORD=?, lastlogin=? WHERE ID=?;";
     private final String updateUserByUsernameSQL = "UPDATE Users SET USERNAME=?,EMAIL=?," +
-            "PASSWORD=? WHERE USERNAME=?;";
+            "PASSWORD=?, lastlogin=? WHERE USERNAME=?;";
     private final String deleteUserByIDSQL = "DELETE FROM Users WHERE ID=?;";
     private final String deleteUserByUsernameSQL = "DELETE FROM Users WHERE USERNAME=?;";
     private final String insertUserSQL = "INSERT INTO Users(USERNAME, EMAIL, PASSWORD) VALUES" +
@@ -119,7 +122,8 @@ public class UserUtil extends DatabaseConnector{
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, user.getId());
+            preparedStatement.setString(4, dateFormat.format(user.getLastlogin()));
+            preparedStatement.setInt(5, user.getId());
 
             // execute the java preparedStatement
             preparedStatement.executeUpdate();
@@ -127,6 +131,7 @@ public class UserUtil extends DatabaseConnector{
             return true;
         } catch(SQLException ex) {
             Log.d(TAG, ex.getClass().getSimpleName());
+            Log.d(TAG, preparedStatement.toString());
         } finally {
             close();
         }
@@ -146,7 +151,8 @@ public class UserUtil extends DatabaseConnector{
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setString(4, user.getUsername());
+            preparedStatement.setString(4, dateFormat.format(user.getLastlogin()));
+            preparedStatement.setString(5, user.getUsername());
 
             // execute the java preparedStatement
             preparedStatement.executeUpdate();

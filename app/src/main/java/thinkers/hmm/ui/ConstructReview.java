@@ -241,9 +241,12 @@ public class ConstructReview extends Activity {
                         result = courseReviewDraftUtil.insertCourseReviewDraft(review);
                     }else {
                         courseReviewDraft.setTitle(title);
+                        Log.d("save and update", title);
                         courseReviewDraft.setContent(content);
+                        Log.d("save and update", content);
                         CourseReviewDraftUtil courseReviewDraftUtil = new CourseReviewDraftUtil();
-                        courseReviewDraftUtil.updateDraft(courseReviewDraft.getId(),courseReviewDraft);
+                        result = courseReviewDraftUtil.updateDraft(courseReviewDraft.getId(),courseReviewDraft);
+                        Log.d("save and update", Boolean.toString(result));
                     }
                 }
 
@@ -272,9 +275,12 @@ public class ConstructReview extends Activity {
                         result = facultyReviewDraftUtil.insertFacultyReviewDraft(facultyReviewDraft);
                     }else{
                         facultyReviewDraft.setTitle(title);
+                        Log.d("save and update", title);
                         facultyReviewDraft.setContent(content);
+                        Log.d("save and update", content);
                         FacultyReviewDraftUtil facultyReviewDraftUtil = new FacultyReviewDraftUtil();
-                        facultyReviewDraftUtil.updateDraft(facultyReviewDraft.getFid(), facultyReviewDraft);
+                        result = facultyReviewDraftUtil.updateDraft(facultyReviewDraft.getFid(), facultyReviewDraft);
+                        Log.d("save and update", Boolean.toString(result));
                     }
 
                 }
