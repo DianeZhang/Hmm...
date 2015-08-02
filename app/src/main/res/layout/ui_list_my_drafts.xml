@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:id="@+id/numberOfDraft"
+            android:id="@+id/numberOfDrafts"
             android:layout_gravity="center_horizontal"
             android:textSize="20dp" />
 
@@ -41,5 +41,15 @@
             android:id="@+id/DraftListViewFaculty"
             android:layout_gravity="center_horizontal"
             android:background="@android:drawable/alert_light_frame" />
+
+
     </LinearLayout>
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/homeButton"
+        android:background="@drawable/homegray"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+ />
 </RelativeLayout>

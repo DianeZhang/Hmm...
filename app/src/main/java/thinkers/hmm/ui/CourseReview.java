@@ -1,9 +1,12 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Course;
 import thinkers.hmm.model.User;
 import thinkers.hmm.util.CourseReviewUtil;
 import thinkers.hmm.util.UserUtil;
@@ -24,6 +28,7 @@ public class CourseReview extends Activity {
     private static final String LIKE = "Like";
     private static final String DISLIKE = "Dislike";
     private thinkers.hmm.model.CourseReview courseReview;
+    private int userID;
 
     private TextView reviewTitle;
     private TextView reviewContent;
@@ -37,6 +42,8 @@ public class CourseReview extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_course_review);
 
+        SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+        userID = sharedpreferences.getInt("uid", -1);
 
         likeButton = (Button) findViewById(R.id.likeButton);
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
@@ -117,6 +124,7 @@ public class CourseReview extends Activity {
     private class CourseReviewHelper extends AsyncTask<Object, Void, Void> {
         private String option = "";
         private User author;
+        private int result = 0;
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -125,13 +133,23 @@ public class CourseReview extends Activity {
                 UserUtil userUtil = new UserUtil();
                 author = userUtil.selectUser(courseReview.getUid());
             } else if (option.equals(LIKE)) {
-                courseReview.setLike(courseReview.getLike() + 1);
-                CourseReviewUtil courseReviewUtil = new CourseReviewUtil();
-                courseReviewUtil.updateCourseReview(courseReview.getId(), courseReview);
+                if (courseReview.getUid() != userID) {
+                    courseReview.setLike(courseReview.getLike() + 1);
+                    CourseReviewUtil courseReviewUtil = new CourseReviewUtil();
+                    courseReviewUtil.updateCourseReview(courseReview.getId(), courseReview);
+                    result = 0;
+                } else {
+                    result = 1;
+                }
             } else if (option.equals(DISLIKE)) {
-                courseReview.setDislike(courseReview.getDislike() + 1);
-                CourseReviewUtil courseReviewUtil = new CourseReviewUtil();
-                courseReviewUtil.updateCourseReview(courseReview.getId(), courseReview);
+                if (courseReview.getUid() != userID) {
+                    courseReview.setDislike(courseReview.getDislike() + 1);
+                    CourseReviewUtil courseReviewUtil = new CourseReviewUtil();
+                    courseReviewUtil.updateCourseReview(courseReview.getId(), courseReview);
+                    result = 0;
+                } else {
+                    result = 1;
+                }
             }
             return null;
         }
@@ -147,9 +165,17 @@ public class CourseReview extends Activity {
                 }
                 reviewAuthor.setText(text);
             } else if (option.equals(LIKE)) {
-                likeButton.setText(String.valueOf(courseReview.getLike()));
+                if (result != 0) {
+                    Toast.makeText(CourseReview.this, "ERROR: One can not like one's own post",Toast.LENGTH_LONG ).show();
+                } else {
+                    likeButton.setText(String.valueOf(courseReview.getLike()));
+                }
             } else if (option.equals(DISLIKE)) {
-                dislikeButton.setText(String.valueOf(courseReview.getDislike()));
+                if (result != 0) {
+                    Toast.makeText(CourseReview.this, "ERROR: One can not dislike one's own post",Toast.LENGTH_LONG ).show();
+                } else {
+                    dislikeButton.setText(String.valueOf(courseReview.getDislike()));
+                }
             }
             return;
         }

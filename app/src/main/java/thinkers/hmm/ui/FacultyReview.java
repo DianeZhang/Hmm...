@@ -1,7 +1,9 @@
 package thinkers.hmm.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +26,7 @@ public class FacultyReview extends Activity {
     private static final String LIKE = "Like";
     private static final String DISLIKE = "Dislike";
     private thinkers.hmm.model.FacultyReview facultyReview;
+    private int userID;
 
     private TextView reviewTitle;
     private TextView reviewContent;
@@ -36,6 +39,9 @@ public class FacultyReview extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_faculty_review);
+
+        SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+        userID = sharedpreferences.getInt("uid", -1);
 
         likeButton = (Button) findViewById(R.id.likeButton);
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
@@ -114,6 +120,7 @@ public class FacultyReview extends Activity {
     private class FacultyReviewHelper extends AsyncTask<Object, Void, Void> {
         private String option = "";
         private User author;
+        private int result = 0;
 
         @Override
         protected Void doInBackground(Object... params ) {
@@ -122,13 +129,23 @@ public class FacultyReview extends Activity {
                 UserUtil userUtil = new UserUtil();
                 author = userUtil.selectUser(facultyReview.getUid());
             } else if (option.equals(LIKE)) {
-                facultyReview.setLike(facultyReview.getLike() + 1);
-                FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
-                facultyReviewUtil.updateFacultyReview(facultyReview.getId(), facultyReview);
+                if (facultyReview.getUid() != userID) {
+                    facultyReview.setLike(facultyReview.getLike() + 1);
+                    FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
+                    facultyReviewUtil.updateFacultyReview(facultyReview.getId(), facultyReview);
+                    result = 0;
+                } else {
+                    result = 1;
+                }
             } else if (option.equals(DISLIKE)) {
-                facultyReview.setDislike(facultyReview.getDislike() + 1);
-                FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
-                facultyReviewUtil.updateFacultyReview(facultyReview.getId(), facultyReview);
+                if (facultyReview.getUid() != userID) {
+                    facultyReview.setDislike(facultyReview.getDislike() + 1);
+                    FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
+                    facultyReviewUtil.updateFacultyReview(facultyReview.getId(), facultyReview);
+                    result = 0;
+                } else {
+                    result = 1;
+                }
             }
             return null;
         }
@@ -144,9 +161,17 @@ public class FacultyReview extends Activity {
                 }
                 reviewAuthor.setText(text);
             } else if (option.equals(LIKE)) {
-                likeButton.setText(String.valueOf(facultyReview.getLike()));
+                if (result != 0) {
+                    Toast.makeText(FacultyReview.this, "ERROR: One can not like one's own post",Toast.LENGTH_LONG ).show();
+                } else {
+                    likeButton.setText(String.valueOf(facultyReview.getLike()));
+                }
             } else if (option.equals(DISLIKE)) {
-                dislikeButton.setText(String.valueOf(facultyReview.getDislike()));
+                if (result != 0) {
+                    Toast.makeText(FacultyReview.this, "ERROR: One can not dislike one's own post",Toast.LENGTH_LONG ).show();
+                } else {
+                    dislikeButton.setText(String.valueOf(facultyReview.getDislike()));
+                }
             }
             return;
         }

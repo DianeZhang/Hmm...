@@ -1,9 +1,11 @@
 package thinkers.hmm.model;
 
+import java.io.Serializable;
+
 /**
  * Created by chaoli on 7/18/15.
  */
-public class Admin {
+public class Admin implements Serializable {
     private int id;
     private String username;
     private String email;

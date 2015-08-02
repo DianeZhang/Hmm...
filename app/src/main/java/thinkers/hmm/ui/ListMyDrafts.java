@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,10 +34,13 @@ public class ListMyDrafts extends Activity {
     private final String COURSE_TYPE = "course";
     private final String FACULTY_TYPE = "faculty";
 
+    public static final String USER = "user";
+
     //Widgets
     private ListView myCourseReviewDraftListView;
     private ListView myFacultyReviewDraftListView;
     private TextView numOfDrafts;
+    private ImageButton homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,7 @@ public class ListMyDrafts extends Activity {
         setContentView(R.layout.ui_list_my_drafts);
 
         //Get elements
-        numOfDrafts = (TextView) findViewById(R.id.numberOfDraft);
+        numOfDrafts = (TextView) findViewById(R.id.numberOfDrafts);
         myCourseReviewDraftListView = (ListView)findViewById(R.id.DraftListViewCourse);
         myCourseReviewDraftListView.setVisibility(View.INVISIBLE);
         myFacultyReviewDraftListView = (ListView)findViewById(R.id.DraftListViewFaculty);
@@ -58,7 +62,8 @@ public class ListMyDrafts extends Activity {
         myCourseReviewDraftListView.setOnItemClickListener(viewCourseReviewDraftListener);
         myFacultyReviewDraftListView.setOnItemClickListener(viewFacultyReviewDraftListener);
 
-
+        homeButton = (ImageButton) findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(homeListener);
 
     }
     @Override
@@ -101,6 +106,23 @@ public class ListMyDrafts extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private View.OnClickListener homeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Login.USER_INFO, Context.MODE_PRIVATE);
+            String role = sharedpreferences.getString("role", null);
+            if (role.equals(USER)) {
+                Intent home = new Intent(ListMyDrafts.this, UserMain.class);
+                startActivity(home);
+            }
+            else {
+                Intent home = new Intent(ListMyDrafts.this, AdminMain.class);
+                startActivity(home);
+            }
+        }
+    };
+
 
     private AdapterView.OnItemClickListener viewCourseReviewDraftListener = new AdapterView.OnItemClickListener()
     {
