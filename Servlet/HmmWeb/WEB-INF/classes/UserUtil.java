@@ -1,5 +1,3 @@
-package HmmWeb;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,7 +7,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 
 public class UserUtil {
-	private int uid = -1;
+private int uid = -1;
 	private Connection conn = null;
     private PreparedStatement st = null;
     private ResultSet rs = null;
@@ -40,7 +38,7 @@ public class UserUtil {
 			return false;
 		}
 	}
-	
+
 	public String lastUpdateFromLastLogin() {
 		String newRecords = "";
 		

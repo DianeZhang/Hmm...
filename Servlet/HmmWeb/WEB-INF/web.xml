@@ -1,0 +1,11 @@
+<web-app>
+	<servlet>
+		<servlet-name>HmmWebServlet</servlet-name>
+		<servlet-class>CheckLastLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HmmWebServlet</servlet-name>
+		<url-pattern>/LoginNewRecordsCheck</url-pattern>
+	</servlet-mapping>	
+	
+</web-app>
