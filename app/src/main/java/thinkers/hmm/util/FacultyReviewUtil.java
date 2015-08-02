@@ -19,7 +19,7 @@ public class FacultyReviewUtil extends DatabaseConnector{
             "dislikes, title, content, location ) VALUES" + "(?,?,?,?,?,?,?);";
     private final String selectFacultyReviewByFacultyIdSQL = "SELECT * FROM FacultyReviews WHERE fid=?;";
     private final String selectFacultyReviewByUserIdSQL = "SELECT * FROM FacultyReviews WHERE uid=?;";
-    private final String updateFacultyReviewByIdSQL = "UPDATE TABLE FacultyReviews SET fid=?, uid=?, " +
+    private final String updateFacultyReviewByIdSQL = "UPDATE FacultyReviews SET fid=?, uid=?, " +
             "likes=?, dislikes=?, title=?, content=?, location=? WHERE id=?;";
     private final String deleteFacultyReviewByIdSQL = "DELETE FROM FacultyReviews WHERE Id=?;";
 
