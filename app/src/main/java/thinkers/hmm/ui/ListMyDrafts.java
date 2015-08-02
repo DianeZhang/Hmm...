@@ -36,6 +36,7 @@ public class ListMyDrafts extends Activity {
     //Widgets
     private ListView myCourseReviewDraftListView;
     private ListView myFacultyReviewDraftListView;
+    private TextView numOfDrafts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,11 @@ public class ListMyDrafts extends Activity {
         setContentView(R.layout.ui_list_my_drafts);
 
         //Get elements
+        numOfDrafts = (TextView) findViewById(R.id.numberOfDraft);
         myCourseReviewDraftListView = (ListView)findViewById(R.id.DraftListViewCourse);
+        myCourseReviewDraftListView.setVisibility(View.INVISIBLE);
         myFacultyReviewDraftListView = (ListView)findViewById(R.id.DraftListViewFaculty);
+        myFacultyReviewDraftListView.setVisibility(View.INVISIBLE);
 
         ListDraftHelper listMyDraftHelper = new ListDraftHelper();
         String[] params= new String[1];
@@ -56,6 +60,19 @@ public class ListMyDrafts extends Activity {
 
 
 
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        myCourseReviewDraftListView.setVisibility(View.INVISIBLE);
+        myFacultyReviewDraftListView.setVisibility(View.INVISIBLE);
+
+
+        ListDraftHelper listMyDraftHelper = new ListDraftHelper();
+        String[] params= new String[1];
+        params[0] = LIST_MYDRAFT;
+        listMyDraftHelper.execute(params);
     }
 
     @Override
@@ -145,11 +162,18 @@ public class ListMyDrafts extends Activity {
         @Override
         protected void onPostExecute(Void object) {
             if(option.equals(LIST_MYDRAFT)) {
+                numOfDrafts.setText("I have "+String.valueOf(courseReviewDraftList.size()+facultyReviewDraftList.size()+" drafts."));
                 CourseReviewDraftAdapter courseReviewDraftAdapter = new CourseReviewDraftAdapter(courseReviewDraftList);
                 myCourseReviewDraftListView.setAdapter(courseReviewDraftAdapter);
+                if(!courseReviewDraftList.isEmpty()){
+                    myCourseReviewDraftListView.setVisibility(View.VISIBLE);
+                }
 
                 FacultyReviewDraftAdapter facultyReviewDraftAdapter = new FacultyReviewDraftAdapter(facultyReviewDraftList);
                 myFacultyReviewDraftListView.setAdapter(facultyReviewDraftAdapter);
+                if(!facultyReviewDraftList.isEmpty()){
+                    myFacultyReviewDraftListView.setVisibility(View.VISIBLE);
+                }
             }
             return;
         }
