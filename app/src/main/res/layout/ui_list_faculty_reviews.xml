@@ -30,6 +30,13 @@
         android:id="@+id/classesLayout"
         android:layout_below="@+id/titleTextView">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_faculty_reviews_course"
+            android:id="@+id/courseTitle"
+            android:layout_marginRight="10dp" />
+
     </LinearLayout>
 
     <ListView

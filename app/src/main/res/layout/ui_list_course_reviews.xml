@@ -29,6 +29,13 @@
         android:id="@+id/professorsLayout"
         android:layout_below="@+id/titleTextView">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_course_reviews_professor"
+            android:id="@+id/professorsTitle"
+            android:layout_marginRight="10dp" />
+
     </LinearLayout>
 
     <ListView
