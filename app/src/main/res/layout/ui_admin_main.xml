@@ -27,43 +27,43 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="430dp"
             android:layout_height="wrap_content"
             android:text="@string/AdminMain_listcourses_label"
             android:id="@+id/coursesButton"
-            android:textSize="36sp"
+            android:textSize="41sp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="35dp"
             android:clickable="false" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="430dp"
             android:layout_height="wrap_content"
             android:text="@string/AdminMain_listfaculties_label"
             android:id="@+id/facultiesButton"
-            android:textSize="36sp"
+            android:textSize="41sp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="35dp"
             android:clickable="false" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="430dp"
             android:layout_height="wrap_content"
             android:text="@string/AdminMain_listusers_label"
             android:id="@+id/usersButton"
-            android:textSize="36sp"
+            android:textSize="41sp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="35dp"
             android:clickable="false" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="430dp"
             android:layout_height="wrap_content"
             android:text="@string/UserMain_settings_label"
             android:id="@+id/settingsButton"
-            android:textSize="36sp"
+            android:textSize="41sp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="35dp"
             android:clickable="false" />
     </LinearLayout>
 

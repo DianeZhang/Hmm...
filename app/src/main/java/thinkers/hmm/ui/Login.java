@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,7 +53,10 @@ public class Login extends Activity {
         signUp = (Button) findViewById(R.id.button2);
         adminlogin = (Button) findViewById(R.id.adminloginButton);
         usernameText = (EditText) findViewById(R.id.usernameText);
+        usernameText.setTypeface(Typeface.SERIF);
+
         passwordText = (EditText) findViewById(R.id.passwordText);
+        passwordText.setTypeface(Typeface.SERIF);
 
         //Set up button action listener
         signUp.setOnClickListener(signUpAction);

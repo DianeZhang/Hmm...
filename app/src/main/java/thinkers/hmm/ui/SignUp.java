@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,8 +51,11 @@ public class SignUp extends Activity {
         submitButton = (Button)findViewById(R.id.submitButton);
         cancelButton = (Button)findViewById(R.id.cancelButton);
         usernameText = (EditText) findViewById(R.id.usernameText);
+        usernameText.setTypeface(Typeface.SERIF);
         passwordText = (EditText) findViewById(R.id.passwordText);
+        passwordText.setTypeface(Typeface.SERIF);
         emailText = (EditText) findViewById(R.id.emailText);
+        emailText.setTypeface(Typeface.SERIF);
 
         //Set up Button action listerner
         submitButton.setOnClickListener(submitAction);

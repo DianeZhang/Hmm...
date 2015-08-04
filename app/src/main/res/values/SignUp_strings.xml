@@ -6,7 +6,7 @@
     <string name="SignUp_UsernameHint">Please enter your username here</string>
     <string name="SignUp_Password">Password:</string>
     <string name="SignUp_PasswordHint">Please enter your password here</string>
-    <string name="SignUp_Email">Email</string>
+    <string name="SignUp_Email">Email:</string>
     <string name="SignUp_EmailHint">example@bob.com</string>
     <string name="SignUp_Phone">Phone Number:</string>
     <string name="SignUp_PhoneHint">123456789</string>
