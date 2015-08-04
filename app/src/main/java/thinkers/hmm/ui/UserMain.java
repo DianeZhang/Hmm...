@@ -120,6 +120,7 @@ public class UserMain extends Activity {
         }
         if (id == R.id.action_logout) {
             Intent intent = new Intent(UserMain.this, Login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             return true;
         }
