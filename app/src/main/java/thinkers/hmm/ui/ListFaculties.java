@@ -64,6 +64,7 @@ public class ListFaculties extends Activity {
         homeButton = (ImageButton) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(homeListener);
 
+        //Show faculties
         ListFacultyHelper listHelper = new ListFacultyHelper();
         String[] params= new String[1];
         params[0] = LIST_OPERATION;
@@ -83,6 +84,17 @@ public class ListFaculties extends Activity {
             //addCourseButton.setLa
             rl.addView(addFacultyButton, lp);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Show faculties
+        ListFacultyHelper listHelper = new ListFacultyHelper();
+        String[] params= new String[1];
+        params[0] = LIST_OPERATION;
+        listHelper.execute(params);
     }
 
     @Override
