@@ -165,7 +165,9 @@ public class ListCourses extends Activity {
 
             // Put in extras
             Intent viewCourseReviews = new Intent(ListCourses.this, ListCourseReviews.class);
-            viewCourseReviews.putExtra("cid", course.getId());
+            Bundle bundle =  new Bundle();
+            bundle.putSerializable("Course", course);
+            viewCourseReviews.putExtra("CourseBundle", bundle);
             // Start activity
             startActivity(viewCourseReviews); // start the viewCourseReviews Activity
         } // end method onItemClick

@@ -1,9 +1,8 @@
 package thinkers.hmm.model;
 
-/**
- * Created by chaoli on 7/18/15.
- */
-public class Faculty {
+import java.io.Serializable;
+
+public class Faculty implements Serializable {
 
     private int id;
     private String name;

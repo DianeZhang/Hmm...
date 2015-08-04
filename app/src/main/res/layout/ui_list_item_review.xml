@@ -25,7 +25,9 @@
         android:layout_gravity="right"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:layout_weight="2" />
+        android:layout_weight="2"
+        android:clickable="false"
+        android:background="@android:color/transparent" />
 
     <Button
         android:id="@+id/dislikeButton"
@@ -37,6 +39,8 @@
         android:layout_gravity="right"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:layout_weight="2" />
+        android:layout_weight="2"
+        android:clickable="false"
+        android:background="@android:color/transparent" />
 
 </LinearLayout>
