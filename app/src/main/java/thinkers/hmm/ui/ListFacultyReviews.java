@@ -221,7 +221,9 @@ public class ListFacultyReviews extends Activity {
                         @Override
                         public void onClick(View v) {
                             Intent listCourseReviews = new Intent(getApplication(), ListCourseReviews.class);
-                            listCourseReviews.putExtra("cid", c.getId());
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("Course", c);
+                            listCourseReviews.putExtra("CourseBundle", bundle);
                             startActivity(listCourseReviews);
                         }
                     });

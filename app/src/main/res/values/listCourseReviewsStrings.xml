@@ -2,9 +2,6 @@
 <resources>
     <string name="list_course_reviews_label">ListCourseReviews</string>
     <string name="list_course_reviews_title">List of Course Reviews</string>
-    <string name="list_course_reviews_prof1">Professor1 ... </string>
-    <string name="list_course_reviews_prof2">Professor2 ... </string>
-    <string name="list_course_reviews_prof3">Professor3 ... </string>
-    <string name="list_course_reviews_prof4">Professor4 ... </string>
     <string name="list_course_reviews_add">New Review</string>
+    <string name="list_course_reviews_professor">Instructors: </string>
 </resources>
