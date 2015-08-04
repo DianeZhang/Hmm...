@@ -29,12 +29,14 @@ import thinkers.hmm.model.CourseReview;
 import thinkers.hmm.model.Faculty;
 import thinkers.hmm.util.CourseFacultyRelationshipUtil;
 import thinkers.hmm.util.CourseReviewUtil;
+import thinkers.hmm.util.CourseUtil;
 import thinkers.hmm.util.FacultyUtil;
 
 public class ListCourseReviews extends Activity {
     //Operation Strings
     private final String LIST_COURSE_REVIEWS = "List_Course_Reviews";
     private final String LIST_FACULTIES = "List_Faculties";
+    private final String DELETE_COURSE = "Delete_Course";
     private Course course;
 
     private TextView titleListCourseReviews;
@@ -88,6 +90,14 @@ public class ListCourseReviews extends Activity {
                     RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             addCourseReviewButton.setOnClickListener(addNewReviewListener);
             rl.addView(addCourseReviewButton, lp);
+        } else {
+            Button deleteCourseButton = new Button(ListCourseReviews.this);
+            deleteCourseButton.setText("Delete Course");
+            RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            deleteCourseButton.setOnClickListener(deleteCourseListener);
+            rl.addView(deleteCourseButton, lp);
         }
     }
 
@@ -156,7 +166,15 @@ public class ListCourseReviews extends Activity {
         }
     };
 
-
+    private View.OnClickListener deleteCourseListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ListCourseReviewHelper deleteCourseHelper = new ListCourseReviewHelper();
+            String[] deleteParams= new String[1];
+            deleteParams[0] = DELETE_COURSE;
+            deleteCourseHelper.execute(deleteParams);
+        }
+    };
 
     // event listener that responds to the user touching a review's name
     // in the ListView
@@ -200,6 +218,9 @@ public class ListCourseReviews extends Activity {
                     Faculty faculty = facultyUtil.selectFaculty(fid);
                     faculties.add(faculty);
                 }
+            } else if (option.equals(DELETE_COURSE)) {
+                CourseUtil courseUtil = new CourseUtil();
+                courseUtil.deleteCourse(course.getId());
             }
             return null;
         }
@@ -229,6 +250,9 @@ public class ListCourseReviews extends Activity {
                     });
                     rl.addView(facultyButton, lp);
                 }
+            } else if (option.equals(DELETE_COURSE)) {
+                Intent listCourses = new Intent(ListCourseReviews.this, ListCourses.class);
+                startActivity(listCourses);
             }
             return;
         }

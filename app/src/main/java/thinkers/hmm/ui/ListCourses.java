@@ -68,6 +68,7 @@ public class ListCourses extends Activity {
         homeButton = (ImageButton) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(homeListener);
 
+        //Show courses
         ListCourseHelper listHelper = new ListCourseHelper();
         String[] params= new String[1];
         params[0] = LIST_OPERATION;
@@ -87,6 +88,17 @@ public class ListCourses extends Activity {
             //addCourseButton.setLa
             rl.addView(addCourseButton, lp);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Show courses
+        ListCourseHelper listHelper = new ListCourseHelper();
+        String[] params= new String[1];
+        params[0] = LIST_OPERATION;
+        listHelper.execute(params);
     }
 
     @Override
@@ -230,7 +242,7 @@ public class ListCourses extends Activity {
             final Course course = getItem(position);
 
             TextView courseTitle = (TextView) convertView.findViewById(android.R.id.text1);
-            courseTitle.setText(course.getName());
+            courseTitle.setText(course.getCode()+" "+course.getName()+" - "+course.getSchool());
 
             return convertView;
         }

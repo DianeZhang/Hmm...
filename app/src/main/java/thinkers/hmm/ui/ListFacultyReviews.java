@@ -35,6 +35,7 @@ public class ListFacultyReviews extends Activity {
 
     private final String LIST_FACULTY_REVIEWS = "List_Faculty_Reviews";
     private final String LIST_COURSES = "List_Courses";
+    private final String DELETE_FACULTY = "Delete_Faculty";
     private Faculty faculty;
 
     private TextView titleListFacultyReviews;
@@ -89,6 +90,14 @@ public class ListFacultyReviews extends Activity {
                     RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             addFacultyReviewButton.setOnClickListener(addNewReviewListener);
             rl.addView(addFacultyReviewButton, lp);
+        } else {
+            Button deleteFacultyButton = new Button(ListFacultyReviews.this);
+            deleteFacultyButton.setText("Delete Faculty");
+            RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            deleteFacultyButton.setOnClickListener(deleteFacultyListener);
+            rl.addView(deleteFacultyButton, lp);
         }
     }
 
@@ -139,6 +148,16 @@ public class ListFacultyReviews extends Activity {
             addNewReview.putExtra("type", "faculty");
             addNewReview.putExtra("id", faculty.getId());
             startActivity(addNewReview); // start the addNewReview Activity
+        }
+    };
+
+    private View.OnClickListener deleteFacultyListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            ListFacultyReviewHelper deleteFacultyHelper = new ListFacultyReviewHelper();
+            String[] deleteParams= new String[1];
+            deleteParams[0] = DELETE_FACULTY;
+            deleteFacultyHelper.execute(deleteParams);
         }
     };
 
@@ -200,6 +219,9 @@ public class ListFacultyReviews extends Activity {
                     Course course = courseUtil.selectCourse(cid);
                     courses.add(course);
                 }
+            } else if (option.equals(DELETE_FACULTY)) {
+                FacultyUtil facultyUtil = new FacultyUtil();
+                facultyUtil.deleteFaculty(faculty.getId());
             }
             return null;
         }
@@ -229,6 +251,9 @@ public class ListFacultyReviews extends Activity {
                     });
                     rl.addView(courseButton, lp);
                 }
+            } else if (option.equals(DELETE_FACULTY)) {
+                Intent listFaculties = new Intent(ListFacultyReviews.this, ListFaculties.class);
+                startActivity(listFaculties);
             }
             return;
         }
