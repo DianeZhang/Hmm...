@@ -35,13 +35,9 @@ public class ListFacultyReviews extends Activity {
 
     private final String LIST_FACULTY_REVIEWS = "List_Faculty_Reviews";
     private final String LIST_COURSES = "List_Courses";
-    private int facultyID;
+    private Faculty faculty;
 
     private TextView titleListFacultyReviews;
-    private Button faculty1Button;
-    private Button faculty2Button;
-    private Button faculty3Button;
-    private Button faculty4Button;
     private Button addNewReviewButton;
     private ImageButton homeButton;
 
@@ -56,14 +52,11 @@ public class ListFacultyReviews extends Activity {
         setContentView(R.layout.ui_list_faculty_reviews);
 
         // Get facultyID from bundle
-        facultyID =  getIntent().getExtras().getInt("fid");
-        Toast.makeText(ListFacultyReviews.this, "faculty ID:" + facultyID, Toast.LENGTH_SHORT).show();
+        faculty = (Faculty) getIntent().getBundleExtra("FacultyBundle").getSerializable("Faculty");
+        Toast.makeText(ListFacultyReviews.this, "faculty ID:" + faculty.getId(), Toast.LENGTH_SHORT).show();
 
         titleListFacultyReviews = (TextView) findViewById(R.id.titleTextView);
-
-        //Clicking on the button to add new review
-        addNewReviewButton = (Button) findViewById(R.id.addNewReviewButton);
-        addNewReviewButton.setOnClickListener(addNewReviewListener);
+        titleListFacultyReviews.setText(faculty.getName());
 
         //Clicking on an item goes to Faculty page
         listFacultyReviewsListView = (ListView) findViewById(R.id.listFacultyReviewsListView);
@@ -143,7 +136,7 @@ public class ListFacultyReviews extends Activity {
         public void onClick(View v) {
             Intent addNewReview = new Intent(ListFacultyReviews.this, ConstructReview.class);
             addNewReview.putExtra("type", "faculty");
-            addNewReview.putExtra("id", facultyID);
+            addNewReview.putExtra("id", faculty.getId());
             startActivity(addNewReview); // start the addNewReview Activity
         }
     };
@@ -196,10 +189,10 @@ public class ListFacultyReviews extends Activity {
             option = (String)params[0];
             if(option.equals(LIST_FACULTY_REVIEWS)) {
                 FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
-                facultyReviewList = facultyReviewUtil.selectFacultyReview(facultyID);
+                facultyReviewList = facultyReviewUtil.selectFacultyReview(faculty.getId());
             } else if (option.equals(LIST_COURSES)) {
                 CourseFacultyRelationshipUtil courseFacultyRelationshipUtil = new CourseFacultyRelationshipUtil();
-                ArrayList<Integer> courseIDs = courseFacultyRelationshipUtil.selectCourses(facultyID);
+                ArrayList<Integer> courseIDs = courseFacultyRelationshipUtil.selectCourses(faculty.getId());
 
                 CourseUtil courseUtil = new CourseUtil();
                 for (int cid : courseIDs) {

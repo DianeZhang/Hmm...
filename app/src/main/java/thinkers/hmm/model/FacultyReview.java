@@ -2,9 +2,6 @@ package thinkers.hmm.model;
 
 import java.util.Date;
 
-/**
- * Created by chaoli on 7/18/15.
- */
 public class FacultyReview extends Review {
 
     private int fid;

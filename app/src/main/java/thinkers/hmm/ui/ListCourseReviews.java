@@ -24,6 +24,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import thinkers.hmm.R;
+import thinkers.hmm.model.Course;
 import thinkers.hmm.model.CourseReview;
 import thinkers.hmm.model.Faculty;
 import thinkers.hmm.util.CourseFacultyRelationshipUtil;
@@ -34,7 +35,7 @@ public class ListCourseReviews extends Activity {
     //Operation Strings
     private final String LIST_COURSE_REVIEWS = "List_Course_Reviews";
     private final String LIST_FACULTIES = "List_Faculties";
-    private int courseID;
+    private Course course;
 
     private TextView titleListCourseReviews;
     private ImageButton homeButton;
@@ -50,10 +51,11 @@ public class ListCourseReviews extends Activity {
         setContentView(R.layout.ui_list_course_reviews);
 
         // Get courseID from bundle
-        courseID =  getIntent().getExtras().getInt("cid");
-        Toast.makeText(ListCourseReviews.this, "Course ID:" + courseID, Toast.LENGTH_SHORT).show();
+        course = (Course) getIntent().getBundleExtra("CourseBundle").getSerializable("Course");
+        Toast.makeText(ListCourseReviews.this, "Course ID:" + course.getId(), Toast.LENGTH_SHORT).show();
 
         titleListCourseReviews = (TextView) findViewById(R.id.titleTextView);
+        titleListCourseReviews.setText(course.getName());
 
         //Clicking on an item goes to CourseReview page
         listCourseReviewsListView = (ListView) findViewById(R.id.listCourseReviewsListView);
@@ -148,7 +150,7 @@ public class ListCourseReviews extends Activity {
         public void onClick(View v) {
             Intent addNewReview = new Intent(ListCourseReviews.this, ConstructReview.class);
             addNewReview.putExtra("type", "course");
-            addNewReview.putExtra("id", courseID);
+            addNewReview.putExtra("id", course.getId());
             startActivity(addNewReview); // start the addNewReview Activity
         }
     };
@@ -185,12 +187,12 @@ public class ListCourseReviews extends Activity {
         @Override
         protected Void doInBackground(Object... params ) {
             option = (String)params[0];
-            if(option.equals(LIST_COURSE_REVIEWS)) {
+            if (option.equals(LIST_COURSE_REVIEWS)) {
                 CourseReviewUtil courseReviewUtil = new CourseReviewUtil();
-                courseReviewList = courseReviewUtil.selectCourseReviewsByCourseId(courseID);
+                courseReviewList = courseReviewUtil.selectCourseReviewsByCourseId(course.getId());
             } else if (option.equals(LIST_FACULTIES)) {
                 CourseFacultyRelationshipUtil courseFacultyRelationshipUtil = new CourseFacultyRelationshipUtil();
-                ArrayList<Integer> facultyIDs = courseFacultyRelationshipUtil.selectFaculties(courseID);
+                ArrayList<Integer> facultyIDs = courseFacultyRelationshipUtil.selectFaculties(course.getId());
 
                 FacultyUtil facultyUtil = new FacultyUtil();
                 for (int fid: facultyIDs) {

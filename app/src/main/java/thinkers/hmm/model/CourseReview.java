@@ -2,9 +2,6 @@ package thinkers.hmm.model;
 
 import java.util.Date;
 
-/**
- * Created by chaoli on 7/18/15.
- */
 public class CourseReview extends Review {
 
     private int cid = -1;
