@@ -12,10 +12,10 @@
         android:text="@string/UserMain_welcome_msg"
         android:id="@+id/welcomeText"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:textSize="64sp"
         android:textColor="#ff000000"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="100dp"
+        android:gravity="center_horizontal" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,51 +25,51 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/UserMain_listcourse_label"
             android:id="@+id/coursesButton"
-            android:textSize="56sp"
+            android:textSize="36sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:clickable="false" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/UserMain_listfaculties_label"
             android:id="@+id/facultiesButton"
-            android:textSize="56sp"
+            android:textSize="36sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:clickable="false" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/UserMain_viewdrafts_label"
             android:id="@+id/draftsButton"
-            android:textSize="56sp"
+            android:textSize="36sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:clickable="false" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/UserMain_myreviews_label"
             android:id="@+id/reviewsButton"
-            android:textSize="56sp"
+            android:textSize="36sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:clickable="false" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/UserMain_settings_label"
             android:id="@+id/settingsButton"
-            android:textSize="56sp"
+            android:textSize="36sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:clickable="false" />
