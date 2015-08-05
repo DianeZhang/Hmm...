@@ -71,5 +71,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/reviewContent"
+        android:id="@+id/relativeLayout"></RelativeLayout>
+
 
 </RelativeLayout>

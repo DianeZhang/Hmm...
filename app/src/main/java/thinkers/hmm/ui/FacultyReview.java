@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +26,12 @@ public class FacultyReview extends Activity {
     private static final String GET_AUTHOR = "Get_Author";
     private static final String LIKE = "Like";
     private static final String DISLIKE = "Dislike";
+    private static final String DELETE = "Delete";
     private thinkers.hmm.model.FacultyReview facultyReview;
     private int userID;
+
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
 
     private TextView reviewTitle;
     private TextView reviewContent;
@@ -68,6 +73,18 @@ public class FacultyReview extends Activity {
         dislikeButton = (Button) findViewById(R.id.dislikeButton);
         dislikeButton.setText(String.valueOf(facultyReview.getDislike()));
         dislikeButton.setOnClickListener(dislikeListener);
+
+        String role = sharedpreferences.getString("role", null);
+
+        if (role.equals(ADMIN)) {
+            Button addCourseReviewButton = new Button(FacultyReview.this);
+            addCourseReviewButton.setText("Delete Review");
+            RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            addCourseReviewButton.setOnClickListener(deleteReviewListener);
+            rl.addView(addCourseReviewButton, lp);
+        }
     }
 
     @Override
@@ -118,6 +135,16 @@ public class FacultyReview extends Activity {
         }
     };
 
+    private View.OnClickListener deleteReviewListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            FacultyReviewHelper deleteHelper = new FacultyReviewHelper();
+            String[] deleteParams = new String[1];
+            deleteParams[0] = DELETE;
+            deleteHelper.execute(deleteParams);
+        }
+    };
+
     private class FacultyReviewHelper extends AsyncTask<Object, Void, Void> {
         private String option = "";
         private User author;
@@ -147,6 +174,10 @@ public class FacultyReview extends Activity {
                 } else {
                     result = 1;
                 }
+            } else if (option.equals(DELETE)) {
+                FacultyReviewUtil facultyReviewUtil = new FacultyReviewUtil();
+                facultyReviewUtil.deleteFacultyReview(facultyReview.getId());
+
             }
             return null;
         }
@@ -173,6 +204,8 @@ public class FacultyReview extends Activity {
                 } else {
                     dislikeButton.setText(String.valueOf(facultyReview.getDislike()));
                 }
+            } else if (option.equals(DELETE)) {
+                onBackPressed();
             }
             return;
         }
