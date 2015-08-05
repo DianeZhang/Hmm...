@@ -9,4 +9,5 @@
     <string name="ConstructReview_SubmitButton">Submit</string>
     <string name="ConstructReview_SaveButton">Save</string>
     <string name="ConstructReview_CancelButton">Cancel</string>
+    <string name="construct_review_location">Add Location</string>
 </resources>

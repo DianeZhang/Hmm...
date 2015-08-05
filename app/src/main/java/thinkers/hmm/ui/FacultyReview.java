@@ -189,7 +189,7 @@ public class FacultyReview extends Activity {
                 String text = "BY: " + author.getUsername();
                 text += " @" + format.format(facultyReview.getCreatedtime());
                 if (facultyReview.getLocation() != null) {
-                    text += " @" + facultyReview.getLocation();
+                    text += "\n@" + facultyReview.getLocation();
                 }
                 reviewAuthor.setText(text);
             } else if (option.equals(LIKE)) {

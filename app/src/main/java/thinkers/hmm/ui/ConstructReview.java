@@ -3,6 +3,12 @@ package thinkers.hmm.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +18,14 @@ import android.view.View;
 import android.widget.Button;
 import thinkers.hmm.R;
 import android.content.Intent;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import thinkers.hmm.model.*;
 import thinkers.hmm.model.CourseReview;
@@ -24,8 +35,9 @@ import thinkers.hmm.model.FacultyReview;
 import thinkers.hmm.util.FacultyReviewDraftUtil;
 import thinkers.hmm.util.FacultyReviewUtil;
 
-public class ConstructReview extends Activity {
+import static android.location.LocationManager.PASSIVE_PROVIDER;
 
+public class ConstructReview extends Activity implements LocationListener {
     private final String TAG = "ConstrcutRevew";
     private final String SUBMIT_OPERATION = "submit";
     private final String SAVE_OPEARTION = "save";
@@ -48,8 +60,11 @@ public class ConstructReview extends Activity {
     private String type = null;
     private int id = -1;
     private int uid = -1;
+    private String locationStr = null;
     private FacultyReviewDraft facultyReviewDraft = null;
     private CourseReviewDraft courseReviewDraft =null;
+
+    private CheckBox addLocation;
 
     //Async Helper
     ConstructReviewHelper constructReviewHelper = new ConstructReviewHelper();
@@ -112,6 +127,9 @@ public class ConstructReview extends Activity {
         cancelButton.setOnClickListener(cancelAction);
         submitbutton.setOnClickListener(submitAction);
         saveButton.setOnClickListener(saveAction);
+
+        addLocation = (CheckBox) findViewById(R.id.addLocation);
+        addLocation.setOnClickListener(addLocationListener);
 
     }
 
@@ -198,6 +216,59 @@ public class ConstructReview extends Activity {
         }
     };
 
+    private View.OnClickListener addLocationListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (((CheckBox) v).isChecked()) {
+                // Get the location manager
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+                //update last location
+                String provider = LocationManager.PASSIVE_PROVIDER;
+                locationManager.requestSingleUpdate(provider, ConstructReview.this, null);
+
+                //Get last location
+                Location location = locationManager.getLastKnownLocation(provider);
+
+                //Get address
+                Geocoder geocoder = new Geocoder(ConstructReview.this, Locale.getDefault());
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                    Address address = addresses.get(0);
+                    locationStr = address.getAddressLine(0);
+                    locationStr = locationStr + ", " + address.getLocality();
+                    locationStr = locationStr + ", " + address.getAdminArea();
+                    locationStr = locationStr + ", " + address.getCountryName();
+                    locationStr = locationStr + " " + address.getPostalCode();
+                    Toast.makeText(ConstructReview.this, locationStr, Toast.LENGTH_LONG).show();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
     private class ConstructReviewHelper extends AsyncTask<Object, Void, Void> {
 
         private String option = "";
@@ -221,7 +292,7 @@ public class ConstructReview extends Activity {
                 if(option.equals(SUBMIT_OPERATION)) {
                     //Construct Course Review
                     CourseReview review = new CourseReview(
-                            id, uid, title,content,"location", null);
+                            id, uid, title,content,locationStr, null);
                     //Insert into DB
                     CourseReviewUtil courseReviewUtil =
                             new CourseReviewUtil();
@@ -255,7 +326,7 @@ public class ConstructReview extends Activity {
                 if(option.equals(SUBMIT_OPERATION)) {
                     //Construct Faculty Review
                     FacultyReview review = new FacultyReview(
-                            uid, id, title, content, "location", null);
+                            uid, id, title, content, locationStr, null);
                     //Insert into DB
                     FacultyReviewUtil facultyReviewUtil =
                             new FacultyReviewUtil();
