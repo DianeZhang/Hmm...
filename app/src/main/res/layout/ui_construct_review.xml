@@ -90,5 +90,14 @@
                 android:id="@+id/cancelButton"
                 android:layout_weight="0.33" />
         </LinearLayout>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/construct_review_location"
+            android:id="@+id/addLocation"
+            android:layout_below="@+id/reviewContent"
+            android:layout_alignEnd="@+id/reviewContent"
+            android:layout_gravity="right" />
     </LinearLayout>
 </RelativeLayout>

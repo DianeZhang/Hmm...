@@ -162,7 +162,7 @@ public class CourseReview extends Activity {
                 String text = "BY: " + author.getUsername();
                 text += " @" + format.format(courseReview.getCreatedtime());
                 if (courseReview.getLocation() != null) {
-                    text += " @" + courseReview.getLocation();
+                    text += "\n@" + courseReview.getLocation();
                 }
                 reviewAuthor.setText(text);
             } else if (option.equals(LIKE)) {
